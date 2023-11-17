@@ -1,11 +1,9 @@
-import Home from "./pages/Home";
+import LayoutBasic from "./layouts/LayoutBasic";
 
 const App = () => {
 
   return (
-   <div>
-    <Home/>
-   </div>
+    <LayoutBasic/>
  );
 }
 

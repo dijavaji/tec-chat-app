@@ -1,0 +1,66 @@
+footer{
+  position: relative;
+}
+
+.footer{
+  height: 10vh;
+  background: #000000;
+  color:#FFFFFF;
+}
+
+.social{
+  width: 50%;
+  float: left;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.social label a{
+  color:#FFFFFF;
+}
+
+.social-icon{
+  font-size: 25px;
+  padding: 0 10px;
+}
+
+.social-icon:hover{
+  /*color: #3B7ACF;*/
+  background-color: #3B7ACF;
+
+}
+.copyr{
+  width: 50%;
+  float: left;
+  margin-top: 20px;
+  text-align: left;
+}
+
+@media(max-width:1024px){
+  .footer{
+    height: 15vh;
+  }
+  .social{
+    width: 100%;
+  }
+  .social-icon{
+    font-size: 25px;
+  }
+
+  .copyr{
+    width: 100%;
+  }
+
+  .copyr p{
+    /*width: 50%;*/
+    text-align: center;
+    /*margin-top: 10px;*/
+    width: 100%;
+  }
+}
+
+@media(max-width:768px){
+  .copyr p{
+    font-size: 14px;
+  }
+}

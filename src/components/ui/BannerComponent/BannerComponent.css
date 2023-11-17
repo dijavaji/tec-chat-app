@@ -1,0 +1,287 @@
+section{
+  width: 100%;
+}
+
+.banner{
+  height: 97vh;
+  position: relative;
+  background-color: white;
+}
+
+.banner-content img{
+  margin: 5px 0;
+  width: 100%;
+}
+
+.banner-text{
+  position: absolute;
+  color:#FFFFFF;
+  top: 37%;
+  left: 50%;
+  transform: translateX(0%) translateY(-45%);
+}
+
+.banner-text h2{
+  font-size: 45px;
+}
+
+.banner-text a{
+  display: block;
+  width: 100px;
+  color: #F5F2F2;
+  text-decoration: none;
+  padding: 7px;
+  margin-top: 10px;
+  border: 3px solid #F5F2F2;
+}
+
+.banner-text a:hover{
+  background-color: #F5F2F2;
+  color: grey;
+}
+
+.about{
+  height: 97vh;
+  position: relative;
+  background: #302D2D;
+  color: #F5F2F2;
+}
+
+.about-content{
+  width: 100%;
+  hyphens: 100%;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.about-content h2{
+  font-size: 45px;
+  text-transform: uppercase;
+}
+
+.about-content p, .about-content h2{
+  padding: 10px 50px;
+}
+
+.about-img{
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 30px;
+  padding: 0 50px;
+}
+
+.about-imgx{
+  width: 33%;
+  float: left;
+}
+
+.img-job{
+  width: 280px;
+  height: 280px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 15px;
+}
+
+.testimonio{
+  height: 97vh;
+  position: relative;
+  background: url(../../../assets/img/umixjcVd0Ws.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  color:#F5F2F2;
+}
+
+.testimonio-content{
+  width: 100%;
+  height: 100%;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.testimonio-content h2{
+  font-size: 45px;
+  text-transform: uppercase;
+}
+
+.testimonio-content p,
+  .testimonio-content h2{
+  padding: 10px 50px;
+}
+
+.testimonio-group{
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 30px;
+  padding: 0 50px;
+}
+
+.testimonio-card{
+  width: 33%;
+  float: left;
+}
+
+.img-perfil{
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 3px solid white;
+}
+
+.contacto{
+  height: 97vh;
+  position: relative;
+}
+
+.contacto-content{
+  width: 100%;
+  height: 100%;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.contacto-content h2{
+  font-size: 45px;
+  text-transform: uppercase;
+}
+
+.contacto-content p, .contacto-content h2 {
+  padding: 10px 50px;
+}
+
+.contacto-group{
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 30px;
+  padding: 0 50px;
+}
+
+.form-contact{
+  width: 50%;
+  float: left;
+}
+
+.form-control{
+  width: 85%;
+  padding: 0.8rem;
+  margin: 0.6rem 1rem;
+  display: block;
+  font-size: 1rem;
+  outline: 0;
+  border-radius: 5px;
+  border: 1.5px solid #C7C7C7;
+}
+
+.send-btn{
+  display: block;
+  font-size: 1rem;
+  text-transform: uppercase;
+  background: #666666;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.7rem 0.5rem;
+  margin: 0.6rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.contacto-img{
+  width: 50%;
+  float: left;
+}
+
+.contacto-img img{
+  width: 80%;
+  display: block;
+  margin: auto;
+}
+
+
+@media(max-width:1024px){
+  .banner{
+    height: 89vh;
+  }
+
+  .banner-content img{
+    margin-top: 50px;
+  }
+
+  .about, .testimonio, .contacto{
+    height: 100vh;
+  }
+
+  .img-job{
+    width: 210px;
+    height: 210px;
+  }
+  .testimonio-card p{
+    font-size: 13px;
+  }
+  .img-perfil{
+    width: 150px;
+    height: 150px;
+  }
+
+  .form-control{
+    width:75%;
+    padding: 0.3rem;
+    margin:0.6rem 1rem;
+  }
+
+  .send-btn{
+    font-size: 0.8rem;
+  }
+}
+
+@media(max-width:768px){
+  .banner{
+    height: 55vh;
+  }
+  .banner-text h2{
+    font-size: 30px;
+  }
+  .banner-text p{
+    font-size: 14px;
+  }
+
+  .banner-text a{
+    font-size: 14px;
+    width: 60px;
+  }
+
+  .about, .testimonio, .contacto{
+    height: 165vh;
+  }
+
+  .about-content h2, .testimonio-content h2, .contacto-content h2 {
+    font-size: 35px;
+
+  }
+
+  .about-imgx{
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .testimonio-card{
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .form-contact, .contacto-img{
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .form-control, .send-btn{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .send-btn{
+    width: 77%;
+  }
+
+}
