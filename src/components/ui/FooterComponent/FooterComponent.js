@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link} from 'react-router-dom';
+
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
@@ -11,11 +13,11 @@ const FooterComponent = () => {
       <div className="footer-content" >
         <div className="social">
           <label>
-            <a href="#"> <FaFacebook className="social-icon"/> </a>
+            <Link to="#"> <FaFacebook className="social-icon"/> </Link>
           </label>
-          <label><a href="#"> <FaInstagram className="social-icon"/> </a></label>
-          <label><a href="#"> <FaSquareXTwitter className="social-icon"/> </a></label>
-          <label><a href="#"> <FaGoogle className="social-icon"/> </a></label>
+          <label><Link to="#"> <FaInstagram className="social-icon"/> </Link></label>
+          <label><Link to="#"> <FaSquareXTwitter className="social-icon"/> </Link></label>
+          <label><Link to="#"> <FaGoogle className="social-icon"/> </Link></label>
         </div>
         <div className="copyr">
            <p>Copyright &copy; 2023 Technoloqie Asesoramiento Inform&#225;tico. Todos los derechos reservados</p>

@@ -27,6 +27,7 @@ footer{
 .social-icon:hover{
   /*color: #3B7ACF;*/
   background-color: #3B7ACF;
+  border-radius: 3px;
 
 }
 .copyr{
@@ -44,7 +45,7 @@ footer{
     width: 100%;
   }
   .social-icon{
-    font-size: 25px;
+    font-size: 20px;
   }
 
   .copyr{

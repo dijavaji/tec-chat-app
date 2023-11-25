@@ -11,6 +11,7 @@
     "react-icons": "^4.12.0",
     "react-scripts": "^4.0.3",
     "react-stomp": "^5.1.0",
+    "react-router-dom": "^5.3.0",
     "sockjs": "^0.3.24",
     "sockjs-client": "^1.6.1",
     "web-vitals": "^2.1.0"

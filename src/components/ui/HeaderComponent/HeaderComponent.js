@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link} from 'react-router-dom';
 import { FaBars } from "react-icons/fa";
 
 import "./HeaderComponent.css";
@@ -13,10 +14,10 @@ const HeaderComponent = () => {
         </label>
         <label className="logo">Technoloqie</label>
         <ul className="nav-options">
-          <li> <a href="#" >Home</a></li>
-          <li> <a href="#nosotros" >Servicios</a></li>
-          <li> <a href="#" >Clientes</a></li>
-          <li> <a href="#" >Contactos</a></li>
+          <li> <Link to="/"> Home</Link></li>
+          <li> <Link to="/servicios" >Servicios</Link></li>
+          <li> <Link to="/clientes" >Clientes</Link></li>
+          <li> <Link to="/contactos" >Contactos</Link></li>
         </ul>
       </nav>
     </header>
