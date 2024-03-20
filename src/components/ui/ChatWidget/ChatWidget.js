@@ -5,15 +5,17 @@ import Sockjs from 'sockjs-client';
 //import BannerComponent from '../../components/ui/BannerComponent';
 import { Widget, addResponseMessage } from 'react-chat-widget';
 
+import { API_SERVER_BACKEND, } from "../../../utils/constants";
 import 'react-chat-widget/lib/styles.css';
 import logo from '../../../logo.svg';
+const API_SERVER_SOCKET = API_SERVER_BACKEND.HOST + '/ws';
 
 const ChatWidget = () => {
   const [stompCLient, setStompCLient] = useState(null);
   const [nickName, setNickName] = useState('usuario');
 
   useEffect(() => {
-    const socket = new Sockjs('http://127.0.0.1:8081/ws');
+    const socket = new Sockjs(API_SERVER_SOCKET);//new Sockjs('http://127.0.0.1:8081/ws');
     const client = Stomp.over(socket);
     //addResponseMessage('Bienvenidos a este incre\u00edble chat\u0021');
     client.connect({},()=>{

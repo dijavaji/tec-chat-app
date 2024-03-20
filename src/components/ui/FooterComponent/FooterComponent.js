@@ -20,7 +20,7 @@ const FooterComponent = () => {
           <label><Link to="#"> <FaGoogle className="social-icon"/> </Link></label>
         </div>
         <div className="copyr">
-           <p>Copyright &copy; 2023 Technoloqie Asesoramiento Inform&#225;tico. Todos los derechos reservados</p>
+           <p>Copyright &copy; {new Date().getFullYear()} Technoloqie Asesoramiento Inform&#225;tico. Todos los derechos reservados</p>
         </div>
       </div>
     </footer>
