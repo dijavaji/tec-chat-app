@@ -1,5 +1,5 @@
 {
-  "name": "tec-test-chat",
+  "name": "tec-chat-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
