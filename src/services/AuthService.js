@@ -1,4 +1,4 @@
-import { API_SERVER_BACKEND, HTTP_METHODS } from "../utils/constants";
+import { API_SERVER_BACKEND, HTTP_METHODS } from "../utils/tec-chat.constants";
 
 const API_SERVER_AUTH = API_SERVER_BACKEND.HOST + API_SERVER_BACKEND.AUTH;
 //const API_SERVER_AUTH = "http://127.0.0.1:4000";

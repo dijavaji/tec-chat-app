@@ -5,7 +5,7 @@ import Sockjs from 'sockjs-client';
 //import BannerComponent from '../../components/ui/BannerComponent';
 import { Widget, addResponseMessage } from 'react-chat-widget';
 
-import { API_SERVER_BACKEND, } from "../../../utils/constants";
+import { API_SERVER_BACKEND, } from "../../../utils/tec-chat.constants";
 import 'react-chat-widget/lib/styles.css';
 import logo from '../../../logo.svg';
 const API_SERVER_SOCKET = API_SERVER_BACKEND.HOST + '/ws';

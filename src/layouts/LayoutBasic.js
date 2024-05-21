@@ -5,13 +5,13 @@ import ChatWidget from '../components/ui/ChatWidget';
 
 export default function LayoutBasic(props) {
   const {children} = props;
-  console.log(props);
+  //console.log(props);
     return (
       <React.Fragment>
         <HeaderComponent/>
-        <main>
-        <>{children}</>
-        </main>
+          <main>
+          <>{children}</>
+          </main>
         <ChatWidget/>
         <FooterComponent/>
       </React.Fragment>

@@ -4,17 +4,23 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.4",
+    "axios": "^1.7.1",
+    "bootstrap": "^4.6.2",
+    "formik": "^2.2.9",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
     "react": "^17.0.2",
     "react-chat-widget": "^3.1.4",
     "react-dom": "^17.0.2",
     "react-icons": "^4.12.0",
+    "react-router-dom": "^5.3.0",
     "react-scripts": "^4.0.3",
     "react-stomp": "^5.1.0",
-    "react-router-dom": "^5.3.0",
     "sockjs": "^0.3.24",
     "sockjs-client": "^1.6.1",
-    "web-vitals": "^2.1.0"
+    "validator": "^13.12.0",
+    "web-vitals": "^2.1.0",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
