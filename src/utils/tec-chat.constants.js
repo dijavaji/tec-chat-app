@@ -6,8 +6,9 @@ export const SERVER_FRONTEND_HOST=process.env.REACT_APP_SERVER_FRONTEND_HOST;
 
 export const API_SERVER_BACKEND={
     HOST: process.env.REACT_APP_API_SERVER_BACKEND_HOST,
-    AUTH: "/api/auth",
-    USER: "/api/users",
+    HOST_AUTH: process.env.REACT_APP_API_SERVER_BACKEND_HOST_AUTH,
+    AUTH: "/api/v1/auth",
+    USER: "/api/v1/users",
 };
 export const STATUS = {
   OK: 200,

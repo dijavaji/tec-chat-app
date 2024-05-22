@@ -26,7 +26,7 @@ const LoginComponent = (props) => {
   const [error, setError] = useState("");
 	//const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [user, setUser] = useState('');
 	//const {setUser} = useAuth();
 	//const {setAuthType } = props;
 
@@ -35,7 +35,7 @@ const LoginComponent = (props) => {
   validationSchema:Yup.object(
     {
       email: Yup.string().email("El email no es valido").required("El email es obligatorio"),
-      password: Yup.string().required("La contrase\u00f1a es obligatoria"),
+      password: Yup.string().matches(/[a-zA-Z0-9-]*$/, "La contrase\u00f1a no puede tener espacios").required("La contrase\u00f1a es obligatoria").min(6,"La contrase\u00f1a debe contener al menos 6 caracteres"),
     }
   ),
   onSubmit:async (formData) =>{
@@ -47,23 +47,27 @@ const LoginComponent = (props) => {
       console.log(data);
       const token = data.accessToken;
       if(token){
-        console.log(token);
-        //setToken(token);
-        //setUser(decodeToken(token));
+        //console.log(token);
+        setToken(token);
+        setUser(decodeToken(token));
+        console.log(user);
       }else {
-        throw new Error(data.message);
+        //console.log(data.error.message)
+        throw new Error(data.error.message);
       }
-    }catch(error){
+    }catch(e){
       //toast.error(error.message)
-      console.log(error.message);
-      setError(error.message);
+      //console.log(JSON.stringify(e.message)); //console.log(e.toString()); //console.error(e);
+      //const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+      setLoading(false);
+      setError(e.message);
     }
   },
 
 });
 
   return (
-     <div className="container">
+     <div className="container mt-3">
     <div className="col-md-3">
         <div className="card card-container">
         <form onSubmit={formikLogin.handleSubmit}>
@@ -81,6 +85,9 @@ const LoginComponent = (props) => {
 			              onBlur={formikLogin.handleBlur}
                     onChange={formikLogin.handleChange}
                     className="form-control"/>
+              <div>
+                {formikLogin.touched.email && formikLogin.errors.email ? (<p className="alert alert-danger"><span className=""></span>{formikLogin.errors.email}</p>): null }
+              </div>
             </div>
 
             <div className="form-group">
@@ -92,6 +99,9 @@ const LoginComponent = (props) => {
                 onBlur={formikLogin.handleBlur}
                 onChange={formikLogin.handleChange}
                 />
+                <div>
+                  {formikLogin.touched.password && formikLogin.errors.password ? (<p className="alert alert-danger"><span className=""></span>{formikLogin.errors.password}</p>): null }
+                </div>
             </div>
 
             <div className="form-group">
@@ -101,10 +111,10 @@ const LoginComponent = (props) => {
               </button>
             </div>
 
-            {formikLogin.touched.email && formikLogin.errors.email && (
+            {error && (
               <div className="form-group">
                 <div className="alert alert-danger" role="alert">
-                  {formikLogin.errors.email}
+                  {error}
                 </div>
               </div>
             )}

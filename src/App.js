@@ -5,7 +5,7 @@ import {
   Route
 } from "react-router-dom";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 //import Home from './pages/Home';
 import BannerComponent from './components/ui/BannerComponent';
 import AboutComponent from './components/ui/AboutComponent';
