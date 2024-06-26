@@ -2,13 +2,15 @@ import React from 'react';
 import { Link} from 'react-router-dom';
 
 import "./BannerComponent.css";
+//import bannerImg from "../../../assets/img/scott-lord.jpg";
+//https://picsum.photos/1920/1080?random
 
 const BannerComponent = () => {
   return (
     <div>
       <section className="banner">
         <div className="banner-content">
-          <img src="https://source.unsplash.com/random" alt="img-banner"/>
+          <img src="https://picsum.photos/1920/1080?random" alt="img-banner"/>
           <div className="banner-text">
             <h2>Live Design</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Nullam vestibulum orci a sapien imperdiet maximus.</p>

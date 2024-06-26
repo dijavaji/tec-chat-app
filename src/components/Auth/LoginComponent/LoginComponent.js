@@ -1,9 +1,8 @@
 import React, {useState} from "react";
+import { useHistory } from 'react-router-dom';
 import {useFormik} from "formik";
 import * as Yup from "yup";
 //import {toast} from "react-toastify";
-
-import { RiEyeLine, RiEyeOffLine, } from "react-icons/ri";
 
 import "./LoginComponent.css";
 import AuthService from "../../../services/auth.service";
@@ -22,11 +21,11 @@ const required = value => {
 };
 
 const LoginComponent = (props) => {
-
+  const navigate = useHistory();
   const [error, setError] = useState("");
 	//const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState('');
+  //const [user, setUser] = useState('');
 	//const {setUser} = useAuth();
 	//const {setAuthType } = props;
 
@@ -44,13 +43,14 @@ const LoginComponent = (props) => {
 
     try{
       const data = await AuthService.login(formData.email, formData.password);
-      console.log(data);
+      //console.log(data);
       const token = data.accessToken;
       if(token){
         //console.log(token);
         setToken(token);
-        setUser(decodeToken(token));
-        console.log(user);
+        navigate.push('/profile');
+        //setUser(decodeToken(token));
+        //console.log(decodeToken(token));
       }else {
         //console.log(data.error.message)
         throw new Error(data.error.message);
@@ -105,7 +105,7 @@ const LoginComponent = (props) => {
             </div>
 
             <div className="form-group">
-              <button className="btn btn-primary btn-block" disabled={loading} >
+              <button type="submit" className="send-btn" disabled={loading} >
                 {loading && ( <span className="spinner-border spinner-border-sm"></span>)}
                 <span>Login</span>
               </button>

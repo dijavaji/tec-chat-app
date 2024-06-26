@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_SERVER_BACKEND, HTTP_METHODS } from "../utils/tec-chat.constants";
+import { getToken} from "../utils/tec-token.util";
 
 const API_SERVER_AUTH = API_SERVER_BACKEND.HOST_AUTH + API_SERVER_BACKEND.AUTH;
 //const API_URL = "http://localhost:4000/api/v1/auth/";
@@ -32,7 +33,8 @@ class AuthService {
   }
 
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));
+    //return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(getToken());
   }
 }
 

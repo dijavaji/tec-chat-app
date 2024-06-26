@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 //import "bootstrap/dist/css/bootstrap.min.css";
-//import Home from './pages/Home';
+import Home from './pages/Home';
 import BannerComponent from './components/ui/BannerComponent';
 import AboutComponent from './components/ui/AboutComponent';
 import ClientComponent from './components/ui/ClientComponent';
@@ -29,6 +29,7 @@ const App = () => {
             <Route path="/contactos" render={() => (<LayoutBasic> <ContactComponent/></LayoutBasic>) }/>
             <Route path="/avatar" render={() => (<LayoutBasic> <AvatarComponent/></LayoutBasic>) }/>
             <Route path="/login" render={() => (<LayoutBasic> <Login/></LayoutBasic>)} />
+            <Route path="/profile" render={() => (<LayoutBasic> <Home/></LayoutBasic>)} />
             <Route path="*" component={NotFoundComponent} />
           </Switch>
     </Router>

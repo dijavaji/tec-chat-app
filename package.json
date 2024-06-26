@@ -5,7 +5,6 @@
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "axios": "^1.7.1",
-    "bootstrap": "^4.6.2",
     "formik": "^2.2.9",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",

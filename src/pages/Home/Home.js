@@ -9,8 +9,16 @@ import "./Home.css";
 
 //import ChatComponent from "../../components/ChatComponent";
 //import ChatRoomComponent from "../../components/ChatRoomComponent";
+import AuthService from "../../services/auth.service";
 
 export default function Home() {
+
+  function componentDidMount() {
+    const currentUser = AuthService.getCurrentUser();
+
+    if (!currentUser) this.setState({ redirect: "/home" });
+    this.setState({ currentUser: currentUser, userReady: true })
+  }
 
   return (
     <div className="container" >
