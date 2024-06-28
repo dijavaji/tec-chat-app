@@ -47,7 +47,7 @@ nav{
 }
 
 .nav-options li a:focus, li a:hover{
-  background-color: #3B7ACF;
+  background-color: #018aaf;
   transition: .5s;
 }
 

@@ -1,5 +1,6 @@
 require("dotenv").config({ path: ".env.local" });
 
+export const APP_NAME="tec_user_legal_bot"
 //clave utilizado para autenticacion
 export const TOKEN = "token";
 export const SERVER_FRONTEND_HOST=process.env.REACT_APP_SERVER_FRONTEND_HOST;

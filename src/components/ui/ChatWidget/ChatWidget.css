@@ -1,0 +1,24 @@
+/*.rcw-conversation-container > .rcw-header {
+  background-color: red;
+}
+
+.rcw-conversation-container .rcw-header .rcw-title{
+  font-size: 100px;
+}*/
+
+.rcw-conversation-container .rcw-header .rcw-title .avatar{
+  width: 110px;
+  height: 110px;
+}
+
+.rcw-conversation-container .rcw-title {
+  font-size: 18px;
+  font-style: oblique;
+}
+.rcw-conversation-container > .rcw-header {
+  background-color: #018aaf;
+}
+
+.rcw-launcher{
+  background-color: #018aaf;
+}
