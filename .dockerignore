@@ -1,0 +1,32 @@
+# Ignorar node_modules
+node_modules
+npm-debug.log
+
+# Ignorar archivos de construccion de React
+build
+dist
+
+# Ignorar archivos de configuracion de IDE
+.idea
+.vscode
+
+# Ignorar archivos de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+#.env.production.local
+
+# Ignorar archivos de prueba
+coverage
+*.test.js
+*.spec.js
+
+# Ignorar otros archivos innecesarios
+.DS_Store
+*.log
+*.tmp
+*.bak
+
+# Ignorar carpetas especificas si es necesario
+#public/static
