@@ -3,7 +3,7 @@ require("dotenv").config({ path: ".env.local" });
 export const APP_NAME=process.env.REACT_APP_NAME;
 
 //clave utilizado para autenticacion
-export const TOKEN = "token";
+export const TOKEN = process.env.REACT_ACCESS_TOKEN;
 export const SERVER_FRONTEND_HOST=process.env.REACT_APP_SERVER_FRONTEND_HOST;
 
 export const API_SERVER_BACKEND={

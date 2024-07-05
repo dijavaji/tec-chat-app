@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { useHistory } from 'react-router-dom';
 import {useFormik} from "formik";
 import * as Yup from "yup";
-//import {toast} from "react-toastify";
+import {toast} from "react-toastify";
 
 import "./LoginComponent.css";
 import AuthService from "../../../services/auth.service";
@@ -52,12 +52,12 @@ const LoginComponent = (props) => {
         //setUser(decodeToken(token));
         //console.log(decodeToken(token));
       }else {
-        //console.log(data.error.message)
-        throw new Error(data.error.message);
+        console.log(data.error)
+        throw new Error(data.message);
       }
     }catch(e){
-      //toast.error(error.message)
-      //console.log(JSON.stringify(e.message)); //console.log(e.toString()); //console.error(e);
+      toast.error(e.message)
+      console.log(JSON.stringify(e.message)); //console.log(e.toString()); //console.error(e);
       //const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
       setLoading(false);
       setError(e.message);
@@ -67,10 +67,10 @@ const LoginComponent = (props) => {
 });
 
   return (
-     <div className="container mt-3">
-    <div className="col-md-3">
-        <div className="card card-container">
-        <form onSubmit={formikLogin.handleSubmit}>
+     <div className="contenedor">
+    <div className="contenido">
+        <div className="login-content">
+        <form onSubmit={formikLogin.handleSubmit} className="form-login">
           <img
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
             alt="profile-img"
@@ -79,8 +79,8 @@ const LoginComponent = (props) => {
 
 
             <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input type="email" name="email" placeholder="Correo Electr&#243;nico"
+
+              <input type="email" name="email" placeholder="Correo"
 						        value={formikLogin.values.email}
 			              onBlur={formikLogin.handleBlur}
                     onChange={formikLogin.handleChange}
@@ -91,10 +91,11 @@ const LoginComponent = (props) => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+
               <input name="password"
                 type="password"
                 className="form-control"
+                placeholder="Password"
                 value={formikLogin.password}
                 onBlur={formikLogin.handleBlur}
                 onChange={formikLogin.handleChange}
@@ -107,17 +108,20 @@ const LoginComponent = (props) => {
             <div className="form-group">
               <button type="submit" className="send-btn" disabled={loading} >
                 {loading && ( <span className="spinner-border spinner-border-sm"></span>)}
-                <span>Login</span>
+                <span>Enviar</span>
               </button>
             </div>
+            <div className="form-group">
+              <p className="register-link">¿No tienes una cuenta? <a href="#">Regístrate aquí</a></p>
+            </div>
 
-            {error && (
+            {/*error && (
               <div className="form-group">
                 <div className="alert alert-danger" role="alert">
                   {error}
                 </div>
               </div>
-            )}
+            )*/}
 
 
             </form>
