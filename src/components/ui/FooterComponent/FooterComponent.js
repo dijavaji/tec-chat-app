@@ -16,7 +16,7 @@ const FooterComponent = () => {
             <Link to="#"> <FaFacebook className="social-icon"/> </Link>
           </label>
           <label><Link to="#"> <FaInstagram className="social-icon"/> </Link></label>
-          <label><Link to="#"> <FaSquareXTwitter className="social-icon"/> </Link></label>
+          <label><Link to={{ pathname: "https://x.com/Technoloqie" }} target="_blank"> <FaSquareXTwitter className="social-icon"/> </Link></label>
           <label><Link to="#"> <FaGoogle className="social-icon"/> </Link></label>
         </div>
         <div className="copyr">

@@ -87,17 +87,15 @@ function LoginLaucher(){
 
   return(<div className="loginLaucher-container">
         <form className="loginLaucher-form">
-            <h2>Iniciar Sesión</h2>
-            <div className="form-group">
-                <label for="username">Nombre de Usuario</label>
-                <input type="text" id="username" name="username" required></input>
+            <h2 className="padding: 0 50px">Iniciar Sesi&#243;n</h2>
+            <div className="loginLaucherform-group">
+                <input type="text" id="username" name="username" placeholder="Correo" required></input>
             </div>
-            <div className="form-group">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" required></input>
+            <div className="loginLaucherform-group">
+                <input type="password" id="password" name="password" placeholder="Contrase&#241;a" required></input>
             </div>
-            <div className="form-group">
-              <button type="submit">Iniciar Sesión</button>
+            <div className="loginLaucherform-group">
+              <button className="loginLaucher-button" type="submit">Iniciar</button>
             </div>
         </form>
     </div>)

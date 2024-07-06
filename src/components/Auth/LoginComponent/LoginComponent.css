@@ -50,3 +50,13 @@
 .register-link a:hover {
     text-decoration: underline;
 }
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.profile-img-card{
+  border-radius: 50%;
+}

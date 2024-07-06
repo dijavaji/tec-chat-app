@@ -71,13 +71,12 @@ const LoginComponent = (props) => {
     <div className="contenido">
         <div className="login-content">
         <form onSubmit={formikLogin.handleSubmit} className="form-login">
+        <h2>Iniciar Sesi&#243;n</h2>
           <img
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
             alt="profile-img"
             className="profile-img-card"
           />
-
-
             <div className="form-group">
 
               <input type="email" name="email" placeholder="Correo"
@@ -95,12 +94,12 @@ const LoginComponent = (props) => {
               <input name="password"
                 type="password"
                 className="form-control"
-                placeholder="Password"
+                placeholder="Contrase&#241;a"
                 value={formikLogin.password}
                 onBlur={formikLogin.handleBlur}
                 onChange={formikLogin.handleChange}
                 />
-                <div>
+                <div className="error-message">
                   {formikLogin.touched.password && formikLogin.errors.password ? (<p className="alert alert-danger"><span className=""></span>{formikLogin.errors.password}</p>): null }
                 </div>
             </div>
