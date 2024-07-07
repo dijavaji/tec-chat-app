@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Link} from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import {useFormik} from "formik";
 import * as Yup from "yup";
@@ -111,7 +112,7 @@ const LoginComponent = (props) => {
               </button>
             </div>
             <div className="form-group">
-              <p className="register-link">¿No tienes una cuenta? <a href="#">Regístrate aquí</a></p>
+              <p className="register-link">¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link></p>
             </div>
 
             {/*error && (
