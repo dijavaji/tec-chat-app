@@ -1,8 +1,6 @@
 import LayoutBasic from "../layouts/LayoutBasic";
 //paginas
-import Home from "../pages/Home";
 import NotFound from "../pages/ui/NotFound";
-import UserPage from "../pages/UserPage";
 
 import BannerComponent from '../components/ui/BannerComponent';
 import AboutComponent from '../components/ui/AboutComponent';
@@ -62,15 +60,9 @@ const routes=[
     layout: LayoutBasic
   },
   {
-    path:"/profile",
-    component:Home,
-    exact: true,
-    layout: LayoutBasic
-  },
-  {
     path:"*",
     component:NotFound,
-    layout: LayoutBasic
+    layout: ""
   }
 ]
 
