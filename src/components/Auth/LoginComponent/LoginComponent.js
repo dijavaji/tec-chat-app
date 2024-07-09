@@ -38,21 +38,16 @@ const LoginComponent = () => {
     }
   ),
   onSubmit:async (formData) =>{
-    console.log("ingreso a login usuario");
+    //console.log("ingreso a login usuario");
     setError("");
-
     try{
       const data = await AuthService.login(formData.email, formData.password);
       //console.log(data);
       const token = data.accessToken;
       if(token){
-        //console.log(token);
         setToken(token);
-        const user = decodeToken(token);
-        console.log(user);
-        setUser(user);
+        setUser(decodeToken(token));
         navigate.push('/profile');
-        //setUser(decodeToken(token));
         //console.log(decodeToken(token));
       }else {
         console.log(data.error)

@@ -24,6 +24,12 @@ const routes=[
     layout: LayoutBasic
   },
   {
+    path:"/home",
+    component:BannerComponent,
+    exact: true,
+    layout: LayoutBasic
+  },
+  {
     path:"/servicios",
     component:AboutComponent,
     exact: true,
@@ -62,7 +68,7 @@ const routes=[
   {
     path:"*",
     component:NotFound,
-    layout: ""
+    layout: LayoutBasic
   }
 ]
 

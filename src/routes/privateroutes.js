@@ -1,13 +1,20 @@
 import Home from "../pages/Home";
 import NotFound from "../pages/ui/NotFound";
-import UserPage from "../pages/UserPage";
+//import UserPage from "../pages/UserPage";
+import BannerComponent from '../components/ui/BannerComponent';
 
 import LayoutBasic from "../layouts/LayoutBasic";
 
 const privateroutes =[
   {
-    path:"/profile",
+    path:"/",
     component:Home,
+    exact: true,
+    layout: LayoutBasic
+  },
+  {
+    path:"/home",
+    component:BannerComponent,
     exact: true,
     layout: LayoutBasic
   },
@@ -15,7 +22,7 @@ const privateroutes =[
     path:"*",
     component:NotFound,
     layout: LayoutBasic
-  }
+  },
 ]
 
 export default privateroutes;
