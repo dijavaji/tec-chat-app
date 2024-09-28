@@ -1,0 +1,19 @@
+.contenedor {
+
+}
+
+.contenedor{
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  width: min(90%, 1000px);
+  /*border: 3px solid hotpink;*/
+  margin-inline: auto;
+}
+
+.contenido {
+    text-align: center;
+    padding: 2em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}

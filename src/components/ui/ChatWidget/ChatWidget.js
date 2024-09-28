@@ -42,21 +42,33 @@ const ChatWidget = () => {
     //console.log(`New message incoming! ${newMessage}`);
     // Now send the message throught the backend API
     if(newMessage.trim()){
-        const chatMessage = {
-          id:messageId,
-          displayName:nickName,
-          text: newMessage,
-          assistantName:APP_NAME,
-          createdBy:AUDIT_APP.CREATE_BY
-        };
-        const response = stompCLient.send('/app/chat', {}, JSON.stringify(chatMessage));
-        console.log(`responde api ${response}`);
+        if(newMessage !== '/login'){
+          const chatMessage = {
+            id:messageId,
+            displayName:nickName,
+            text: newMessage,
+            assistantName:APP_NAME,
+            createdBy:AUDIT_APP.CREATE_BY
+          };
+          const response = stompCLient.send('/app/chat', {}, JSON.stringify(chatMessage));
+          console.log(`responde api ${response}`);
+        }else{
+          console.log("ingreso login");
+          renderCustomComponent(getCustomLauncher);
+        }
         //addResponseMessage("hola mundo");
     }
   };
-  /*const getCustomLauncher = (handleToggle) =>
-    <button onClick={handleToggle}>This is my launcher component!</button>
-  renderCustomComponent(getCustomLauncher)*/
+  const getCustomLauncher = (handleToggle) =>{
+
+    return <LoginLaucher onClick={onButtonCustom}/>
+  }
+
+
+  //renderCustomComponent(getCustomLauncher)
+  const onButtonCustom =()=>{
+    console.log("consumo api log");
+  }
 
   return (
     <div>
@@ -68,6 +80,25 @@ const ChatWidget = () => {
         resizable={false}/>
     </div>
   )
+}
+
+
+function LoginLaucher(){
+
+  return(<div className="loginLaucher-container">
+        <form className="loginLaucher-form">
+            <h2 className="padding: 0 50px">Iniciar Sesi&#243;n</h2>
+            <div className="loginLaucherform-group">
+                <input type="text" id="username" name="username" placeholder="Correo" required></input>
+            </div>
+            <div className="loginLaucherform-group">
+                <input type="password" id="password" name="password" placeholder="Contrase&#241;a" required></input>
+            </div>
+            <div className="loginLaucherform-group">
+              <button className="loginLaucher-button" type="submit">Iniciar</button>
+            </div>
+        </form>
+    </div>)
 }
 
 export default ChatWidget;

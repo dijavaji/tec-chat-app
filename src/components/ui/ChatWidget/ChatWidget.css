@@ -22,3 +22,58 @@
 .rcw-launcher{
   background-color: #018aaf;
 }
+
+
+.loginLaucher-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginLaucherform-group {
+    margin-bottom: 15px;
+    margin-top: 0px;
+    padding: 0 50px;
+}
+
+.loginLaucher-form h2{
+  padding: 0 50px;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+input:focus {
+    border-color: #018aaf;
+    outline: none;
+}
+
+.loginLaucher-button {
+    padding: 0.7em;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.loginLaucher-button:hover {
+    background-color: #018aaf;
+}
