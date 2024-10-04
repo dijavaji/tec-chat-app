@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_SERVER_BACKEND, HTTP_METHODS } from "../utils/tec-chat.constants";
+import { API_SERVER_BACKEND } from "../utils/tec-chat.constants";
 import { getToken} from "../utils/tec-token.util";
 
 const API_SERVER_AUTH = API_SERVER_BACKEND.HOST_AUTH + API_SERVER_BACKEND.AUTH;
@@ -21,7 +21,7 @@ class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   }
 
   register(username, email, password) {

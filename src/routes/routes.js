@@ -1,8 +1,6 @@
 import LayoutBasic from "../layouts/LayoutBasic";
 //paginas
-import Home from "../pages/Home";
 import NotFound from "../pages/ui/NotFound";
-import UserPage from "../pages/UserPage";
 
 import BannerComponent from '../components/ui/BannerComponent';
 import AboutComponent from '../components/ui/AboutComponent';
@@ -21,6 +19,12 @@ import RegisterComponent from '../components/Auth/RegisterComponent';
 const routes=[
   {
     path:"/",
+    component:BannerComponent,
+    exact: true,
+    layout: LayoutBasic
+  },
+  {
+    path:"/home",
     component:BannerComponent,
     exact: true,
     layout: LayoutBasic
@@ -58,12 +62,6 @@ const routes=[
   {
     path:"/register",
     component:RegisterComponent,
-    exact: true,
-    layout: LayoutBasic
-  },
-  {
-    path:"/profile",
-    component:Home,
     exact: true,
     layout: LayoutBasic
   },

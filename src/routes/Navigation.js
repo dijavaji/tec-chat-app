@@ -1,9 +1,10 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import routes from "./routes";
+
 import {map} from "lodash";
 
-export default function Navigation() {
+export default function Navigation(props) {
+  const routes = props.routes;
   return (
     <Router>
       <Switch>

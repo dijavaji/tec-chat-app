@@ -7,9 +7,8 @@ import {toast} from "react-toastify";
 
 import "./LoginComponent.css";
 import AuthService from "../../../services/auth.service";
-
 import {setToken, decodeToken} from "../../../utils/tec-token.util";
-//import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 
 const required = value => {
   if (!value) {
@@ -21,13 +20,13 @@ const required = value => {
   }
 };
 
-const LoginComponent = (props) => {
+const LoginComponent = () => {
   const navigate = useHistory();
   const [error, setError] = useState("");
 	//const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   //const [user, setUser] = useState('');
-	//const {setUser} = useAuth();
+	const {setUser} = useAuth();
 	//const {setAuthType } = props;
 
   const formikLogin= useFormik({
@@ -39,18 +38,16 @@ const LoginComponent = (props) => {
     }
   ),
   onSubmit:async (formData) =>{
-    console.log("ingreso a login usuario");
+    //console.log("ingreso a login usuario");
     setError("");
-
     try{
       const data = await AuthService.login(formData.email, formData.password);
       //console.log(data);
       const token = data.accessToken;
       if(token){
-        //console.log(token);
         setToken(token);
+        setUser(decodeToken(token));
         navigate.push('/profile');
-        //setUser(decodeToken(token));
         //console.log(decodeToken(token));
       }else {
         console.log(data.error)
