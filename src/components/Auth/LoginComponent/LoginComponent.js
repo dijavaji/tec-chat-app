@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import { Link} from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import {Link, useHistory } from 'react-router-dom';
 import {useFormik} from "formik";
 import * as Yup from "yup";
 import {toast} from "react-toastify";
@@ -47,7 +46,7 @@ const LoginComponent = () => {
       if(token){
         setToken(token);
         setUser(decodeToken(token));
-        navigate.push('/profile');
+        navigate.push('/menu');
         //console.log(decodeToken(token));
       }else {
         console.log(data.error)
