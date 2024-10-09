@@ -1,4 +1,5 @@
 import LayoutBasic from "../layouts/LayoutBasic";
+import LayoutHome from "../layouts/LayoutHome";
 //paginas
 import NotFound from "../pages/ui/NotFound";
 
@@ -9,6 +10,8 @@ import ContactComponent from '../components/ui/ContactComponent';
 import AvatarComponent from '../components/ui/AvatarComponent';
 import Login from '../components/Auth/LoginComponent';
 import RegisterComponent from '../components/Auth/RegisterComponent';
+
+import Home from "../pages/Home";
 
 //import SectionPage from "../pages/SectionPage";
 //import BalancePage from "../pages/BalancePage";
@@ -66,9 +69,16 @@ const routes=[
     layout: LayoutBasic
   },
   {
+    path:"/menu",
+    component:Home,
+    exact: true,
+    layout: LayoutHome,
+    private:true
+  },
+  {
     path:"*",
     component:NotFound,
-    layout: LayoutBasic
+    layout: "LayoutHome"
   }
 ]
 
