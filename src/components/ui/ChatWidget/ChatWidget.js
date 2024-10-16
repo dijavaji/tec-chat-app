@@ -88,8 +88,8 @@ const ChatWidget = () => {
 
   //renderCustomComponent(getCustomLauncher)
   const handleLoginSubmit = async (values)=>{
-    console.log("ingreso a login usuario",values);
-    
+    //console.log("ingreso a login usuario",values);
+
     setError("");
     try{
       const data = await AuthService.login(values.email, values.password);
@@ -101,9 +101,9 @@ const ChatWidget = () => {
         const user = decodeToken(token);
         console.log(user);
         setUser(user);
-        setNickName(user.nombre)
-        addResponseMessage("Hola Bienvenido "+user.nombre);
-        //navigate.push('/home');
+        setNickName(user.username)
+        addResponseMessage("Hola Bienvenido "+user.username);
+        navigate.push('/menu');
         //setUser(decodeToken(token));
         //console.log(decodeToken(token));
       }else {
