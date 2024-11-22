@@ -1,0 +1,86 @@
+.table-container {
+  overflow-x: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.intent-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.intent-table th,
+.intent-table td {
+  padding: 12px 20px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.intent-table th {
+  background-color: #018aaf;
+  color: white;
+  font-weight: bold;
+}
+
+.intent-table tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.intent-table td {
+  color: #555;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+  .intent-table th, .intent-table td {
+    padding: 8px 12px;
+  }
+
+  .intent-table {
+    font-size: 14px;
+  }
+
+  .intent-table th {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .intent-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .intent-table thead {
+    display: none;
+  }
+
+  .intent-table tbody tr {
+    display: block;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+
+  .intent-table tbody tr td {
+    display: block;
+    text-align: right;
+    font-size: 14px;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .intent-table tbody tr td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .intent-table td {
+    padding-left: 50%;
+  }
+}
