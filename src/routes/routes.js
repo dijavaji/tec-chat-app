@@ -13,7 +13,7 @@ import RegisterComponent from '../components/Auth/RegisterComponent';
 import ListIntentComponent from '../components/ListIntentComponent';
 import IntentComponent from '../components/IntentComponent';
 import FileUploadComponent from '../components/FileUploadComponent';
-import ChatModuleComponent from '../components/ChatModuleComponent';
+import ChatPage from '../pages/ChatPage';
 
 import Home from "../pages/Home";
 
@@ -105,7 +105,7 @@ const routes=[
   },
   {
     path:"/chat",
-    component:ChatModuleComponent,
+    component:ChatPage,
     layout: LayoutHome,
     private:true
   },
