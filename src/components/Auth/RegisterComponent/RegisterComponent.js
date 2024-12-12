@@ -1,25 +1,51 @@
 import {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
+import {toast} from "react-toastify";
 
+import AuthService from '../../../services/auth.service';
+import { AUDIT_APP,} from "../../../utils/tec-chat.constants";
 import "./RegisterComponent.css"
 
 
 const RegisterComponent = (props) => {
-  const handleSubmit = (values)=>{
-    props.next(values);
-  };
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleSubmit = async (values)=>{
+
+    try{
+      const newUser = await AuthService.register({
+        username:values.userName,
+        email:values.email,
+        password:values.password,
+        createdBy: AUDIT_APP.CREATE_BY,
+        person:{
+            firstName: values.firstName,
+            lastName:values.lastName,
+            address:values.address,
+            phone:values.phone
+        }
+      });
+      if(newUser.success){
+          toast.success(newUser.message);
+          //navigate.push('/intents');
+      }else{
+        throw new Error("Error al crear usuario");
+      }
+    }catch(e){
+      toast.error(e.message);
+    }
+  };
 
 
   return (
     <div className="contenedor">
     <div className="contenido">
      <h2 className="text-2xl font-bold">Registrate</h2>
-      <Formik initialValues={props.data} onSubmit={handleSubmit} validationSchema={registerValidationSchema}>
+      <Formik initialValues={registerValidationSchema} onSubmit={handleSubmit} validationSchema={registerValidationSchema}>
       {() =>(
        <Form className="form-login">
-        <div className="form-group">
+        <div className="mb-4">
           <Field type="text" name="firstName" placeholder="Nombre"
               className="form-control"  />
           <ErrorMessage name="firstName" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
@@ -31,7 +57,7 @@ const RegisterComponent = (props) => {
           <ErrorMessage name="lastName" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
         </div>
         <div className="mb-4">
-          <Field type="text" name="userName" placeholder="Nickname"
+          <Field type="text" name="userName" placeholder="Nombre usuario"
           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
           <ErrorMessage name="userName" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
         </div>
@@ -90,7 +116,7 @@ const registerValidationSchema = Yup.object({
   email: Yup.string().email("El email no es valido").required("El email es obligatorio"),
   address: Yup.string().required("El pa\u00eds es obligatorio"),
   password: Yup.string().required("La contrase\u00f1a es obligatoria").min(5, "La contrase\u00f1a debe contener al menos 5 caracteres"),
-  accept: Yup.boolean().required("Aceptar t&#233;rminos y condiciones"),
+  accept: Yup.boolean().required("Aceptar t\u00e9rminos y condiciones"),
 }
 );
 

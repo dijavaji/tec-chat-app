@@ -24,12 +24,10 @@ class AuthService {
     localStorage.removeItem("token");
   }
 
-  register(username, email, password) {
-    return axios.post(API_SERVER_AUTH + "/signup", {
-      username,
-      email,
-      password
-    });
+  register(user) {
+    return axios.post(API_SERVER_AUTH + "/signup", user).then(response => {
+      return response.data;
+    }).catch((err) => {console.error('Error:', err.response.data); throw new Error(err.response.data.message);});
   }
 
   getCurrentUser() {
