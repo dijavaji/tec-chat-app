@@ -1,13 +1,12 @@
 import axios from "axios";
 import { API_SERVER_BACKEND } from "../utils/tec-chat.constants";
 
-//const API_SERVER_AUTH = API_SERVER_BACKEND.HOST_AUTH + API_SERVER_BACKEND.AUTH;
-const API_URL = "http://localhost:8080/api/v1/messages/";
+const MESSAGES_REST_API_URL = API_SERVER_BACKEND.HOST_MESSAGE + API_SERVER_BACKEND.MESSAGE;
 
 class MessageService {
-  login(email, password) {
+  getSignin = async (email, password) =>{
     return axios
-      .post(API_SERVER_AUTH + "/signin", {
+      .post(MESSAGES_REST_API_URL + "/signin", {
         email,
         password
       })
@@ -18,6 +17,12 @@ class MessageService {
         return response.data;
       }).catch((err) => {console.error('Error:', err.response.data); return err.response.data});
   }
+
+  getMessage = async (chatDto) =>{
+      return axios.post(MESSAGES_REST_API_URL, chatDto).then(response => {
+        return response.data;
+      }).catch((err) => {console.error('Error:', err.response.data); throw new Error(err.response.data.message);});
+    }
 
 }
 

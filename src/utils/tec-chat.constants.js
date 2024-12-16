@@ -10,9 +10,11 @@ export const API_SERVER_BACKEND={
     HOST: process.env.REACT_APP_API_SERVER_BACKEND_HOST,
     HOST_AUTH: process.env.REACT_APP_API_SERVER_BACKEND_HOST_AUTH,
     HOST_DOCUMENT_LOADER:process.env.REACT_APP_API_SERVER_BACKEND_HOST_DOCUMENT_LOADER,
+    HOST_MESSAGE: process.env.REACT_APP_API_SERVER_BACKEND_HOST_MESSAGE,
     AUTH: "/api/v1/auth",
     USER: "/api/v1/users",
     INTENT: "/api/v1/intents",
+    MESSAGE: "/api/v1/messages",
 };
 export const STATUS = {
   OK: 200,

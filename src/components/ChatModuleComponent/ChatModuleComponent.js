@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import MessageService from '../../services/message.service';
+import { AUDIT_APP,} from "../../utils/tec-chat.constants";
 
 import ChatInputComponent from './ChatInputComponent';
 import ChatMessageComponent from './ChatMessageComponent';
+
 
 import './ChatModuleComponent.css';
 
@@ -16,17 +19,14 @@ const ChatModuleComponent = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8081/api/v1/messages', {
-        model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: message }],
-      }, {
-        headers: {
-          'Authorization': `Bearer YOUR_API_KEY`,
-        },
+      //const botResponse = response.data.choices[0].message.content;
+      const botResponse = await MessageService.getMessage({
+        id: "string",
+        text: message,
+        createdBy: AUDIT_APP.CREATE_BY,
+        assistantName: "tec_user_legal_bot"
       });
-
-      const botResponse = response.data.choices[0].message.content;
-      setMessages([...newMessages, { sender: 'bot', text: botResponse }]);
+      setMessages([...newMessages, { sender: 'bot', text: botResponse.data.text }]);
     } catch (error) {
       console.error(error);
       setMessages([...newMessages, { sender: 'bot', text: "Lo sentimos, algo sali\u00f3 mal!" }]);
