@@ -8,7 +8,7 @@ const ChatMessageComponent = ({ messages, loading }) => {
           <p>{msg.text}</p>
         </div>
       ))}
-      {loading && <div className="message bot">Typing...</div>}
+      {loading && <div className="message bot">Procesando...</div>}
     </div>
   );
 };

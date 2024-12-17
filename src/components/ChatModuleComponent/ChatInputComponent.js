@@ -19,7 +19,7 @@ const ChatInputComponent = ({ onSendMessage }) => {
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Escribe un mensaje..."
         />
-        <button type="submit">Send</button>
+        <button type="submit">Enviar</button>
       </form>
     </div>
   );
