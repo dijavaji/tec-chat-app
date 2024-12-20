@@ -12,7 +12,7 @@ class IntentService {
           localStorage.setItem("user", JSON.stringify(response.data));
         }*/
         return response.data;
-      }).catch((err) => {console.error('Error:', err.response.data); return err.response.data});
+      }).catch((err) => {console.error('Error sevicio intencion:', err.message); throw new Error(err.message)});
   }
 
   createIntent = async (intent) =>{
