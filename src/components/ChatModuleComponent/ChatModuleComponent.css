@@ -36,6 +36,12 @@
   margin-right: 5px;
 }
 
+.quote-btn{
+  padding-left: 5px;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
 /* Responsive Styles */
 @media (max-width: 600px) {
   .chatbox {
