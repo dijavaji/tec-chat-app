@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { MESSAGE_ROLE} from '../../utils/tec-chat.constants';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
@@ -19,7 +22,7 @@ const ChatMessageComponent = ({ messages, loading }) => {
     <div className="chatbox">
       {messages.map((msg, index) => (
         <div key={index} className={`message ${msg.sender}`}>
-          <p>{msg.text} {msg.sender==='bot' && <QuoteButton contentPopover=''/>}</p>
+          <p>{msg.text} {msg.sender===MESSAGE_ROLE.SENDER_CHATBOT && <QuoteButton contentPopover=''/>}</p>
 
         </div>
       ))}
