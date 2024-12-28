@@ -17,17 +17,32 @@ const FileUploadComponent = () => {
   const [files, setFiles] = useState([])
     const [status, setStatus] = useState(STATUS_IDLE)
 
-    const uploadFiles = (data)=> {
+    const uploadFiles = async ()=> {
         setStatus(STATUS_UPLOADING)
 
-        fetch(API_URL, {
+        /*fetch(API_URL, {
             method: API_METHOD,
             body: data,
         })
         .then((res) => res.json())
         .then((data) => console.log(data))
         .catch((err) => console.error(err))
-        .finally(() => setStatus(STATUS_IDLE))
+        .finally(() => setStatus(STATUS_IDLE));*/
+
+          const nuevosArchivos = [...files];
+          nuevosArchivos.forEach(async (file) => {
+          try{
+            const response = await FileService.uploadMultipleFile(file, 2);
+            console.log(response);
+            toast.success("Cargando datos proceso en background.");
+          } catch (e) {
+              //console.log("error",e.response.data);
+              toast.error(e.response.data.message);
+              setStatus(STATUS_IDLE);
+          }
+
+          });
+        setStatus(STATUS_IDLE);
     }
 
     const packFiles = (filesUp)=> {
@@ -42,8 +57,8 @@ const FileUploadComponent = () => {
 
     const handleUploadClick = () => {
         if (files.length) {
-            const data = packFiles(files)
-            uploadFiles(data)
+            //const data = packFiles(files)
+            uploadFiles()
         }
     }
 
