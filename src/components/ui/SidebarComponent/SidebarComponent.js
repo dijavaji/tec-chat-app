@@ -1,13 +1,17 @@
 import React from 'react';
 //import { MdSupportAgent } from "react-icons/md";
 import { MdAssistant, MdOutlineTextsms, MdOutlineUploadFile, MdOutlineTextSnippet} from "react-icons/md";
+import { FaRegUser } from 'react-icons/fa';
+import {SUPER_USER_ROL} from "../../../utils/tec-chat.constants";
 //import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
 //import { RiRobot2Line } from "react-icons/ri";
-import { FaRegUser } from "react-icons/fa";
-import {NavLink} from 'react-router-dom';
+import {RiLogoutCircleRLine} from 'react-icons/ri';
+import {NavLink, Link} from 'react-router-dom';
 import './SidebarComponent.css';
+import useAuth from "../../../hooks/useAuth";
 
 const SidebarComponent = () => {
+  const {auth, logout} = useAuth();
   return (
         <nav className="sidebar">
           <div className="logo-container">
@@ -15,15 +19,14 @@ const SidebarComponent = () => {
             <span className="logo-text">Asesor Virtual Inteligente</span>
           </div>
           <ul className="nav-list">
-            <li className="nav-item">
-              <NavLink className={({isActive}) => (isActive ? "nav-link-active" : "nav-link")} exact={true} to="/menu">
-                <span className="nav-icon">
-                    <MdAssistant className="" width="24" height="24"/>
-                </span>
-                <span className="nav-text">Menu</span>
-              </NavLink>
-            </li>
-
+          <li className="nav-item">
+            <NavLink className={({isActive}) => (isActive ? "nav-link-active" : "nav-link")} exact={true} to="/menu">
+              <span className="nav-icon">
+                  <MdAssistant className="" width="24" height="24"/>
+              </span>
+              <span className="nav-text">Menu</span>
+            </NavLink>
+          </li>
             <li className="nav-item">
               <NavLink className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} to="/chat">
               <span className="nav-icon">
@@ -33,6 +36,7 @@ const SidebarComponent = () => {
               </NavLink>
             </li>
 
+            {auth.roles === SUPER_USER_ROL && <div>
             <li className="nav-item">
               <NavLink className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} to="/file-upload">
               <span className="nav-icon">
@@ -59,8 +63,17 @@ const SidebarComponent = () => {
               <span className="nav-text">Perfil</span>
               </NavLink>
             </li>
+            </div>}
 
           </ul>
+          <nav className="logout-nav" onClick={logout}>
+           <NavLink to="/" className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} >
+              <span className="nav-icon">
+                <RiLogoutCircleRLine className=""  width="24" height="24"/>
+              </span>
+              <span className="nav-text">Cerrar sesi&#243;n</span>
+           </NavLink>
+         </nav>
         </nav>
   )
 }
