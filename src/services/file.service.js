@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { API_SERVER_BACKEND } from "../utils/tec-chat.constants";
 
-//const INTENT_BASE_REST_API_URL = API_SERVER_BACKEND.HOST_DOCUMENT_LOADER + API_SERVER_BACKEND.INTENT;
-const FILE_BASE_REST_API_URL = 'http://127.0.0.1:8082/api/v1/files';
+const FILE_BASE_REST_API_URL = API_SERVER_BACKEND.HOST_DOCUMENT_LOADER + API_SERVER_BACKEND.FILE;
 
 class FileService {
 
@@ -34,7 +33,7 @@ class FileService {
         },
     }).then(response => {
       return response.data;
-    }).catch((err) => {console.error('Error:', err.response.data.error);  throw err;});
+    }).catch((err) => {console.error('Error:', err.response.data);  throw err;});
   }
 
 }
