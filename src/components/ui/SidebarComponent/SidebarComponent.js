@@ -1,4 +1,8 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 //import { MdSupportAgent } from "react-icons/md";
 import { MdAssistant, MdOutlineTextsms, MdOutlineUploadFile, MdOutlineTextSnippet} from "react-icons/md";
 import { FaRegUser } from 'react-icons/fa';
@@ -10,8 +14,34 @@ import {NavLink, Link} from 'react-router-dom';
 import './SidebarComponent.css';
 import useAuth from "../../../hooks/useAuth";
 
+const useStyles = makeStyles({
+
+    root: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: '0.75rem',
+      borderRadius: '0.5rem',
+      background: 'white',
+      transition: 'all var(--transition-speed)',
+      textDecoration: 'none',
+      color: 'var(--text-color)',
+      textTransform: 'none',
+        },
+     });
+
 const SidebarComponent = () => {
   const {auth, logout} = useAuth();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles();
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
         <nav className="sidebar">
           <div className="logo-container">
@@ -66,13 +96,16 @@ const SidebarComponent = () => {
             </div>}
 
           </ul>
-          <nav className="logout-nav" onClick={logout}>
-           <NavLink to="/" className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} >
-              <span className="nav-icon">
-                <RiLogoutCircleRLine className=""  width="24" height="24"/>
-              </span>
-              <span className="nav-text">Cerrar sesi&#243;n</span>
-           </NavLink>
+          <nav className="logout-nav">
+           <Button aria-controls="simple-menu" aria-haspopup="true" className={classes.root} onClick={handleClick}>
+              <div className="profile-icon">A</div>
+              <span className="nav-text">Mi perfil</span>
+           </Button>
+           <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+            <MenuItem onClick={handleClose}>Perfil</MenuItem>
+            <MenuItem onClick={handleClose}>Mi cuenta</MenuItem>
+            <MenuItem onClick={logout}>Cerrar sesi&#243;n</MenuItem>
+          </Menu>
          </nav>
         </nav>
   )
