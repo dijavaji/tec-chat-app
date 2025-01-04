@@ -13,8 +13,10 @@ const ChatInputComponent = ({ onSendMessage }) => {
   return (
     <div className="chat-input">
       <form onSubmit={handleSubmit}>
-        <input
+        <textarea
+          className="chat-textarea"
           type="text"
+          rows="1" cols="50"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Escribe un mensaje..."

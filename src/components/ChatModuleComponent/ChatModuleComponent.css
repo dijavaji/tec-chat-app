@@ -36,6 +36,12 @@
   margin-right: 5px;
 }
 
+.chat-input textarea {
+  width: 70%;
+  margin-right: 5px;
+  height: 40px;
+}
+
 .quote-btn{
   padding-left: 5px;
   transition: background-color 0.2s ease-in-out;
