@@ -4,47 +4,46 @@ import {toast} from "react-toastify";
 import FileService from '../../services/file.service.js';
 //import { AUDIT_APP,} from "../../utils/tec-chat.constants";
 
+import LoadScreenComponent from '../ui/LoadScreenComponent';
 import "./FileUploadComponent.css";
 import loadImg from '../../assets/img/load.svg';
-
-const STATUS_IDLE = 0
-const STATUS_UPLOADING = 1
 
 const FileUploadComponent = () => {
 
   const [files, setFiles] = useState([])
-    const [status, setStatus] = useState(STATUS_IDLE)
+  const [isLoading, setIsLoading] = useState(false);
 
-    const uploadFiles = async ()=> {
-        setStatus(STATUS_UPLOADING)
+  const uploadFiles = async ()=> {
+    setIsLoading(true);
 
-        /*fetch(API_URL, {
-            method: API_METHOD,
-            body: data,
-        })
-        .then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.error(err))
-        .finally(() => setStatus(STATUS_IDLE));*/
-
-          const nuevosArchivos = [...files];
-          nuevosArchivos.forEach(async (file) => {
-          try{
-            const response = await FileService.uploadMultipleFile(file, 2);
-            console.log(response);
-            if(response.success){
-              toast.success(`Archivo ${response.data.fileName} guardado.`);
-              setStatus(STATUS_IDLE);
-            }
-          } catch (e) {
-              //console.log("error",e.response.data);
-              toast.error(e.response.data.message);
-              setStatus(STATUS_IDLE);
+      const nuevosArchivos = [...files];
+      nuevosArchivos.forEach(async (file) => {
+      try{
+        if(file.type==='text/csv'){
+          const response = await FileService.uploadCsvFile(file);
+          console.log(response);
+          //setMessage(response.data);
+          toast.success("Cargando datos proceso en background.");
+          setIsLoading(false);
+        }else{
+          const response = await FileService.uploadMultipleFile(file, 2);
+          if(response.success){
+            toast.success(`Archivo ${response.data.fileName} guardado.`);
+            //setStatus(STATUS_IDLE);
+            setIsLoading(false);
           }
+        }
 
-          });
+      } catch (e) {
+          //console.log("error",e.response.data);
+          toast.error(e.response.data.message);
+          //setStatus(STATUS_IDLE);
+          setIsLoading(false);
+      }
 
-    }
+      });
+
+  }
 
     const packFiles = (filesUp)=> {
         const data = new FormData();
@@ -63,6 +62,10 @@ const FileUploadComponent = () => {
         }
     }
 
+    if(isLoading ){
+      return <LoadScreenComponent/>;
+    }
+
     const renderFileList = () => (
       <ol>
         {[...files].map((f, i) => (
@@ -71,7 +74,7 @@ const FileUploadComponent = () => {
     </ol>)
 
     const getButtonStatusText = () => (
-        (status === STATUS_IDLE) ? 'Enviar al servidor' : <img src = {loadImg} />
+        (!isLoading) ? 'Enviar al servidor' : <img src = {loadImg} />
     )
 
   return (
@@ -79,7 +82,7 @@ const FileUploadComponent = () => {
       <div>
           <input type="file" multiple onChange={(e)=> setFiles(e.target.files)} accept=".csv, .pdf, .doc, .txt"/>
           {renderFileList()}
-          <button onClick={handleUploadClick} disabled={status === STATUS_UPLOADING}>
+          <button onClick={handleUploadClick} disabled={isLoading}>
                   {getButtonStatusText()}
           </button>
       </div>
