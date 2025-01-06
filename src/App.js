@@ -7,20 +7,20 @@ import React, {useState, useEffect, useMemo} from "react";
 import {getToken, decodeToken, removeToken} from "./utils/tec-token.util";
 import AuthContext from "./context/AuthContext";
 import Navigation from "./routes/Navigation";
+//import useAuth from './hooks/useAuth';
 
 import routes from "./routes/routes";
-import privateroutes from "./routes/privateroutes";
+//import privateroutes from "./routes/privateroutes";
 
 {/*<Router>
       <Switch>
-        <Route exact path="/precio" component={Pricing}/>
         <Route exact={true} path="/" render={() => (<LayoutBasic> <BannerComponent/> </LayoutBasic>) } />
         <Route path="/servicios" render={() => (<LayoutBasic><AboutComponent/> </LayoutBasic>) }/>
         <Route path="/clientes" render={() => (<LayoutBasic> <ClientComponent/></LayoutBasic>) }/>
         <Route path="/contactos" render={() => (<LayoutBasic> <ContactComponent/></LayoutBasic>) }/>
         <Route path="/avatar" render={() => (<LayoutBasic> <AvatarComponent/></LayoutBasic>) }/>
         <Route path="/login" render={() => (<LayoutBasic> <Login/></LayoutBasic>)} />
-        <Route path="/profile" render={() => (<LayoutBasic> <Home/></LayoutBasic>)} />
+        <Route path="/profile" render={() => (<PrivateRoute> <LayoutBasic> <Home/> </LayoutBasic> </PrivateRoute>)} />
         <Route path="/register" render={() => (<LayoutBasic> <RegisterComponent/></LayoutBasic>)} />
         <Route path="*" component={NotFound} />
       </Switch>
@@ -61,7 +61,7 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={authData}>
-      {!auth? <Navigation routes={routes}/> : <Navigation routes={privateroutes}/>}
+      <Navigation routes={routes}/>
     </AuthContext.Provider>
  );
 }

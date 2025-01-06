@@ -2,15 +2,17 @@ require("dotenv").config({ path: ".env.local" });
 
 export const APP_NAME=process.env.REACT_APP_NAME;
 
-//key de local storage
+//key del local storage
 export const TOKEN = "token";
 export const SERVER_FRONTEND_HOST=process.env.REACT_APP_SERVER_FRONTEND_HOST;
 
 export const API_SERVER_BACKEND={
     HOST: process.env.REACT_APP_API_SERVER_BACKEND_HOST,
     HOST_AUTH: process.env.REACT_APP_API_SERVER_BACKEND_HOST_AUTH,
+    HOST_DOCUMENT_LOADER:process.env.REACT_APP_API_SERVER_BACKEND_HOST_DOCUMENT_LOADER,
     AUTH: "/api/v1/auth",
     USER: "/api/v1/users",
+    INTENT: "/api/v1/intents",
 };
 export const STATUS = {
   OK: 200,
