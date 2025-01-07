@@ -1,7 +1,7 @@
 import React from 'react';
 //import { MdSupportAgent } from "react-icons/md";
-import { MdAssistant, MdChatBubbleOutline } from "react-icons/md";
-import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
+import { MdAssistant, MdOutlineTextsms, MdOutlineUploadFile, MdOutlineTextSnippet} from "react-icons/md";
+//import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
 //import { RiRobot2Line } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa";
 import {NavLink} from 'react-router-dom';
@@ -25,20 +25,29 @@ const SidebarComponent = () => {
             </li>
 
             <li className="nav-item">
-              <NavLink className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} to="/intents">
+              <NavLink className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} to="/chat">
               <span className="nav-icon">
-                  <HiChatBubbleBottomCenterText className="" width="24" height="24"/>
+                  <MdOutlineTextsms className="" width="24" height="24"/>
               </span>
-              <span className="nav-text">Intenci&#243;n</span>
+              <span className="nav-text">Chat nuevo</span>
               </NavLink>
             </li>
 
             <li className="nav-item">
               <NavLink className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} to="/file-upload">
               <span className="nav-icon">
-                  <FaRegUser className="" width="24" height="24"/>
+                  <MdOutlineUploadFile className="" width="24" height="24"/>
               </span>
               <span className="nav-text">Cargar archivo</span>
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} to="/intents">
+              <span className="nav-icon">
+                  <MdOutlineTextSnippet className="" width="24" height="24"/>
+              </span>
+              <span className="nav-text">Intenci&#243;n</span>
               </NavLink>
             </li>
 
