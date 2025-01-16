@@ -10,11 +10,11 @@ import ContactComponent from '../components/ui/ContactComponent';
 import AvatarComponent from '../components/ui/AvatarComponent';
 import Login from '../components/Auth/LoginComponent';
 import RegisterComponent from '../components/Auth/RegisterComponent';
-import ListIntentComponent from '../components/ListIntentComponent';
+
 import IntentComponent from '../components/IntentComponent';
 import FileUploadComponent from '../components/FileUploadComponent';
 import ChatPage from '../pages/ChatPage';
-
+import IntentsPage from '../pages/IntentsPage';
 import Home from "../pages/Home";
 
 //import SectionPage from "../pages/SectionPage";
@@ -81,7 +81,7 @@ const routes=[
   },
   {
     path:"/intents",
-    component:ListIntentComponent,
+    component:IntentsPage,
     layout: LayoutHome,
     private:true
   },

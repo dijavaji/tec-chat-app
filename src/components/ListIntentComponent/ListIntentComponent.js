@@ -19,9 +19,13 @@ const ListIntentComponent = () => {
 
     const getAllIntents = async () => {
       setIsLoading(true);
-      const response = await IntentService.listIntents();
-      setIntents(response);
-      setIsLoading(false);
+      try{
+        const response = await IntentService.listIntents();
+        setIntents(response);
+        setIsLoading(false);
+      }catch(e){
+          toast.error(e.message);
+      }
     }
 
     function handleAddNewIntent() {
@@ -55,7 +59,7 @@ const ListIntentComponent = () => {
     return (
         <div className = "container">
             <h2> Lista intenci&#243;n </h2>
-            <div className="table-container">
+            {intents &&<div className="table-container">
               <button className = "btn btn-primary mb-2" onClick={handleAddNewIntent }>Nuevo</button>
               <table className="intent-table">
                 <thead>
@@ -82,7 +86,7 @@ const ListIntentComponent = () => {
                     }
                 </tbody>
               </table>
-            </div>
+            </div>}
 
         </div>
     )

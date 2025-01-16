@@ -17,7 +17,6 @@ export default function LayoutHome(props) {
           <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} closeOnClick={true}
             pauseOnHover draggable rtl={false} pauseOnFocurLoss />
         </main>
-        <ChatWidget/>
         <FooterComponent/>
       </React.Fragment>
     );
