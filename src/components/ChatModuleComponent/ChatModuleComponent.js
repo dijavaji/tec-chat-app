@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+
 import MessageService from '../../services/message.service';
-import { AUDIT_APP,} from "../../utils/tec-chat.constants";
+import { AUDIT_APP, MESSAGE_ROLE} from '../../utils/tec-chat.constants';
 
 import ChatInputComponent from './ChatInputComponent';
 import ChatMessageComponent from './ChatMessageComponent';
@@ -14,7 +14,7 @@ const ChatModuleComponent = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSendMessage = async (message) => {
-    const newMessages = [...messages, { sender: 'user', text: message }];
+    const newMessages = [...messages, { sender: MESSAGE_ROLE.SENDER_USER, text: message }];
     setMessages(newMessages);
     setIsLoading(true);
 
@@ -26,10 +26,10 @@ const ChatModuleComponent = () => {
         createdBy: AUDIT_APP.CREATE_BY,
         assistantName: "tec_user_legal_bot"
       });
-      setMessages([...newMessages, { sender: 'bot', text: botResponse.data.text }]);
+      setMessages([...newMessages, { sender: MESSAGE_ROLE.SENDER_CHATBOT, text: botResponse.data.text }]);
     } catch (error) {
       console.error(error);
-      setMessages([...newMessages, { sender: 'bot', text: "Lo sentimos, algo sali\u00f3 mal!" }]);
+      setMessages([...newMessages, { sender: MESSAGE_ROLE.SENDER_CHATBOT, text: "Lo sentimos, algo sali\u00f3 mal!" }]);
     }
     setIsLoading(false);
 

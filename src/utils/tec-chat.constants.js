@@ -47,3 +47,8 @@ export const FORMAT_APP={
     DATE_DD_MM_YYYY: "dd/MM/yyyy",
     DATE_DD_MM_YYYY_HH_MM: "dd/MM/yyyy hh:mm",
 }
+
+export const MESSAGE_ROLE= {
+  SENDER_CHATBOT: "bot",
+  SENDER_USER: 'user'
+}
