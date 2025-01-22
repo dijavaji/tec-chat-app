@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import MessageService from '../../services/message.service';
-import { AUDIT_APP, MESSAGE_ROLE} from '../../utils/tec-chat.constants';
+import { AUDIT_APP, MESSAGE_ROLE, APP_NAME} from '../../utils/tec-chat.constants';
 
 import ChatInputComponent from './ChatInputComponent';
 import ChatMessageComponent from './ChatMessageComponent';
@@ -12,6 +13,7 @@ import './ChatModuleComponent.css';
 const ChatModuleComponent = () => {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [userId] = useState(uuidv4(),);
 
   const handleSendMessage = async (message) => {
     const newMessages = [...messages, { sender: MESSAGE_ROLE.SENDER_USER, text: message }];
@@ -20,11 +22,12 @@ const ChatModuleComponent = () => {
 
     try {
       //const botResponse = response.data.choices[0].message.content;
+      //TODO tomar assistantName asociados al usuario y id
       const botResponse = await MessageService.getMessage({
-        id: "string",
+        id: userId,
         text: message,
         createdBy: AUDIT_APP.CREATE_BY,
-        assistantName: "tec_user_legal_bot"
+        assistantName: APP_NAME
       });
       setMessages([...newMessages, { sender: MESSAGE_ROLE.SENDER_CHATBOT, text: botResponse.data.text }]);
     } catch (error) {
