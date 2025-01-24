@@ -79,6 +79,28 @@
     transition: opacity var(--transition-speed);
 }
 
+.logout-nav {
+  position: absolute; /* Absolute positioning */
+  width: calc(100% - 40px); /* Ensure proper width considering padding */
+}
+
+.logout-link {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.logout-link:hover {
+  background-color: var(--accent-hover);
+}
+
+.logout-icon {
+  margin-right: 8px;
+}
+
 .collapsed .nav-text {
     opacity: 0;
     width: 0;

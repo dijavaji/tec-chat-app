@@ -52,3 +52,5 @@ export const MESSAGE_ROLE= {
   SENDER_CHATBOT: "bot",
   SENDER_USER: 'user'
 }
+
+export const SUPER_USER_ROL=1
