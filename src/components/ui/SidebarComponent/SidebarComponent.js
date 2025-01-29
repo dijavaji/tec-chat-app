@@ -5,7 +5,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 //import { MdSupportAgent } from "react-icons/md";
 import { MdAssistant, MdOutlineTextsms, MdOutlineUploadFile, MdOutlineTextSnippet} from "react-icons/md";
-import { FaRegUser } from 'react-icons/fa';
+import { FaLink } from 'react-icons/fa';
 import {SUPER_USER_ROL} from "../../../utils/tec-chat.constants";
 //import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
 //import { RiRobot2Line } from "react-icons/ri";
@@ -86,11 +86,11 @@ const SidebarComponent = () => {
             </li>
 
             <li className="nav-item">
-              <NavLink className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} to="/profile">
+              <NavLink className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} to="/url-upload">
               <span className="nav-icon">
-                  <FaRegUser className="" width="24" height="24"/>
+                  <FaLink className="" width="24" height="24"/>
               </span>
-              <span className="nav-text">Perfil</span>
+              <span className="nav-text">Agregar ruta</span>
               </NavLink>
             </li>
             </div>}
@@ -98,11 +98,11 @@ const SidebarComponent = () => {
           </ul>
           <nav className="logout-nav">
            <Button aria-controls="simple-menu" aria-haspopup="true" className={classes.root} onClick={handleClick}>
-              <div className="profile-icon">A</div>
+              <div className="profile-icon">AD</div>
               <span className="nav-text">Mi perfil</span>
            </Button>
            <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-            <MenuItem onClick={handleClose}>Perfil</MenuItem>
+            <MenuItem onClick={handleClose} href='/profile' >Perfil</MenuItem>
             <MenuItem onClick={handleClose}>Mi cuenta</MenuItem>
             <MenuItem onClick={logout}>Cerrar sesi&#243;n</MenuItem>
           </Menu>

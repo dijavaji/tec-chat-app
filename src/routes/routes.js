@@ -13,6 +13,7 @@ import RegisterComponent from '../components/Auth/RegisterComponent';
 
 import IntentComponent from '../components/IntentComponent';
 import FileUploadComponent from '../components/FileUploadComponent';
+import UrlUploadComponent from '../components/UrlUploadComponent';
 import ChatPage from '../pages/ChatPage';
 import IntentsPage from '../pages/IntentsPage';
 import Home from "../pages/Home";
@@ -106,6 +107,12 @@ const routes=[
   {
     path:"/chat",
     component:ChatPage,
+    layout: LayoutHome,
+    private:true
+  },
+  {
+    path:"/url-upload",
+    component:UrlUploadComponent,
     layout: LayoutHome,
     private:true
   },
