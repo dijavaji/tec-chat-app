@@ -7,8 +7,6 @@ import FileService from '../../services/file.service.js';
 import "./FileUploadComponent.css";
 import loadImg from '../../assets/img/load.svg';
 
-const API_URL = 'https://httpbin.org/post'
-const API_METHOD = 'POST'
 const STATUS_IDLE = 0
 const STATUS_UPLOADING = 1
 
@@ -34,7 +32,10 @@ const FileUploadComponent = () => {
           try{
             const response = await FileService.uploadMultipleFile(file, 2);
             console.log(response);
-            toast.success("Cargando datos proceso en background.");
+            if(response.success){
+              toast.success(`Archivo ${response.data.fileName} guardado.`);
+              setStatus(STATUS_IDLE);
+            }
           } catch (e) {
               //console.log("error",e.response.data);
               toast.error(e.response.data.message);
@@ -42,7 +43,7 @@ const FileUploadComponent = () => {
           }
 
           });
-        setStatus(STATUS_IDLE);
+
     }
 
     const packFiles = (filesUp)=> {

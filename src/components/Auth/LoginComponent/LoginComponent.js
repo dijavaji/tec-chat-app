@@ -49,12 +49,12 @@ const LoginComponent = () => {
         navigate.push('/menu');
         //console.log(decodeToken(token));
       }else {
-        console.log(data.error)
+        //console.log(data.error)
         throw new Error(data.message);
       }
     }catch(e){
       toast.error(e.message)
-      console.log(JSON.stringify(e.message)); //console.log(e.toString()); //console.error(e);
+      //console.log(JSON.stringify(e.message)); //console.log(e.toString()); //console.error(e);
       //const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
       setLoading(false);
       setError(e.message);

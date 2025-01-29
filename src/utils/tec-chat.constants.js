@@ -15,6 +15,7 @@ export const API_SERVER_BACKEND={
     USER: "/api/v1/users",
     INTENT: "/api/v1/intents",
     MESSAGE: "/api/v1/messages",
+    FILE : "/api/v1/files"
 };
 export const STATUS = {
   OK: 200,

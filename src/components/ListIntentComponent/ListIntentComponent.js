@@ -60,7 +60,7 @@ const ListIntentComponent = () => {
         <div className = "container">
             <h2> Lista intenci&#243;n </h2>
             {intents &&<div className="table-container">
-              <button className = "btn btn-primary mb-2" onClick={handleAddNewIntent }>Nuevo</button>
+              <button className = "" style={{margin: '5px'}} onClick={handleAddNewIntent }>Nuevo</button>
               <table className="intent-table">
                 <thead>
                     <th> Id </th>
