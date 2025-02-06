@@ -17,13 +17,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ChatMessageComponent = ({ messages, loading }) => {
+const ChatMessageComponent = ({ messages, loading, onDownloadDocument }) => {
   return (
     <div className="chatbox">
       {messages.map((msg, index) => (
         <div key={index} className={`message ${msg.sender}`}>
-          <p>{msg.text} {msg.sender===MESSAGE_ROLE.SENDER_CHATBOT && <QuoteButton contentPopover=''/>}</p>
-
+          <div>{msg.text} { (msg.sender===MESSAGE_ROLE.SENDER_CHATBOT && msg.metadata.sources.length>0 ) ? <QuoteButton onDownloadDocument={onDownloadDocument} contentPopover='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum orci a sapien imperdiet maximus.' docName={msg.metadata.sources.join(", ")} page={10}/>: null }</div>
         </div>
       ))}
       {loading && <div className="message bot"> <img src = {loadImg} /> </div>}
@@ -31,9 +30,9 @@ const ChatMessageComponent = ({ messages, loading }) => {
   );
 };
 
-function QuoteButton({contentPopover, inversion, recive}){
+function QuoteButton({contentPopover, docName, page, onDownloadDocument}){
   //datos cita (Apellido, ano, pagina). ejm (Arias, 2018, p.342) (NombreDoc, pagina)
-  contentPopover = '"mineros para acceder al derecho de preferencia son los siguientes: 1. Ser beneficiarios de contratos mineros de pequeña minería en áreas de aporte..." (EjemploRespuestas.docx, p.10)';
+  const contentPopUp = <div>"{contentPopover}..." <div className="doc-lnk" onClick={onDownloadDocument}>({docName}.docx </div>, p.{page}) </div>;
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -62,9 +61,10 @@ function QuoteButton({contentPopover, inversion, recive}){
         horizontal: 'center',
       }}
     >
-      <Typography className={classes.typography}>{contentPopover}</Typography>
+      <Typography className={classes.typography}>{contentPopUp}</Typography>
     </Popover>
   </>);
 }
+
 
 export default ChatMessageComponent;

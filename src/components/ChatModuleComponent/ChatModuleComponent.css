@@ -48,6 +48,12 @@
   cursor: pointer;
 }
 
+.doc-lnk{
+  text-decoration: underline;
+  cursor:pointer;
+  display: inline;
+}
+
 /* Responsive Styles */
 @media (max-width: 600px) {
   .chatbox {
