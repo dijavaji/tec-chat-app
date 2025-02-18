@@ -6,7 +6,7 @@ import Sockjs from 'sockjs-client';
 import { Widget, addResponseMessage, renderCustomComponent} from 'react-chat-widget';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
-import {toast} from "react-toastify";
+//import {toast} from "react-toastify";
 
 import 'react-chat-widget/lib/styles.css';
 import logo from '../../../logo.svg';
@@ -20,7 +20,7 @@ import useAuth from "../../../hooks/useAuth";
 
 
 
-const API_SERVER_SOCKET = API_SERVER_BACKEND.HOST + '/ws';
+const API_SERVER_SOCKET = API_SERVER_BACKEND.HOST_MESSAGE + '/ws';
 
 const ChatWidget = () => {
   const navigate = useHistory();

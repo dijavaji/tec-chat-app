@@ -63,13 +63,13 @@ const RegisterComponent = (props) => {
         </div>
 
         <div className="mb-4">
-          <Field type="text" name="email" placeholder="Correo electronico"
+          <Field type="text" name="email" placeholder="Correo electr&#243;nico"
           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
           <ErrorMessage name="email" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
         </div>
 
           <div className="mb-4">
-            <Field type="text" name="address" placeholder="Pa&#237;s"
+            <Field type="text" name="address" placeholder="Direcci&#243;n"
             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
             <ErrorMessage name="address" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
           </div>
