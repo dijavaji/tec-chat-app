@@ -17,6 +17,7 @@ import UrlUploadComponent from '../components/UrlUploadComponent';
 import ChatPage from '../pages/ChatPage';
 import IntentsPage from '../pages/IntentsPage';
 import Home from "../pages/Home";
+import Auth from "../pages/Auth";
 
 //import SectionPage from "../pages/SectionPage";
 //import BalancePage from "../pages/BalancePage";
@@ -63,7 +64,7 @@ const routes=[
   },
   {
     path:"/login",
-    component:Login,
+    component:Auth,
     exact: true,
     layout: LayoutBasic
   },
