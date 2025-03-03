@@ -1,6 +1,9 @@
 # Etapa de construccion
 FROM node:16.17 AS build
 
+ARG ENV_APP_NAME
+ENV REACT_APP_NAME=$ENV_APP_NAME
+
 # Establecer el directorio de trabajo
 WORKDIR /app
 
