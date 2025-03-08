@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'underscore/modules/map.js'
 
 import { MESSAGE_ROLE} from '../../utils/tec-chat.constants';
 
@@ -22,7 +23,7 @@ const ChatMessageComponent = ({ messages, loading, onDownloadDocument }) => {
     <div className="chatbox">
       {messages.map((msg, index) => (
         <div key={index} className={`message ${msg.sender}`}>
-          <div>{msg.text} { (msg.sender===MESSAGE_ROLE.SENDER_CHATBOT && msg.metadata.sources.length>0 ) ? <QuoteButton onDownloadDocument={onDownloadDocument} contentPopover='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum orci a sapien imperdiet maximus.' docName={msg.metadata.sources.join(", ")} page={10}/>: null }</div>
+          <div>{msg.text} { (msg.sender===MESSAGE_ROLE.SENDER_CHATBOT && msg.metadata && msg.metadata.sources.length>0 ) ? <QuoteButton onDownloadDocument={onDownloadDocument} contentPopover={msg.text.length>170?msg.text.substring(70, 170): msg.text.substring(10, 10)} docName={_.pluck(msg.metadata.sources,'fileName').join(", ")} page={10}/>: null }</div>
         </div>
       ))}
       {loading && <div className="message bot"> <img src = {loadImg} /> </div>}

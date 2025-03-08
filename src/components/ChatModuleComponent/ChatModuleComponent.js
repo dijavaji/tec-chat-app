@@ -34,7 +34,8 @@ const ChatModuleComponent = () => {
         assistantName: APP_NAME
       });
       //console.log('respuesta bot',botResponse.data);
-      setMessages([...newMessages, { sender: MESSAGE_ROLE.SENDER_CHATBOT, text: botResponse.data.text, metadata: botResponse.data.metadata}]);
+      const metadata = botResponse.data.metadata? botResponse.data.metadata : '';
+      setMessages([...newMessages, { sender: MESSAGE_ROLE.SENDER_CHATBOT, text: botResponse.data.text, metadata: metadata}]);
     } catch (error) {
       console.error(error);
       setMessages([...newMessages, { sender: MESSAGE_ROLE.SENDER_CHATBOT, text: "Lo sentimos, algo sali\u00f3 mal!" }]);
