@@ -33,7 +33,7 @@ class FileService {
         },
     }).then(response => {
       return response.data;
-    }).catch((err) => {console.error('Error:', err.response.data);  throw err;});
+    }).catch((err) => {  throw err;});
   }
 
 }

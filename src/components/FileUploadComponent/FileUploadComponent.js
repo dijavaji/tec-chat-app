@@ -26,7 +26,7 @@ const FileUploadComponent = () => {
           toast.success("Cargando datos proceso en background.");
           setIsLoading(false);
         }else{
-          const response = await FileService.uploadMultipleFile(file, 2);
+          const response = await FileService.uploadMultipleFile(file, 6);
           if(response.success){
             toast.success(`Archivo ${response.data.fileName} guardado.`);
             //setStatus(STATUS_IDLE);
@@ -35,10 +35,13 @@ const FileUploadComponent = () => {
         }
 
       } catch (e) {
-          //console.log("error",e.response.data);
-          toast.error(e.response.data.message);
-          //setStatus(STATUS_IDLE);
           setIsLoading(false);
+          //console.log("error",e.response.data);
+          console.log("error",e);
+          const errMsg = e.response? e.response.data.message: e.message;
+          toast.error(errMsg);
+          //setStatus(STATUS_IDLE);
+
       }
 
       });

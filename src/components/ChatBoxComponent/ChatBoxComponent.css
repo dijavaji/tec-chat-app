@@ -1,0 +1,16 @@
+.chat-widget-container {
+  position: relative;
+  width: 100%;
+  max-width: 1150px; /* Ancho máximo del contenedor */
+  height: 500px; /* Altura del contenedor */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  overflow: hidden; /* Evita que el contenido sobrepase los límites */
+}
+
+/* Estilos adicionales para el widget */
+.chat-widget-container .rcw-widget-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}

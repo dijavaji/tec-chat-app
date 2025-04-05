@@ -1,7 +1,5 @@
-//import React, {useState, useEffect}from 'react';
+import React, {useState, useEffect}from 'react';
 //import BannerComponent from '../../components/ui/BannerComponent';
-//import { Widget, addResponseMessage } from 'react-chat-widget';
-
 
 import "./Home.css";
 //import 'react-chat-widget/lib/styles.css';
@@ -9,6 +7,7 @@ import "./Home.css";
 
 //import ChatComponent from "../../components/ChatComponent";
 //import ChatRoomComponent from "../../components/ChatRoomComponent";
+import ChatBoxComponent from '../../components/ChatBoxComponent';
 import AuthService from "../../services/auth.service";
 
 export default function Home() {
