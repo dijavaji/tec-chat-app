@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
+
 //import _ from 'underscore/modules/map.js'
 import _ from 'underscore';
 
-import { MESSAGE_ROLE} from '../../utils/tec-chat.constants';
+import { MESSAGE_ROLE } from '../../utils/tec-chat.constants';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
@@ -24,7 +25,7 @@ const ChatMessageComponent = ({ messages, loading, onDownloadDocument }) => {
     <div className="chatbox">
       {messages.map((msg, index) => (
         <div key={index} className={`message ${msg.sender}`}>
-          <div>{msg.text} { (msg.sender===MESSAGE_ROLE.SENDER_CHATBOT && msg.metadata && msg.metadata.sources.length>0 ) ? <QuoteButton onDownloadDocument={onDownloadDocument} contentPopover={msg.text.length>170?msg.text.substring(70, 170): msg.text.substring(10, 10)} docName={_.pluck(msg.metadata.sources,'fileName').join(", ")} page={10}/>: null }</div>
+          <div>{msg.text} { (msg.sender===MESSAGE_ROLE.SENDER_CHATBOT && msg.metadata && msg.metadata.sources.length>0 ) ? <QuoteButton onDownloadDocument={onDownloadDocument} contentPopover={msg.text.length>170?msg.text.substring(70, 170): msg.text.substring(10, 10)} metadata={msg.metadata}  page={10}/>: null }</div>
         </div>
       ))}
       {loading && <div className="message bot"> <img src = {loadImg} /> </div>}
@@ -32,12 +33,14 @@ const ChatMessageComponent = ({ messages, loading, onDownloadDocument }) => {
   );
 };
 
-function QuoteButton({contentPopover, docName, page, onDownloadDocument}){
+function QuoteButton({contentPopover, page, onDownloadDocument, metadata}){
+  const [sources, setSources] = React.useState(metadata.sources);
   //datos cita (Apellido, ano, pagina). ejm (Arias, 2018, p.342) (NombreDoc, pagina)
-  const contentPopUp = <div>"{contentPopover}..." <div className="doc-lnk" onClick={onDownloadDocument}>({docName}.docx </div>, p.{page}) </div>;
+  //const docName=_.pluck(sources,'fileName').join(", ");
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [downloadId, setDownloadId] = React.useState(0);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -46,10 +49,22 @@ function QuoteButton({contentPopover, docName, page, onDownloadDocument}){
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleDownloadReference = (id) =>{
+    onDownloadDocument(id);
+  }
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
+  const createContentPopup = ()=>{
+    return(
+      <div>
+        "{contentPopover}..." {sources.map((sorce,index) => (<i key={index} className="doc-lnk" onClick={() => handleDownloadReference(sorce.id)}> {sorce.fileName} </i>))}  , p.{page})
+      </div>
+    );
+  }
+
+  const contentPopUp = createContentPopup()
   return(<>
     {/*<Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}> Open Popover </Button>*/}
     <MdFormatQuote type="button" className="quote-btn" title="Cita narrativa" onClick={handleClick}/>
@@ -63,7 +78,7 @@ function QuoteButton({contentPopover, docName, page, onDownloadDocument}){
         horizontal: 'center',
       }}
     >
-      <Typography className={classes.typography}>{contentPopUp}</Typography>
+      <div className={classes.typography}>{contentPopUp}</div>
     </Popover>
   </>);
 }

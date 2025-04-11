@@ -52,6 +52,7 @@
   text-decoration: underline;
   cursor:pointer;
   display: inline;
+  font-style: unset;
 }
 
 /* Responsive Styles */
