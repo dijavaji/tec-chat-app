@@ -74,7 +74,7 @@ const ChatWidget = () => {
             createdBy:AUDIT_APP.CREATE_BY
           };
           const response = stompCLient.send('/app/chat', {}, JSON.stringify(chatMessage));
-          console.log(`responde api ${response}`);
+          //console.log(`responde api ${response}`);
 
         }
         //addResponseMessage("hola mundo");
