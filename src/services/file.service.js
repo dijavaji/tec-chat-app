@@ -36,6 +36,12 @@ class FileService {
     }).catch((err) => {  throw err;});
   }
 
+  getDownloadFile = async (fileId) =>{
+      return axios.get(`${FILE_BASE_REST_API_URL}/download/${fileId}`).then(response => {
+        return response.data;
+      }).catch((err) => {console.error('Error:', err); throw new Error(err);});
+    }
+
 }
 
 export default new FileService();

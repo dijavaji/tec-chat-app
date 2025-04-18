@@ -1,5 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+import { triggerBase64Download } from 'common-base64-downloader-react';
 import { v4 as uuidv4 } from 'uuid';
+import {toast} from "react-toastify";
+
+import FileService from '../../services/file.service.js';
 
 import MessageService from '../../services/message.service';
 import { AUDIT_APP, MESSAGE_ROLE, APP_NAME} from '../../utils/tec-chat.constants';
@@ -29,7 +33,8 @@ const ChatModuleComponent = () => {
         createdBy: AUDIT_APP.CREATE_BY,
         assistantName: APP_NAME
       });
-      setMessages([...newMessages, { sender: MESSAGE_ROLE.SENDER_CHATBOT, text: botResponse.data.text }]);
+      //console.log('respuesta bot',botResponse.data);
+      setMessages([...newMessages, { sender: MESSAGE_ROLE.SENDER_CHATBOT, text: botResponse.data.text, metadata: botResponse.data.metadata}]);
     } catch (error) {
       console.error(error);
       setMessages([...newMessages, { sender: MESSAGE_ROLE.SENDER_CHATBOT, text: "Lo sentimos, algo sali\u00f3 mal!" }]);
@@ -38,12 +43,33 @@ const ChatModuleComponent = () => {
 
   }
 
+  const handleDownload = async () =>{
+    console.log("descargando");
+    try{
+      const response = await FileService.getDownloadFile(9);
+      if(response.success){
+        toast.success(`Descargando ${response.data.fileName}.`);
+        const base64Data = response.data.fileBase64.startsWith('data:') ? response.data.fileBase64 : `data:${response.data.fileType};base64,${response.data.fileBase64}`;
+
+        triggerBase64Download(base64Data, response.data.fileName);
+        setIsLoading(false);
+      }
+    }catch(e){
+      setIsLoading(false);
+      //console.log("error",e.response.data);
+      console.log("error",e);
+      const errMsg = e.response? e.response.data.message: e.message;
+      toast.error(errMsg);
+    }
+
+  }
+
 
   return (
     <div className="appChat">
-      <ChatMessageComponent messages={messages} loading={isLoading} />
+      <ChatMessageComponent messages={messages} loading={isLoading} onDownloadDocument={handleDownload}/>
 
-      <ChatInputComponent onSendMessage={handleSendMessage} isLoading={isLoading} />
+      <ChatInputComponent onSendMessage={handleSendMessage} isLoading={isLoading}/>
     </div>
   )
 }
