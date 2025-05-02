@@ -6,11 +6,13 @@ import {toast} from "react-toastify";
 import IntentService from '../../services/intent.service.js';
 
 import LoadScreenComponent from '../ui/LoadScreenComponent';
+import ModalComponent from '../ui/ModalComponent';
 import "./ListIntentComponent.css";
 
 const ListIntentComponent = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [intents, setIntents] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
     const navigate = useHistory();
 
     useEffect(() => {
@@ -77,7 +79,7 @@ const ListIntentComponent = () => {
                                 <td>
                                     <div className="flex justify-center padding-left: 5px; padding-right: 5px;">
                                       <AiOutlineEdit type="button" onClick={() => handleUpdateIntent(intent.id)} className="" title="Editar"/>
-                                      <AiOutlineCloseCircle type="button" onClick={() => handleRemoveIntent(intent)} className="" title="Eliminar"/>
+                                      <AiOutlineCloseCircle type="button" onClick={() => setIsOpen(true)} className="" title="Eliminar"/>
                                     </div>
 
                                 </td>
@@ -87,6 +89,11 @@ const ListIntentComponent = () => {
                 </tbody>
               </table>
             </div>}
+
+            <ModalComponent isOpen={isOpen} onClose={() => setIsOpen(false)} title="Eliminar intenci&#243;n" >
+              <p>Contenido del Modal</p>
+
+            </ModalComponent>
 
         </div>
     )
