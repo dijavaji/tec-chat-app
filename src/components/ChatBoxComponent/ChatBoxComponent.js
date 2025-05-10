@@ -11,9 +11,20 @@ const ChatBoxComponent = () => {
    toggleWidget(); // Abre el widget al montar el componente
  }, []);
 
-  const handleNewUserMessage = (newMessage) => {
+  const handleNewUserMessage = async (newMessage) => {
     console.log(`New message incoming! ${newMessage}`);
     // Now send the message throught the backend API
+    try{
+      // Simular respuesta de la API (reemplazar con llamada real a sendMessageToAPI)
+      const response = await new Promise(resolve => {
+          setTimeout(() => {
+              resolve(`Respuesta simulada: "${newMessage}"`);
+          }, 1000);
+      });
+      addResponseMessage(response);
+    }catch(e){
+      console.error('error',e);
+    }
   };
 
   const getCustomLauncher = (handleToggle) =>{
@@ -24,7 +35,8 @@ const ChatBoxComponent = () => {
   return (
     <div className="chat-widget-container">
       <Widget fullScreenMode={true}  showCloseButton={false} autofocus={true}
-         handleNewUserMessage={handleNewUserMessage}/>
+        title="Soporte en vivo"
+        handleNewUserMessage={handleNewUserMessage}/>
     </div>
   )
 }

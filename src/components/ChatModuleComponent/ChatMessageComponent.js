@@ -1,5 +1,6 @@
 import React from 'react';
-import _ from 'underscore/modules/map.js'
+//import _ from 'underscore/modules/map.js'
+import _ from 'underscore';
 
 import { MESSAGE_ROLE} from '../../utils/tec-chat.constants';
 
