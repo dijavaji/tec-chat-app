@@ -20,7 +20,7 @@ const FileUploadComponent = () => {
       nuevosArchivos.forEach(async (file) => {
       try{
         if(file.type==='text/csv'){
-          const response = await FileService.uploadCsvFile(file);
+          const response = await FileService.uploadCsvFile(file,1);
           console.log(response);
           //setMessage(response.data);
           toast.success("Cargando datos proceso en background.");
