@@ -44,10 +44,12 @@ const ChatModuleComponent = () => {
 
   }
 
-  const handleDownload = async () =>{
-    console.log("descargando");
+  const handleDownload = async (id) =>{
+    //const file = e.target.value;
+    //e.preventDefault();
+    console.log("descargando",id);
     try{
-      const response = await FileService.getDownloadFile(9);
+      const response = await FileService.getDownloadFile(id);
       if(response.success){
         toast.success(`Descargando ${response.data.fileName}.`);
         const base64Data = response.data.fileBase64.startsWith('data:') ? response.data.fileBase64 : `data:${response.data.fileType};base64,${response.data.fileBase64}`;
