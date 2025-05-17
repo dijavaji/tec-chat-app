@@ -33,7 +33,6 @@ const SidebarComponent = () => {
   const {auth, logout} = useAuth();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const classes = useStyles();
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -98,7 +97,7 @@ const SidebarComponent = () => {
           </ul>
           <nav className="logout-nav">
            <Button aria-controls="simple-menu" aria-haspopup="true" className={classes.root} onClick={handleClick}>
-              <div className="profile-icon">AD</div>
+              <div className="profile-icon">{auth.username.charAt(0).toUpperCase()}</div>
               <span className="nav-text">Mi perfil</span>
            </Button>
            <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
