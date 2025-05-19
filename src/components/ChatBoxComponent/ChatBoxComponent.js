@@ -9,7 +9,7 @@ const ChatBoxComponent = () => {
   //const [chatToggle, setChatToggle] = useState(false);
 
   useEffect(() => {
-   addResponseMessage('Welcome to this **awesome** chat!');
+   //addResponseMessage('Welcome to this **awesome** chat!');
 
    const chatOpen = document.querySelector('.rcw-conversation-container') !== null;
    if(!chatOpen){
@@ -19,7 +19,7 @@ const ChatBoxComponent = () => {
  }, []);
 
   const handleNewUserMessage = async (newMessage) => {
-    console.log(`New message incoming! ${newMessage}`);
+    //console.log(`New message incoming! ${newMessage}`);
     // Now send the message throught the backend API
     try{
 

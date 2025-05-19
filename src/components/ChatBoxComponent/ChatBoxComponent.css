@@ -56,4 +56,13 @@
   .chat-widget-container {
     padding: 10px;
   }
+  .rcw-widget-container {
+    right: 10px !important;
+    bottom: 10px !important;
+  }
+
+  .rcw-conversation-container {
+    width: 95vw !important;
+    height: 70vh !important;
+  }
 }
