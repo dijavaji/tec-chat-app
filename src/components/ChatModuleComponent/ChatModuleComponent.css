@@ -55,6 +55,13 @@
   font-style: unset;
 }
 
+.disabled-btn{
+  background-color: gray;
+  color: white;
+  cursor: not-allowed;
+  box-shadow: 0px 0px 10px 0px gray;
+}
+
 /* Responsive Styles */
 @media (max-width: 600px) {
   .chatbox {

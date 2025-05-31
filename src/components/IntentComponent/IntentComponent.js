@@ -61,7 +61,15 @@ const IntentComponent = () => {
           modifiedBy: AUDIT_APP.UPDATE_BY,
           phrases:updatePhrases,
         });
-        toast.success("Intencion actualizada correctamente.");
+        console.log("actualiza intent",intentUpdated);
+
+        if(intentUpdated.success){
+            navigate.push('/intents');
+            //toast.success("Intenci\u00f3n actualizada correctamente.");
+            toast.success(intentUpdated.message);
+        }else{
+          throw new Error("Error al actualizar intenci\u00f3n");
+        }
       }else{
         const phrasesNew = [];
         const responsesNew = [];
@@ -83,7 +91,6 @@ const IntentComponent = () => {
           createdBy: AUDIT_APP.CREATE_BY,
           phrases:phrasesNew
         });
-        //console.log("guardamos intent",intentResponse);
         if(intentResponse.success){
             navigate.push('/intents');
             toast.success(intentResponse.message);
@@ -96,6 +103,10 @@ const IntentComponent = () => {
       //console.log(e.response.data);
       toast.error(e.message);
     }
+  }
+
+  const handleClickCancel = () =>{
+    navigate.push('/intents');
   }
 
   if(isLoading ){
@@ -135,7 +146,8 @@ const IntentComponent = () => {
           </div>
 
           <div className="form-group">
-            <input type="submit" value="Ejecutar" className="send-btn"/>
+            <button type="submit" style={{margin: '5px'}} >Ejecutar</button>
+            <button type="reset" onClick={handleClickCancel} style={{margin: '5px', backgroundColor: '#5cb85c'}}>Cancelar</button>
           </div>
          </Form>
          )

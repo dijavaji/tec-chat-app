@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ChatInputComponent = ({ onSendMessage }) => {
+const ChatInputComponent = ({ onSendMessage, isLoading }) => {
   const [message, setMessage] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const ChatInputComponent = ({ onSendMessage }) => {
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Escribe un mensaje..."
         />
-        <button type="submit">Enviar</button>
+        <button type="submit" disabled={isLoading} className={isLoading? 'disabled-btn':''}>Enviar</button>
       </form>
     </div>
   );
