@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import { useHistory } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 import {toast} from "react-toastify";
@@ -9,9 +10,9 @@ import "./RegisterComponent.css"
 
 
 const RegisterComponent = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useHistory();
 
-  const handleSubmit = async (values)=>{
+  const handleSubmit = async (values, { resetForm })=>{
 
     try{
       const newUser = await AuthService.register({
@@ -28,7 +29,8 @@ const RegisterComponent = (props) => {
       });
       if(newUser.success){
           toast.success(newUser.message);
-          //navigate.push('/intents');
+          resetForm();
+          navigate.push('/login');
       }else{
         throw new Error("Error al crear usuario");
       }
@@ -42,7 +44,7 @@ const RegisterComponent = (props) => {
     <div className="contenedor">
     <div className="contenido">
      <h2 className="text-2xl font-bold">Registrate</h2>
-      <Formik initialValues={registerValidationSchema} onSubmit={handleSubmit} validationSchema={registerValidationSchema}>
+      <Formik initialValues={initValues} onSubmit={handleSubmit} validationSchema={registerValidationSchema}>
       {() =>(
        <Form className="form-login">
         <div className="mb-4">
@@ -91,7 +93,7 @@ const RegisterComponent = (props) => {
           <Field type="checkbox" name="accept"
             className="form-check-input appearance-none h-4 w-4 border border-yellow-500 rounded-sm bg-white checked:bg-yellow-600 checked:border-yellow-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"/>
             <label className="form-check-label inline-block text-gray-800 hover:underline cursor-pointer"
-                onClick={() => setIsOpen(true)} htmlFor="accept">Acepto los t&#233;rminos y condiciones
+                htmlFor="accept">Acepto los t&#233;rminos y condiciones
             </label>
             <ErrorMessage name="accept" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
           </div>
@@ -114,10 +116,20 @@ const registerValidationSchema = Yup.object({
   lastName: Yup.string().required("El apellido es obligatorio").min(3, "El apellido debe contener al menos 3 caracteres"),
   userName: Yup.string().matches(/[a-zA-Z0-9-]*$/, "El nickname no puede tener espacios").required("El nombre de usuario es obligatorio").min(3, "El nickname debe contener al menos 3 caracteres"),
   email: Yup.string().email("El email no es valido").required("El email es obligatorio"),
-  address: Yup.string().required("El pa\u00eds es obligatorio"),
+  address: Yup.string().required("La direcci\u00f3n es obligatorio"),
   password: Yup.string().required("La contrase\u00f1a es obligatoria").min(5, "La contrase\u00f1a debe contener al menos 5 caracteres"),
-  accept: Yup.boolean().required("Aceptar t\u00e9rminos y condiciones"),
+  accept: Yup.boolean().oneOf([true], 'Aceptar los t\u00e9rminos y condiciones').required("Aceptar t\u00e9rminos y condiciones"),
 }
 );
+
+const initValues = {
+        firstName: '',
+        lastName: '',
+        userName:'',
+        email: '',
+        address: '',
+        password:'',
+        accept:false
+      };
 
 export default RegisterComponent;
