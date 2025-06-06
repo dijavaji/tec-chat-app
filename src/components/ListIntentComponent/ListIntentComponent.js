@@ -13,6 +13,7 @@ const ListIntentComponent = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [intents, setIntents] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
+    const [intentDelete, setIntentDelete] = useState(null);
     const navigate = useHistory();
 
     useEffect(() => {
@@ -39,11 +40,13 @@ const ListIntentComponent = () => {
     }
 
     const handleRemoveIntent = async (intenthandle) => {
-      alert("Eliminar intenci\u00f3n " + intenthandle.name);
+      //alert("Eliminar intenci\u00f3n " + intenthandle.name);
       try{
         const intentRes = await IntentService.deleteIntent(intenthandle.id);
         if(intentRes.success){
           getAllIntents();
+          setIsOpen(false);
+          setIntentDelete(null);
           toast.success(intentRes.message);
         }else{
           throw new Error("Error al eliminar intenci\u00f3n");
@@ -56,6 +59,24 @@ const ListIntentComponent = () => {
      if(isLoading ){
        return <LoadScreenComponent/>;
      }
+
+    const handleOnDelete = (handleIntent)=>{
+      setIntentDelete(handleIntent);
+      setIsOpen(true);
+    }
+
+    const createContentModalDelete = ()=>{
+      console.log(intentDelete);
+      return (
+        <div>
+          {intentDelete && <p>{intentDelete.id} {intentDelete.name}</p>}
+          <button type="submit" style={{margin: '5px'}} onClick={() => handleRemoveIntent(intentDelete)}>Ejecutar</button>
+          <button type="reset" onClick={() => setIsOpen(false)} style={{margin: '5px', backgroundColor: '#5cb85c'}}>Cancelar</button>
+        </div>
+      );
+    }
+
+    const contentModalDelete = createContentModalDelete();
 
 
     return (
@@ -79,7 +100,7 @@ const ListIntentComponent = () => {
                                 <td>
                                     <div className="flex justify-center padding-left: 5px; padding-right: 5px;">
                                       <AiOutlineEdit type="button" onClick={() => handleUpdateIntent(intent.id)} className="" title="Editar"/>
-                                      <AiOutlineCloseCircle type="button" onClick={() => setIsOpen(true)} className="" title="Eliminar"/>
+                                      <AiOutlineCloseCircle type="button" onClick={() => handleOnDelete(intent)} className="" title="Eliminar"/>
                                     </div>
 
                                 </td>
@@ -91,8 +112,7 @@ const ListIntentComponent = () => {
             </div>}
 
             <ModalComponent isOpen={isOpen} onClose={() => setIsOpen(false)} title="Eliminar intenci&#243;n" >
-              <p>Contenido del Modal</p>
-
+              {contentModalDelete}
             </ModalComponent>
 
         </div>
