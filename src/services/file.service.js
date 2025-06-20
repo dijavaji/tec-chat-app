@@ -5,11 +5,11 @@ const FILE_BASE_REST_API_URL = API_SERVER_BACKEND.HOST_DOCUMENT_LOADER + API_SER
 
 class FileService {
 
-  uploadCsvFile = async (file) =>{
+  uploadCsvFile = async (file, id) =>{
     const formData = new FormData();
         formData.append("file", file);
 
-        return axios.post(`${FILE_BASE_REST_API_URL}/upload-csv`, formData, {
+        return axios.post(`${FILE_BASE_REST_API_URL}/upload-csv/${id}`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },

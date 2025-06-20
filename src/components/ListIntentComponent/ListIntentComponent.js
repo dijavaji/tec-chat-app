@@ -66,7 +66,6 @@ const ListIntentComponent = () => {
     }
 
     const createContentModalDelete = ()=>{
-      console.log(intentDelete);
       return (
         <div>
           {intentDelete && <p>{intentDelete.id} {intentDelete.name}</p>}
