@@ -9,7 +9,7 @@ import LoadScreenComponent from '../ui/LoadScreenComponent';
 import ModalComponent from '../ui/ModalComponent';
 import "./ListIntentComponent.css";
 
-const ListIntentComponent = () => {
+const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [intents, setIntents] = useState([]);
     const [isOpen, setIsOpen] = useState(false);

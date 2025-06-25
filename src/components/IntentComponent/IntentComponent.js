@@ -1,23 +1,23 @@
 import {useState, useEffect} from 'react';
-import {useParams, useHistory } from 'react-router-dom';
+//import {useParams, useHistory } from 'react-router-dom';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
-import {toast} from "react-toastify";
+//import {toast} from "react-toastify";
 
 import LoadScreenComponent from '../ui/LoadScreenComponent';
 
-import IntentService from '../../services/intent.service.js';
-import { AUDIT_APP,} from "../../utils/tec-chat.constants";
+//import IntentService from '../../services/intent.service.js';
+//import { AUDIT_APP,} from "../../utils/tec-chat.constants";
 
-const IntentComponent = () => {
+const IntentComponent = ({ intent, onSubmit, onCancel }) => {
 
-  const navigate = useHistory();
+  //const navigate = useHistory();
   const [isLoading, setIsLoading] = useState(false);
-  const [intent, setIntent] = useState({});
-  const {id} = useParams();
+  //const [intent, setIntent] = useState({});
+  const {id} = intent;
 
-  useEffect(() => {
+  /*useEffect(() => {
        fetchIntent();
    }, [id]);
 
@@ -30,14 +30,17 @@ const IntentComponent = () => {
         //initialValues(intentResult);
         setIsLoading(false);
     }
-  }
+  }*/
 
   const handleSubmit = (values)=>{
     //props.next(values);
-    saveOrUpdateIntent(values);
+    //saveOrUpdateIntent(values);
+    console.log("ingreso a guardar", values);
+    //await onSubmit(values);
+    //setSubmitting(false);
   };
 
-  const saveOrUpdateIntent = async (formData) => {
+  /*const saveOrUpdateIntent = async (formData) => {
     try{
       if(id){
         const updatePhrases = [];
@@ -107,7 +110,7 @@ const IntentComponent = () => {
 
   const handleClickCancel = () =>{
     navigate.push('/intents');
-  }
+  }*/
 
   if(isLoading ){
     return <LoadScreenComponent/>;
@@ -134,20 +137,14 @@ const IntentComponent = () => {
             <ErrorMessage name="intentname" component="div" className=""/>
           </div>
           <div className="">
-            <Field type="text" name="question" placeholder="Frases de entrenamiento"
+            <Field type="text" name="description" placeholder="Descripci&#243;n"
                 className="form-control"  />
-            <ErrorMessage name="question" component="div" className=""/>
-          </div>
-
-          <div className="">
-            <Field type="text" name="answer" placeholder="Respuesta"
-                className="form-control"  />
-            <ErrorMessage name="answer" component="div" className=""/>
+            <ErrorMessage name="description" component="div" className=""/>
           </div>
 
           <div className="form-group">
             <button type="submit" style={{margin: '5px'}} >Ejecutar</button>
-            <button type="reset" onClick={handleClickCancel} style={{margin: '5px', backgroundColor: '#5cb85c'}}>Cancelar</button>
+            <button type="reset" onClick={onCancel} style={{margin: '5px', backgroundColor: '#5cb85c'}}>Cancelar</button>
           </div>
          </Form>
          )
@@ -159,8 +156,7 @@ const IntentComponent = () => {
 
 const intentValidationSchema = Yup.object({
   intentname: Yup.string().required("El nombre es obligatorio").min(3, "El nombre debe contener al menos 3 caracteres").max(50, 'Too Long!'),
-  question: Yup.string().required("La pregunta es obligatorio").min(4, 'Too Short!').max(2000, 'Demasiado largo!'),
-  answer: Yup.string().required("La respuesta es obligatorio").min(4, 'Too Short!').max(2000, 'Demasiado largo!'),
+  description: Yup.string().min(4, 'Too Short!').max(2000, 'Demasiado largo!'),
 }
 );
 
@@ -168,10 +164,7 @@ function initialValues(data){
   return(
     {
       intentname: data ? data.name : '',
-      question: data.phrases? data.phrases[0].phrase :'',
-      questionId: data.phrases? data.phrases[0].id :'',
-      answer: (data.phrases && data.phrases[0].responses) ? data.phrases[0].responses[0].response :'',
-      answerId:(data.phrases && data.phrases[0].responses) ? data.phrases[0].responses[0].id :'',
+      description: data.description? data.description :'',
     }
   );
 }
