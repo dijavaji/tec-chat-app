@@ -9,8 +9,8 @@ import { FaLink } from 'react-icons/fa';
 import {SUPER_USER_ROL} from "../../../utils/tec-chat.constants";
 //import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
 //import { RiRobot2Line } from "react-icons/ri";
-import {RiLogoutCircleRLine} from 'react-icons/ri';
-import {NavLink, Link} from 'react-router-dom';
+//import {RiLogoutCircleRLine} from 'react-icons/ri';
+//import {NavLink, Link} from 'react-router-dom';
 import './SidebarComponent.css';
 import useAuth from "../../../hooks/useAuth";
 
