@@ -51,7 +51,7 @@ const IntentDetailComponent = ({ onBack  }) => {
 
   const handleIntentSave = async (formData) => {
     try{
-      console.log('guardar intencion');
+      console.log('guardar intencion', formData);
       if(intent.id){
         /*const updatePhrases = [];
         const updateResponses = [];
