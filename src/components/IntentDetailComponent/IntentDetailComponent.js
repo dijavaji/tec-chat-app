@@ -146,8 +146,12 @@ const IntentDetailComponent = ({ onBack  }) => {
         <div>
           <button onClick={() => setAddingQuestionMode(true)}>Agregar pregunta</button>
         </div>
+        {addingQuestionMode && (
+        <QuestionComponent initial={null} onSubmit={handleAddQuestion} onCancel={() => setAddingQuestionMode(false)} />
+      )}
+        </>
 
-        </>}
+      }
 
     </div>
   )
