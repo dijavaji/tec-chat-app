@@ -10,7 +10,7 @@ import {SUPER_USER_ROL} from "../../../utils/tec-chat.constants";
 //import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
 //import { RiRobot2Line } from "react-icons/ri";
 //import {RiLogoutCircleRLine} from 'react-icons/ri';
-//import {NavLink, Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import './SidebarComponent.css';
 import useAuth from "../../../hooks/useAuth";
 
@@ -101,7 +101,7 @@ const SidebarComponent = () => {
               <span className="nav-text">Mi perfil</span>
            </Button>
            <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-            <MenuItem onClick={handleClose} href='/profile' >Perfil</MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to='/profile' >Perfil</MenuItem>
             <MenuItem onClick={handleClose}>Mi cuenta</MenuItem>
             <MenuItem onClick={logout}>Cerrar sesi&#243;n</MenuItem>
           </Menu>
