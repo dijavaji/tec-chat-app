@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import { FaEdit, FaTrash, FaPlus, FaSave, FaWindowClose } from "react-icons/fa";
 import { useHistory, useParams } from "react-router-dom";
 import {toast} from "react-toastify";
 import IntentService from '../../services/intent.service.js';
@@ -146,7 +147,9 @@ const IntentDetailComponent = ({ onBack  }) => {
 
         <h3>Preguntas</h3>
         <div>
-          <button onClick={() => setAddingQuestionMode(true)}>Agregar pregunta</button>
+          <button className="" onClick={() => setAddingQuestionMode(true)}>
+            <FaPlus /> Agregar pregunta
+          </button>
         </div>
         {addingQuestionMode && (
           <QuestionComponent initial={null} onSubmit={handleAddQuestion} onCancel={() => setAddingQuestionMode(false)} />
@@ -186,29 +189,29 @@ const IntentDetailComponent = ({ onBack  }) => {
                                     <li key={a.id}>
                                       {a.response}
                                       <div>
-                                        <button onClick={() => setEditingAnswer({ questionId: q.id, answer: a })}>Editar</button>
-                                        <button onClick={() => handleDeleteAnswer(q.id, a.id)}>Eliminar</button>
+                                        <button onClick={() => setEditingAnswer({ questionId: q.id, answer: a })}><FaEdit /> Editar</button>
+                                        <button onClick={() => handleDeleteAnswer(q.id, a.id)}><FaTrash /> Eliminar</button>
                                       </div>
-                                      {editingAnswer.questionId === q.id && editingAnswer.answer?.id === a.id && (
-                                        <AnswerComponent
-                                          initial={editingAnswer.answer}
-                                          onSubmit={(vals) => handleEditAnswer(q.id, a.id, vals)}
-                                          onCancel={() => setEditingAnswer({ questionId: null, answer: null })}
-                                        />
-                                      )}
+
                                     </li>
                                   ))}
                                 </ul>
                                 {editingAnswer.questionId === q.id && editingAnswer.answer === null && (
-                                <AnswerComponent
-                                  initial={null}
-                                  onSubmit={(vals) => handleAddAnswer(q.id, vals)}
-                                  onCancel={() => setEditingAnswer({ questionId: null, answer: null })}
-                                />
-                              )}
+                                  <AnswerComponent
+                                    initial={null}
+                                    onSubmit={(vals) => handleAddAnswer(q.id, vals)}
+                                    onCancel={() => setEditingAnswer({ questionId: null, answer: null })}
+                                  />
+                                )}
 
-
-                          </div>
+                                {editingAnswer.questionId === q.id && editingAnswer.answer?.id && (
+                                  <AnswerComponent
+                                    initial={editingAnswer.answer}
+                                    onSubmit={(vals) => handleEditAnswer(q.id, q.id, vals)}
+                                    onCancel={() => setEditingAnswer({ questionId: null, answer: null })}
+                                  />
+                                )}
+                              </div>
                           </td>
                       </tr>
                   )
