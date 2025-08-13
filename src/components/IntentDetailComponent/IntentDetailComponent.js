@@ -155,69 +155,28 @@ const IntentDetailComponent = ({ onBack  }) => {
           <QuestionComponent initial={null} onSubmit={handleAddQuestion} onCancel={() => setAddingQuestionMode(false)} />
         )}
 
-        <table className="intent-table">
-          <thead>
-              <th> Id </th>
-              <th> Pregunta</th>
-              <th> Acciones </th>
-              <th> Respuesta</th>
-
-          </thead>
-          <tbody>
-              {intent.phrases.map( q =>
-                      <tr key = {q.id}>
-                          <td> {q.id} </td>
-                          <td> {q.phrase}
-                          {editingQuestion && editingQuestion.id === q.id && (
-                            <QuestionComponent initial={editingQuestion} onSubmit={(vals) => handleEditQuestion(q.id, vals)}
-                              onCancel={() => setEditingQuestion(null)}
-                              />
-                            )}
-                          </td>
-                          <td>
-                            <div>
-                              <button onClick={() => setEditingQuestion(q)}>Editar pregunta</button>
-                              <button onClick={() => handleDeleteQuestion(q.id)}>Eliminar pregunta</button>
-                              <button onClick={() => setEditingAnswer({ questionId: q.id, answer: null })}>Agregar respuesta</button>
-                            </div>
-                          </td>
-
-                          <td>
-                          <div style={{ marginTop: 8 }}>
-                                <ul>
-                                  {q.responses.map((a) => (
-                                    <li key={a.id}>
-                                      {a.response}
-                                      <div>
-                                        <button onClick={() => setEditingAnswer({ questionId: q.id, answer: a })}><FaEdit /> Editar</button>
-                                        <button onClick={() => handleDeleteAnswer(q.id, a.id)}><FaTrash /> Eliminar</button>
-                                      </div>
-
-                                    </li>
-                                  ))}
-                                </ul>
-                                {editingAnswer.questionId === q.id && editingAnswer.answer === null && (
-                                  <AnswerComponent
-                                    initial={null}
-                                    onSubmit={(vals) => handleAddAnswer(q.id, vals)}
-                                    onCancel={() => setEditingAnswer({ questionId: null, answer: null })}
-                                  />
-                                )}
-
-                                {editingAnswer.questionId === q.id && editingAnswer.answer?.id && (
-                                  <AnswerComponent
-                                    initial={editingAnswer.answer}
-                                    onSubmit={(vals) => handleEditAnswer(q.id, q.id, vals)}
-                                    onCancel={() => setEditingAnswer({ questionId: null, answer: null })}
-                                  />
-                                )}
-                              </div>
-                          </td>
-                      </tr>
-                  )
-              }
-          </tbody>
-        </table>
+        {/* This is the new div-based structure that replaces the old table. */}
+        <div className="intent-questions-list">
+          {intent.phrases.map(q => (
+            // This placeholder div will eventually become the QuestionCard component.
+            <div key={q.id} className="question-card-placeholder">
+              <p><strong>Pregunta:</strong> {q.phrase} (ID: {q.id})</p>
+              <div>
+                <strong>Respuestas:</strong>
+                <ul>
+                  {q.responses.map(a => (
+                    <li key={a.id}>{a.response}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="question-actions-placeholder">
+                <button>Editar Pregunta</button>
+                <button>Eliminar Pregunta</button>
+                <button>Agregar Respuesta</button>
+              </div>
+            </div>
+          ))}
+        </div>
 
         </>
 
