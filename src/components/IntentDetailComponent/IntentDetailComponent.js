@@ -10,6 +10,7 @@ import LoadScreenComponent from '../ui/LoadScreenComponent';
 import IntentComponent from '../IntentComponent';
 import QuestionComponent from '../QuestionComponent';
 import AnswerComponent from '../AnswerComponent';
+import QuestionCard from '../QuestionCard';
 
 const IntentDetailComponent = ({ onBack  }) => {
 
@@ -155,26 +156,18 @@ const IntentDetailComponent = ({ onBack  }) => {
           <QuestionComponent initial={null} onSubmit={handleAddQuestion} onCancel={() => setAddingQuestionMode(false)} />
         )}
 
-        {/* This is the new div-based structure that replaces the old table. */}
+import QuestionCard from '../QuestionCard';
+
+// ... (rest of the component)
+
         <div className="intent-questions-list">
           {intent.phrases.map(q => (
-            // This placeholder div will eventually become the QuestionCard component.
-            <div key={q.id} className="question-card-placeholder">
-              <p><strong>Pregunta:</strong> {q.phrase} (ID: {q.id})</p>
-              <div>
-                <strong>Respuestas:</strong>
-                <ul>
-                  {q.responses.map(a => (
-                    <li key={a.id}>{a.response}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="question-actions-placeholder">
-                <button>Editar Pregunta</button>
-                <button>Eliminar Pregunta</button>
-                <button>Agregar Respuesta</button>
-              </div>
-            </div>
+            <QuestionCard 
+              key={q.id} 
+              question={q} 
+              onUpdate={handleEditQuestion} 
+              onDelete={handleDeleteQuestion} 
+            />
           ))}
         </div>
 
