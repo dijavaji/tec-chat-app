@@ -1,0 +1,53 @@
+/* IntentDetailComponent.css */
+.intent-header {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.intent-header-display .intent-title-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.intent-header-display h2 {
+  margin: 0;
+}
+
+.intent-header-display p {
+  color: #6c757d;
+}
+
+.intent-header-edit .form-control {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.intent-header-edit .header-edit-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.header-edit-actions .btn-save {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.header-edit-actions .btn-cancel {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
