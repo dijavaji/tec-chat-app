@@ -4,27 +4,90 @@ import './QuestionCard.css';
 
 const QuestionCard = ({ question, onUpdate, onDelete }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditingQuestion, setIsEditingQuestion] = useState(false);
+  const [editedPhrase, setEditedPhrase] = useState(question.phrase);
 
+  // State for inline editing answers
+  const [editingAnswerId, setEditingAnswerId] = useState(null);
+  const [editedAnswerText, setEditedAnswerText] = useState('');
+
+  // Disable expand when editing
   const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
+    if (!isEditingQuestion) {
+      setIsExpanded(!isExpanded);
+    }
+  };
+
+  const handleEditQuestion = (e) => {
+    e.stopPropagation();
+    setEditedPhrase(question.phrase); // Reset on opening
+    setIsEditingQuestion(true);
+  };
+
+  const handleCancelEdit = (e) => {
+    e.stopPropagation();
+    setIsEditingQuestion(false);
+  };
+
+  const handleSaveQuestion = (e) => {
+    e.stopPropagation();
+    // Here you would call the actual update logic passed via props
+    console.log(`Saving new phrase: ${editedPhrase}`);
+    // onUpdate({ ...question, phrase: editedPhrase });
+    setIsEditingQuestion(false);
+  };
+
+  // --- Answer Edit Handlers ---
+  const handleEditAnswer = (answer) => {
+    setEditingAnswerId(answer.id);
+    setEditedAnswerText(answer.response);
+  };
+
+  const handleCancelAnswer = () => {
+    setEditingAnswerId(null);
+    setEditedAnswerText('');
+  };
+
+  const handleSaveAnswer = () => {
+    console.log(`Saving answer ${editingAnswerId} with text: ${editedAnswerText}`);
+    // onUpdateAnswer({ id: editingAnswerId, response: editedAnswerText });
+    setEditingAnswerId(null);
+    setEditedAnswerText('');
   };
 
   return (
     <div className="question-card">
       <div className="question-header" onClick={toggleExpand}>
-        <span className="question-title">
-          {isExpanded ? <FaChevronDown /> : <FaChevronRight />}
-          {question.phrase}
-        </span>
-        <div className="question-actions">
-          <button className="action-btn" onClick={(e) => { e.stopPropagation(); setIsEditing(true); }}>
-            <FaEdit />
-          </button>
-          <button className="action-btn" onClick={(e) => { e.stopPropagation(); onDelete(question.id); }}>
-            <FaTrash />
-          </button>
-        </div>
+        {isEditingQuestion ? (
+          <div className="edit-question-form">
+            <input
+              type="text"
+              value={editedPhrase}
+              onChange={(e) => setEditedPhrase(e.target.value)}
+              onClick={(e) => e.stopPropagation()} // Prevent header click
+              className="form-control"
+            />
+            <div className="edit-actions">
+              <button onClick={handleSaveQuestion} className="btn-save-sm">Guardar</button>
+              <button onClick={handleCancelEdit} className="btn-cancel-sm">Cancelar</button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <span className="question-title">
+              {isExpanded ? <FaChevronDown /> : <FaChevronRight />}
+              {question.phrase}
+            </span>
+            <div className="question-actions">
+              <button className="action-btn" onClick={handleEditQuestion}>
+                <FaEdit />
+              </button>
+              <button className="action-btn" onClick={(e) => { e.stopPropagation(); onDelete(question.id); }}>
+                <FaTrash />
+              </button>
+            </div>
+          </>
+        )}
       </div>
       {isExpanded && (
         <div className="question-content">
@@ -33,11 +96,28 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
             <ul>
               {question.responses.map(answer => (
                 <li key={answer.id}>
-                  {answer.response}
-                  <div className="answer-actions">
-                    <button className="action-btn-sm"><FaEdit /></button>
-                    <button className="action-btn-sm"><FaTrash /></button>
-                  </div>
+                  {editingAnswerId === answer.id ? (
+                    <div className="edit-answer-form">
+                      <input
+                        type="text"
+                        value={editedAnswerText}
+                        onChange={(e) => setEditedAnswerText(e.target.value)}
+                        className="form-control"
+                      />
+                      <div className="edit-actions">
+                        <button onClick={handleSaveAnswer} className="btn-save-sm">Guardar</button>
+                        <button onClick={handleCancelAnswer} className="btn-cancel-sm">Cancelar</button>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      {answer.response}
+                      <div className="answer-actions">
+                        <button onClick={() => handleEditAnswer(answer)} className="action-btn-sm"><FaEdit /></button>
+                        <button className="action-btn-sm"><FaTrash /></button>
+                      </div>
+                    </>
+                  )}
                 </li>
               ))}
             </ul>

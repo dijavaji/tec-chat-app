@@ -14,7 +14,47 @@
   align-items: center;
   padding: 1rem;
   cursor: pointer;
+  min-height: 65px; /* Ensure consistent height */
 }
+
+/* Styles for the inline editing form */
+.edit-question-form {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.edit-question-form .form-control {
+  flex-grow: 1;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.edit-question-form .edit-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-save-sm, .btn-cancel-sm {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-save-sm {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-cancel-sm {
+  background-color: #6c757d;
+  color: white;
+}
+
 
 .question-title {
   font-weight: 600;
@@ -80,6 +120,18 @@
 .answers-section li:hover .answer-actions {
   opacity: 1; /* Show on hover */
 }
+
+.edit-answer-form {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.edit-answer-form .form-control {
+  flex-grow: 1;
+}
+
 
 .action-btn-sm {
   background: none;
