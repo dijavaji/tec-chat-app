@@ -1,21 +1,53 @@
-import React, { useState } from 'react';
-import { FaEdit, FaTrash, FaPlus, FaChevronDown, FaChevronRight } from "react-icons/fa";
+import React, { useState, useEffect, useRef } from 'react';
+import { FaEdit, FaTrash, FaPlus, FaChevronDown, FaChevronRight, FaEllipsisV } from "react-icons/fa";
 import './QuestionCard.css';
 
 const QuestionCard = ({ question, onUpdate, onDelete }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isEditingQuestion, setIsEditingQuestion] = useState(false);
   const [editedPhrase, setEditedPhrase] = useState(question.phrase);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   // State for inline editing answers
   const [editingAnswerId, setEditingAnswerId] = useState(null);
   const [editedAnswerText, setEditedAnswerText] = useState('');
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
 
   // Disable expand when editing
   const toggleExpand = () => {
     if (!isEditingQuestion) {
       setIsExpanded(!isExpanded);
     }
+  };
+
+  const toggleMenu = (e) => {
+    e.stopPropagation();
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleEditClick = (e) => {
+    e.stopPropagation();
+    handleEditQuestion(e);
+    setIsMenuOpen(false);
+  };
+
+  const handleDeleteClick = (e) => {
+    e.stopPropagation();
+    onDelete(question.id);
+    setIsMenuOpen(false);
   };
 
   const handleEditQuestion = (e) => {
@@ -79,12 +111,21 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
               {question.phrase}
             </span>
             <div className="question-actions">
-              <button className="action-btn" onClick={handleEditQuestion}>
-                <FaEdit />
-              </button>
-              <button className="action-btn" onClick={(e) => { e.stopPropagation(); onDelete(question.id); }}>
-                <FaTrash />
-              </button>
+              <div className="context-menu-container">
+                <button className="action-btn" onClick={toggleMenu}>
+                  <FaEllipsisV />
+                </button>
+                {isMenuOpen && (
+                  <div className="context-menu">
+                    <button onClick={handleEditClick} className="menu-item">
+                      <FaEdit /> Editar
+                    </button>
+                    <button onClick={handleDeleteClick} className="menu-item">
+                      <FaTrash /> Eliminar
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </>
         )}
