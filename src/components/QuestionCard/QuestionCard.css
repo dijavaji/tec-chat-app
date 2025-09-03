@@ -85,10 +85,6 @@
 }
 
 /* Context Menu Styles */
-.context-menu-container {
-  position: relative;
-}
-
 .context-menu {
   position: absolute;
   top: 100%;
