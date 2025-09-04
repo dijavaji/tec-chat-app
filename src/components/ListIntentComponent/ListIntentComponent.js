@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
-import { AiOutlineCloseCircle, AiOutlineEdit, AiOutlineFileAdd } from "react-icons/ai";
+import { FaEdit, FaTrash, FaPlus, FaSave } from "react-icons/fa";
 import {toast} from "react-toastify";
 
 import IntentService from '../../services/intent.service.js';
@@ -82,7 +82,7 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
         <div className = "container">
             <h2> Lista intenci&#243;n </h2>
             {intents &&<div className="table-container">
-              <button className = "" style={{margin: '5px'}} onClick={handleAddNewIntent }>Nuevo</button>
+              <button className="add-answer-btn" style={{margin: '5px'}} onClick={handleAddNewIntent }> <FaPlus /> Nuevo</button>
               <table className="intent-table">
                 <thead>
                     <th> Id </th>
@@ -98,8 +98,8 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
                                 <td> {intent.name} </td>
                                 <td>
                                     <div className="flex justify-center padding-left: 5px; padding-right: 5px;">
-                                      <AiOutlineEdit type="button" onClick={() => handleUpdateIntent(intent.id)} className="" title="Editar"/>
-                                      <AiOutlineCloseCircle type="button" onClick={() => handleOnDelete(intent)} className="" title="Eliminar"/>
+                                      <FaEdit type="button" onClick={() => handleUpdateIntent(intent.id)} className="" title="Editar"/>
+                                      <FaTrash type="button" onClick={() => handleOnDelete(intent)} className="" title="Eliminar"/>
                                     </div>
 
                                 </td>
