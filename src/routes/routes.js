@@ -12,6 +12,7 @@ import Login from '../components/Auth/LoginComponent';
 import RegisterComponent from '../components/Auth/RegisterComponent';
 
 import IntentComponent from '../components/IntentComponent';
+import IntentDetailComponent from '../components/IntentDetailComponent';
 import FileUploadComponent from '../components/FileUploadComponent';
 import UrlUploadComponent from '../components/UrlUploadComponent';
 import ChatPage from '../pages/ChatPage';
@@ -95,7 +96,7 @@ const routes=[
   },
   {
     path:"/edit-intent/:id",
-    component:IntentComponent,
+    component:IntentDetailComponent,
     layout: LayoutHome,
     private:true
   },
