@@ -32,12 +32,9 @@ const IntentComponent = ({ intent, onSubmit, onCancel }) => {
     }
   }*/
 
-  const handleSubmit = (values)=>{
-    //props.next(values);
-    //saveOrUpdateIntent(values);
-    console.log("ingreso a guardar", values);
-    //await onSubmit(values);
-    //setSubmitting(false);
+  const handleSubmit = async (values, setSubmitting)=>{
+    await onSubmit(values);
+    setSubmitting(false);
   };
 
   /*const saveOrUpdateIntent = async (formData) => {
@@ -127,7 +124,7 @@ const IntentComponent = ({ intent, onSubmit, onCancel }) => {
   return (
     <div className = "container">
     <h2> { pageTitle() } </h2>
-        {intent && <Formik initialValues={initialValues(intent)} onSubmit={handleSubmit} validationSchema={intentValidationSchema}
+        {intent && <Formik initialValues={initialValues(intent)} onSubmit={async (values, { setSubmitting }) => handleSubmit(values, setSubmitting)} validationSchema={intentValidationSchema}
           enableReinitialize={true} >
         {() =>(
          <Form className="">
