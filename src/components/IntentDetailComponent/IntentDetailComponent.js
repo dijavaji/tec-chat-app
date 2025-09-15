@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import './IntentDetailComponent.css';
-import { FaEdit, FaTrash, FaPlus, FaSave, FaWindowClose } from "react-icons/fa";
+import { FaEdit, FaTrash, FaPlus, FaSave, FaWindowClose, FaAngleLeft} from "react-icons/fa";
 import { useHistory, useParams } from "react-router-dom";
 import {toast} from "react-toastify";
 import IntentService from '../../services/intent.service.js';
@@ -10,7 +10,7 @@ import { AUDIT_APP,} from "../../utils/tec-chat.constants";
 import LoadScreenComponent from '../ui/LoadScreenComponent';
 import IntentComponent from '../IntentComponent';
 import QuestionComponent from '../QuestionComponent';
-import AnswerComponent from '../AnswerComponent';
+
 import QuestionCard from '../QuestionCard';
 
 const IntentDetailComponent = ({ onBack  }) => {
@@ -122,7 +122,8 @@ const IntentDetailComponent = ({ onBack  }) => {
   return (
     <div className = "container">
       {intent && <>
-        <button onClick={handleonBack} className="btn-cancel">Volver a lista</button>
+        <button onClick={handleonBack} className="btn-return-sm">
+        <FaAngleLeft title="Volver a lista"/>Volver</button>
         <div className="intent-header">
           {isEditingHeader ? (
             <div className="intent-header-edit">

@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Popover } from 'react-tiny-popover';
-import { FaEdit, FaTrash, FaPlus, FaChevronDown, FaChevronRight, FaEllipsisV, FaSave } from "react-icons/fa";
+import { FaEdit, FaTrash, FaPlus, FaChevronDown, FaChevronRight, FaEllipsisV, FaSave, FaWindowClose } from "react-icons/fa";
 import './QuestionCard.css';
+import AnswerComponent from '../AnswerComponent';
 
 const QuestionCard = ({ question, onUpdate, onDelete }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isEditingQuestion, setIsEditingQuestion] = useState(false);
   const [editedPhrase, setEditedPhrase] = useState(question.phrase);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [addingAnswerMode, setAddingAnswerMode] = useState(false);
+
 
   // State for inline editing answers
   const [editingAnswerId, setEditingAnswerId] = useState(null);
@@ -69,6 +72,10 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
     setEditedAnswerText('');
   };
 
+  const handleAddAnswer = ()=>{
+
+  };
+
   return (
     <div className="question-card">
       <div className="question-header" onClick={toggleExpand}>
@@ -83,7 +90,7 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
             />
             <div className="edit-actions">
               <button onClick={handleSaveQuestion} className="action-btn"> <FaSave title="Guardar"/> </button>
-              <button onClick={handleCancelEdit} className="btn-cancel-sm">Cancelar</button>
+              <button onClick={handleCancelEdit} className="action-btn"> <FaWindowClose title="Cancelar"/></button>
             </div>
           </div>
         ) : (
@@ -133,25 +140,28 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
                         className="form-control"
                       />
                       <div className="edit-actions">
-                        <button onClick={handleSaveAnswer} className="btn-save-sm">Guardar</button>
-                        <button onClick={handleCancelAnswer} className="btn-cancel-sm">Cancelar</button>
+                        <button onClick={handleSaveAnswer} className="action-btn"><FaSave title="Guardar"/></button>
+                        <button onClick={handleCancelAnswer} className="action-btn"><FaWindowClose title="Cancelar"/></button>
                       </div>
                     </div>
                   ) : (
                     <>
                       {answer.response}
                       <div className="answer-actions">
-                        <button onClick={() => handleEditAnswer(answer)} className="action-btn-sm"><FaEdit /></button>
-                        <button className="action-btn-sm"><FaTrash /></button>
+                        <button onClick={() => handleEditAnswer(answer)} className="action-btn-sm"><FaEdit title="Editar"/></button>
+                        <button className="action-btn-sm"><FaTrash title="Eliminar"/></button>
                       </div>
                     </>
                   )}
                 </li>
               ))}
             </ul>
-            <button className="add-answer-btn">
+            <button className="add-answer-btn" onClick={() => setAddingAnswerMode(true)}>
               <FaPlus /> Respuesta
             </button>
+            {addingAnswerMode && (
+              <AnswerComponent initial={null} onSubmit={handleAddAnswer} onCancel={() => setAddingAnswerMode(false)} />
+            )}
           </div>
         </div>
       )}
