@@ -147,8 +147,29 @@ const IntentDetailComponent = ({ onBack  }) => {
           <button onClick={() => setAddingQuestionMode(true)}>Agregar pregunta</button>
         </div>
         {addingQuestionMode && (
-        <QuestionComponent initial={null} onSubmit={handleAddQuestion} onCancel={() => setAddingQuestionMode(false)} />
-      )}
+          <QuestionComponent initial={null} onSubmit={handleAddQuestion} onCancel={() => setAddingQuestionMode(false)} />
+        )}
+        <div style={{ marginTop: 8 }}>
+              <strong>Respuestas:</strong>
+              <ul>
+                {intent.phrases.map((a) => (
+                  <li key={a.id}>
+                    {a.phrase}
+                    <div>
+                      <button onClick={() => setEditingAnswer({ questionId: intent.id, answer: a })}>Editar</button>
+                      <button onClick={() => handleDeleteAnswer(intent.id, a.id)}>Eliminar</button>
+                    </div>
+                    {editingAnswer.questionId === intent.id && editingAnswer.answer?.id === a.id && (
+                      <AnswerComponent
+                        initial={editingAnswer.answer}
+                        onSubmit={(vals) => handleEditAnswer(intent.id, a.id, vals)}
+                        onCancel={() => setEditingAnswer({ questionId: null, answer: null })}
+                      />
+                    )}
+                  </li>
+                ))}
+              </ul>
+        </div>
         </>
 
       }
