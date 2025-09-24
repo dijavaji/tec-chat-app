@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
-import { FaEdit, FaTrash, FaPlus, FaSave } from "react-icons/fa";
+import { AiOutlineFileAdd } from "react-icons/ai";
+import { FaEdit, FaTrash, FaSave, FaWindowClose} from "react-icons/fa";
 import {toast} from "react-toastify";
 
 import IntentService from '../../services/intent.service.js';
@@ -12,7 +13,11 @@ import "./ListIntentComponent.css";
 const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [intents, setIntents] = useState([]);
-    const [isOpen, setIsOpen] = useState(false);
+    //const [isOpen, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [titleModal, setTitleModal] = useState("");
+    const [childrenModal, setChildrenModal] = useState(null);
+
     const [intentDelete, setIntentDelete] = useState(null);
     const navigate = useHistory();
 
@@ -32,7 +37,7 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
     }
 
     function handleAddNewIntent() {
-      navigate.push('/add-intent');
+      //navigate.push('/add-intent');
    }
 
    const handleUpdateIntent = (id) => {
@@ -45,7 +50,7 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
         const intentRes = await IntentService.deleteIntent(intenthandle.id);
         if(intentRes.success){
           getAllIntents();
-          setIsOpen(false);
+          setShowModal(false);
           setIntentDelete(null);
           toast.success(intentRes.message);
         }else{
@@ -62,27 +67,51 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
 
     const handleOnDelete = (handleIntent)=>{
       setIntentDelete(handleIntent);
-      setIsOpen(true);
+      //setShowModal(true);
+      handlerModal('delete');
     }
 
     const createContentModalDelete = ()=>{
       return (
         <div>
           {intentDelete && <p>{intentDelete.id} {intentDelete.name}</p>}
-          <button type="submit" style={{margin: '5px'}} onClick={() => handleRemoveIntent(intentDelete)}>Ejecutar</button>
-          <button type="reset" onClick={() => setIsOpen(false)} style={{margin: '5px', backgroundColor: '#5cb85c'}}>Cancelar</button>
+          <button type="submit" className="action-btn" onClick={() => handleRemoveIntent(intentDelete)}> <FaSave title="Guardar"/></button>
+          <button type="reset" onClick={() => setShowModal(false)} className="action-btn"> <FaWindowClose title="Cancelar" /> </button>
+        </div>
+      );
+    }
+
+    const createContentModalNew = ()=>{
+      return (
+        <div>
+
+
+          <button type="reset" onClick={() => setShowModal(false)} className="action-btn"> <FaWindowClose title="Cancelar" /> </button>
         </div>
       );
     }
 
     const contentModalDelete = createContentModalDelete();
 
+    //utilizado para modal dinamico
+    const handlerModal = (type) =>{
+      switch (type){
+        case 'delete':
+          setTitleModal('Eliminar intenci\u00f3n');
+          setChildrenModal(createContentModalDelete());
+          setShowModal(true);
+          break;
+        default:
+          break;
+        }
+    }
+
 
     return (
         <div className = "container">
             <h2> Lista intenci&#243;n </h2>
             {intents &&<div className="table-container">
-              <button className="add-answer-btn" style={{margin: '5px'}} onClick={handleAddNewIntent }> <FaPlus /> Nuevo</button>
+              <button className="add-answer-btn" style={{margin: '5px'}} onClick={handleAddNewIntent }>Nuevo</button>
               <table className="intent-table">
                 <thead>
                     <th> Id </th>
@@ -110,8 +139,8 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
               </table>
             </div>}
 
-            <ModalComponent isOpen={isOpen} onClose={() => setIsOpen(false)} title="Eliminar intenci&#243;n" >
-              {contentModalDelete}
+            <ModalComponent isOpen={showModal} onClose={() => setShowModal(false)} title={titleModal} >
+              {childrenModal}
             </ModalComponent>
 
         </div>
