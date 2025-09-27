@@ -107,6 +107,9 @@ const IntentDetailComponent = ({ onBack  }) => {
 
   }
   const handleDeleteAnswer=()=>{
+    console.log('eliminar respuesta')
+
+
 
   }
   const handleEditAnswer=()=>{
@@ -149,27 +152,58 @@ const IntentDetailComponent = ({ onBack  }) => {
         {addingQuestionMode && (
           <QuestionComponent initial={null} onSubmit={handleAddQuestion} onCancel={() => setAddingQuestionMode(false)} />
         )}
-        <div style={{ marginTop: 8 }}>
-              <strong>Respuestas:</strong>
-              <ul>
-                {intent.phrases.map((a) => (
-                  <li key={a.id}>
-                    {a.phrase}
-                    <div>
-                      <button onClick={() => setEditingAnswer({ questionId: intent.id, answer: a })}>Editar</button>
-                      <button onClick={() => handleDeleteAnswer(intent.id, a.id)}>Eliminar</button>
-                    </div>
-                    {editingAnswer.questionId === intent.id && editingAnswer.answer?.id === a.id && (
-                      <AnswerComponent
-                        initial={editingAnswer.answer}
-                        onSubmit={(vals) => handleEditAnswer(intent.id, a.id, vals)}
-                        onCancel={() => setEditingAnswer({ questionId: null, answer: null })}
-                      />
-                    )}
-                  </li>
-                ))}
-              </ul>
-        </div>
+
+        <ul>
+            {intent.phrases.map((q) => (
+              <li key={q.id} style={{ marginBottom: 12 }}>
+                <div>
+                  <strong>Pregunta:</strong> {q.phrase}
+                </div>
+                <div>
+                  <button onClick={() => setEditingQuestion(q)}>Editar pregunta</button>
+                  <button onClick={() => handleDeleteQuestion(q.id)}>Eliminar pregunta</button>
+                  <button onClick={() => setEditingAnswer({ questionId: q.id, answer: null })}>Agregar respuesta</button>
+                </div>
+                {editingQuestion && editingQuestion.id === q.id && (
+                  <QuestionComponent initial={editingQuestion} onSubmit={(vals) => handleEditQuestion(q.id, vals)}
+                    onCancel={() => setEditingQuestion(null)}
+                    />
+                  )}
+
+                  <div style={{ marginTop: 8 }}>
+                        <strong>Respuestas:</strong>
+                        <ul>
+                          {q.responses.map((a) => (
+                            <li key={a.id}>
+                              {a.response}
+                              <div>
+                                <button onClick={() => setEditingAnswer({ questionId: q.id, answer: a })}>Editar</button>
+                                <button onClick={() => handleDeleteAnswer(q.id, a.id)}>Eliminar</button>
+                              </div>
+                              {editingAnswer.questionId === q.id && editingAnswer.answer?.id === a.id && (
+                                <AnswerComponent
+                                  initial={editingAnswer.answer}
+                                  onSubmit={(vals) => handleEditAnswer(q.id, a.id, vals)}
+                                  onCancel={() => setEditingAnswer({ questionId: null, answer: null })}
+                                />
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                        {editingAnswer.questionId === q.id && editingAnswer.answer === null && (
+                        <AnswerComponent
+                          initial={null}
+                          onSubmit={(vals) => handleAddAnswer(q.id, vals)}
+                          onCancel={() => setEditingAnswer({ questionId: null, answer: null })}
+                        />
+                      )}
+
+
+                  </div>
+
+              </li>
+            ))}
+        </ul>
         </>
 
       }
