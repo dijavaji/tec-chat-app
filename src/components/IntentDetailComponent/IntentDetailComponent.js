@@ -131,7 +131,7 @@ const IntentDetailComponent = ({ onBack  }) => {
         <h2>Intención: {intent.name}</h2>
         <div>
           <button onClick={() => setEditingIntent(!editingIntent)}>
-            {editingIntent ? "Cerrar editor" : "Editar intención"}
+            {editingIntent ? "Cerrar editor" : "Editar intenci\u00f3n"}
           </button>
         </div>
 
