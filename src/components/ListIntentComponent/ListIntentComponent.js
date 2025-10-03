@@ -5,6 +5,7 @@ import { FaEdit, FaTrash, FaSave, FaWindowClose} from "react-icons/fa";
 import {toast} from "react-toastify";
 
 import IntentService from '../../services/intent.service.js';
+import { AUDIT_APP,} from "../../utils/tec-chat.constants";
 
 import IntentComponent from '../IntentComponent';
 import LoadScreenComponent from '../ui/LoadScreenComponent';
@@ -24,7 +25,7 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
 
     useEffect(() => {
         getAllIntents();
-    }, [])
+    }, [showModal])
 
     const getAllIntents = async () => {
       setIsLoading(true);
@@ -82,18 +83,42 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
         </div>
       );
     }
-
-    const createContentModalNew = ()=>{
-      return (
-        <div>
-
-
-          <button type="reset" onClick={() => setShowModal(false)} className="action-btn"> <FaWindowClose title="Cancelar" /> </button>
-        </div>
-      );
-    }
-
     const contentModalDelete = createContentModalDelete();
+
+    const saveIntentSubmit = async (formData) => {
+      try{
+        const phrasesNew = [];
+        const responsesNew = [];
+
+        responsesNew.push({
+          response:formData.answer,
+          createdBy: AUDIT_APP.CREATE_BY,
+        });
+
+        phrasesNew.push({
+            phrase:formData.question,
+            createdBy: AUDIT_APP.CREATE_BY,
+            responses:responsesNew,
+            })
+
+        const intentResponse = await IntentService.createIntent({
+          name:formData.intentname,
+          assistantId: 1,
+          createdBy: AUDIT_APP.CREATE_BY,
+          phrases:phrasesNew
+        });
+        if(intentResponse.success){
+            //navigate.push('/intents');
+            setShowModal(false);
+            toast.success(intentResponse.message);
+        }else{
+          throw new Error("Error al crear intenci\u00f3n");
+        }
+      }catch(e){
+        //console.log(e.response.data);
+        toast.error(e.message);
+      }
+    }
 
     //utilizado para modal dinamico
     const handlerModal = (type) =>{
@@ -105,7 +130,7 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
           break;
         default:
           setTitleModal('Agregar intenci\u00f3n');
-          setChildrenModal(<IntentComponent intent={null} onCancel={() => setShowModal(false)}/>);
+          setChildrenModal(<IntentComponent intent={null} onCancel={() => setShowModal(false)} onSubmit={saveIntentSubmit}/>);
           setShowModal(true);
           break;
         }

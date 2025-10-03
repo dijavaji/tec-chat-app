@@ -8,9 +8,6 @@ import * as Yup from "yup";
 
 import LoadScreenComponent from '../ui/LoadScreenComponent';
 
-//import IntentService from '../../services/intent.service.js';
-//import { AUDIT_APP,} from "../../utils/tec-chat.constants";
-
 const IntentComponent = ({ intent, onSubmit, onCancel }) => {
 
   //const navigate = useHistory();
@@ -124,7 +121,9 @@ const IntentComponent = ({ intent, onSubmit, onCancel }) => {
 
   return (
     <div>
-        <Formik initialValues={initialValues(intent)} onSubmit={async (values, { setSubmitting }) => handleSubmit(values, setSubmitting)} validationSchema={intentValidationSchema}
+        <Formik initialValues={initialValues(intent)}
+          onSubmit={async (values, { setSubmitting }) => {await onSubmit(values); setSubmitting(false);}}
+          validationSchema={intentValidationSchema}
           enableReinitialize={true} >
         {() =>(
          <Form className="">
@@ -132,16 +131,19 @@ const IntentComponent = ({ intent, onSubmit, onCancel }) => {
             <Field id="intentname" type="text" name="intentname" placeholder="Nombre intenci&#243;n"
                 className="form-control"  />
             <ErrorMessage name="intentname" component="div" className=""/>
-          <div className="">
-            <Field type="textarea" name="description" placeholder="Descripci&#243;n"
-                className="form-control"  />
-            <ErrorMessage name="description" component="div" className=""/>
-          </div>
 
-          <div className="header-edit-actions">
-            <button type="submit" className="action-btn" > <FaSave title="Ejecutar"/> </button>
-            <button type="reset" onClick={onCancel} className="action-btn" > <FaWindowClose title="Cancelar" /> </button>
-          </div>
+            <Field type="text" name="question" placeholder="Frase de entrenamiento"
+                className="form-control"  />
+            <ErrorMessage name="question" component="div" className=""/>
+
+            <Field type="text" name="answer" placeholder="Respuesta"
+                className="form-control"  />
+            <ErrorMessage name="answer" component="div" className=""/>
+
+            <div className="header-edit-actions">
+              <button type="submit" className="action-btn" > <FaSave title="Ejecutar"/> </button>
+              <button type="reset" onClick={onCancel} className="action-btn" > <FaWindowClose title="Cancelar" /> </button>
+            </div>
          </Form>
          )
         }
@@ -152,7 +154,8 @@ const IntentComponent = ({ intent, onSubmit, onCancel }) => {
 
 const intentValidationSchema = Yup.object({
   intentname: Yup.string().required("El nombre es obligatorio").min(3, "El nombre debe contener al menos 3 caracteres").max(50, 'Demasiado Largo!'),
-  description: Yup.string().min(4, 'Demasiado corto!').max(2000, 'Demasiado largo!'),
+  question: Yup.string().required("La pregunta es obligatorio").min(4, 'Demasiado corto!').max(2000, 'Demasiado largo!'),
+  answer: Yup.string().required("La respuesta es obligatorio").min(4, 'Demasiado corto!').max(2000, 'Demasiado largo!'),
 }
 );
 
@@ -161,6 +164,7 @@ function initialValues(data){
     {
       intentname: data ? data.name : '',
       description: data? data.description :'',
+      answer: data? data.answer : '', 
     }
   );
 }
