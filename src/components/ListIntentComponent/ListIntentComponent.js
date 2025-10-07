@@ -25,7 +25,7 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
 
     useEffect(() => {
         getAllIntents();
-    }, [showModal])
+    }, [])
 
     const getAllIntents = async () => {
       setIsLoading(true);
@@ -71,19 +71,8 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
     const handleOnDelete = (handleIntent)=>{
       setIntentDelete(handleIntent);
       //setShowModal(true);
-      handlerModal('delete');
+      handlerModal('delete', handleIntent);
     }
-
-    const createContentModalDelete = ()=>{
-      return (
-        <div>
-          {intentDelete && <p>{intentDelete.id} {intentDelete.name}</p>}
-          <button type="submit" className="action-btn" onClick={() => handleRemoveIntent(intentDelete)}> <FaSave title="Guardar"/></button>
-          <button type="reset" onClick={() => setShowModal(false)} className="action-btn"> <FaWindowClose title="Cancelar" /> </button>
-        </div>
-      );
-    }
-    const contentModalDelete = createContentModalDelete();
 
     const saveIntentSubmit = async (formData) => {
       try{
@@ -111,6 +100,7 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
             //navigate.push('/intents');
             setShowModal(false);
             toast.success(intentResponse.message);
+            getAllIntents();
         }else{
           throw new Error("Error al crear intenci\u00f3n");
         }
@@ -121,11 +111,11 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
     }
 
     //utilizado para modal dinamico
-    const handlerModal = (type) =>{
+    const handlerModal = (type, data) =>{
       switch (type){
         case 'delete':
           setTitleModal('Eliminar intenci\u00f3n');
-          setChildrenModal(createContentModalDelete());
+          setChildrenModal(<CreateContentModalDelete intentDelete={data} onSubmit={() => handleRemoveIntent(data)} onCancel={() => setShowModal(false)}/>);
           setShowModal(true);
           break;
         default:
@@ -175,6 +165,16 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
 
         </div>
     )
+}
+
+const CreateContentModalDelete = ({intentDelete, onCancel, onSubmit})=>{
+  return (
+    <div>
+      {intentDelete && <p>{intentDelete.id} {intentDelete.name}</p>}
+      <button type="submit" className="action-btn" onClick={onSubmit}> <FaSave title="Guardar"/></button>
+      <button type="reset" onClick={onCancel} className="action-btn"> <FaWindowClose title="Cancelar" /> </button>
+    </div>
+  );
 }
 
 export default ListIntentComponent
