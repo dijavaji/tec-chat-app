@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 import {toast} from "react-toastify";
@@ -28,9 +28,9 @@ const RegisterComponent = (props) => {
         }
       });
       if(newUser.success){
-          toast.success(newUser.message);
           resetForm();
           navigate.push('/login');
+          toast.success(newUser.message);
       }else{
         throw new Error("Error al crear usuario");
       }
@@ -50,56 +50,56 @@ const RegisterComponent = (props) => {
         <div className="mb-4">
           <Field type="text" name="firstName" placeholder="Nombre"
               className="form-control"  />
-          <ErrorMessage name="firstName" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
+          <ErrorMessage name="firstName" component="div" className="error-message"/>
         </div>
 
         <div className="mb-4">
           <Field type="text" name="lastName" placeholder="Apellido"
               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
-          <ErrorMessage name="lastName" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
+          <ErrorMessage name="lastName" component="div" className="error-message"/>
         </div>
         <div className="mb-4">
           <Field type="text" name="userName" placeholder="Nombre usuario"
           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
-          <ErrorMessage name="userName" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
+          <ErrorMessage name="userName" component="div" className="error-message"/>
         </div>
 
         <div className="mb-4">
           <Field type="text" name="email" placeholder="Correo electr&#243;nico"
           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
-          <ErrorMessage name="email" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
+          <ErrorMessage name="email" component="div" className="error-message"/>
         </div>
 
           <div className="mb-4">
             <Field type="text" name="address" placeholder="Direcci&#243;n"
             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
-            <ErrorMessage name="address" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
+            <ErrorMessage name="address" component="div" className="error-message"/>
           </div>
 
 
-          <div className="mb-4">
+          <div className="">
             <Field type="tel" name="phone" placeholder="Telefono"
             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
-            <ErrorMessage name="phone" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
+            <ErrorMessage name="phone" component="div" className="error-message"/>
           </div>
 
-          <div className="mb-4">
+          <div className="">
             <Field type="Password" name="password" placeholder="*********"
             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
-            <ErrorMessage name="password" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
+            <ErrorMessage name="password" component="div" className="error-message"/>
           </div>
 
-          <div className="form-check text-center mb-4">
-          <Field type="checkbox" name="accept"
-            className="form-check-input appearance-none h-4 w-4 border border-yellow-500 rounded-sm bg-white checked:bg-yellow-600 checked:border-yellow-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"/>
-            <label className="form-check-label inline-block text-gray-800 hover:underline cursor-pointer"
-                htmlFor="accept">Acepto los t&#233;rminos y condiciones
-            </label>
-            <ErrorMessage name="accept" component="div" className="mt-1 text-sm text-red-600 dark:text-red-500"/>
+          <div className="" style={{display: 'table'}}>
+            <label className="" style={{display: 'table-cell', whiteSpace: 'nowrap'}} htmlFor="accept">Acepto los t&#233;rminos y condiciones </label>
+            <Field type="checkbox" name="accept" className="" style={{display: 'table-cell'}}/>
           </div>
+          <ErrorMessage name="accept" component="div" className="error-message"/>
 
-        <div className="mt-8 flex justify-center text-lg text-black">
-          <input type="submit" value="Continuar" className="form-control block w-full px-6 py-2.5 bg-yellow-500 text-black font-bold text-xs leading-tight rounded shadow-md hover:bg-yellow-700 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-800 active:shadow-lg transition duration-150 ease-in-out"/>
+        <div className="">
+          <button type="submit" className="register-btn">Registrarse</button>
+        </div>
+        <div className="">
+          <p className="register-link">&#161;Entra con tu cuenta&#33; <Link to="/login">Iniciar sesi&#243;n</Link></p>
         </div>
        </Form>
        )

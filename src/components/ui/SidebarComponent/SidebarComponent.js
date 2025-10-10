@@ -101,8 +101,8 @@ const SidebarComponent = () => {
               <span className="nav-text">Mi perfil</span>
            </Button>
            <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-            <MenuItem onClick={handleClose} component={Link} to='/profile' >Perfil</MenuItem>
-            <MenuItem onClick={handleClose}>Mi cuenta</MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to='/menu'>Home</MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to={`/user/${auth.username}`}>Perfil</MenuItem>
             <MenuItem onClick={logout}>Cerrar sesi&#243;n</MenuItem>
           </Menu>
          </nav>

@@ -19,10 +19,7 @@ import ChatPage from '../pages/ChatPage';
 import IntentsPage from '../pages/IntentsPage';
 import Home from "../pages/Home";
 import Auth from "../pages/Auth";
-
-//import SectionPage from "../pages/SectionPage";
-//import BalancePage from "../pages/BalancePage";
-//import BillPayPage from "../pages/BillPayPage";
+import UserPage from "../pages/UserPage";
 
 //import {ReportPage, ReportUserPage } from "../pages/ReportPage";
 
@@ -115,6 +112,13 @@ const routes=[
   {
     path:"/url-upload",
     component:UrlUploadComponent,
+    layout: LayoutHome,
+    private:true
+  },
+  {
+    path:"/user/:username",
+    component:UserPage,
+    exact: true,
     layout: LayoutHome,
     private:true
   },
