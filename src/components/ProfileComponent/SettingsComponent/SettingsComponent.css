@@ -1,0 +1,20 @@
+.settings-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-form button{
+  background-color: transparent !important;
+  border-bottom: 1px solid gray;
+  padding: 18px 0;
+  margin: 0;
+  border-radius: 0;
+  cursor: pointer;
+  font-weight: 600;
+  color: #6c757d;
+}
+
+.settings-form button:hover, focus{
+  background-color: #e1e1e1 !important;
+  cursor: pointer;
+}
