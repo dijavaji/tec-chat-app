@@ -1,10 +1,10 @@
 import React from 'react';
-import ChatModuleComponent from '../../components/ChatModuleComponent';
+import ChatBoxComponent from '../../components/ChatBoxComponent';
 
 const ChatPage = () => {
   return (
     <div className="container" >
-      <ChatModuleComponent/> 
+      <ChatBoxComponent/>
     </div>
   )
 }
