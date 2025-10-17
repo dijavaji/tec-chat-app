@@ -29,7 +29,6 @@ const ProfileComponent = (props) => {
     try{
       const response = await UserService.getUser('',username);
       //setIntents(response);
-      console.log(response);
       setUser(response.data);
       setIsLoading(false);
     }catch(e){
@@ -48,7 +47,7 @@ const ProfileComponent = (props) => {
         break;
       case 'settings':
         setTitleModal('');
-        setChildrenModal(<SettingsComponent setShowModal={setShowModal}/> );
+        setChildrenModal(<SettingsComponent setShowModal={setShowModal} setTitleModal={setTitleModal} setChildrenModal={setChildrenModal}/> );
         setShowModal(true);
         break;
       default:
