@@ -3,6 +3,7 @@ import useAuth from '../../../hooks/useAuth';
 import { useHistory } from "react-router-dom";
 
 import PasswordComponent from '../PasswordComponent';
+import EmailComponent from '../EmailComponent';
 import './SettingsComponent.css';
 
 const SettingsComponent = (props) => {
@@ -15,6 +16,11 @@ const SettingsComponent = (props) => {
     setChildrenModal(<PasswordComponent/>);
   }
 
+  const onChangeEmail = () =>{
+    setTitleModal('Cambiar email');
+    setChildrenModal(<EmailComponent/>);
+  }
+
   const onLogout = () =>{
     //TODO cerrar la sesion en el backend
     logout();
@@ -24,7 +30,7 @@ const SettingsComponent = (props) => {
   return (
     <div className='settings-form'>
       <button onClick={onChangePassword}>Cambiar contrase&#241;a</button>
-      <button>Cambiar email</button>
+      <button onClick={onChangeEmail} setShowModal={setShowModal}>Cambiar email</button>
       <button>Descripci&#243;n</button>
       <button onClick={onLogout} >Cerrar sesi&#243;n</button>
       <button onClick={() => setShowModal(false)}>Cancelar</button>
