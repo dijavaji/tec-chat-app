@@ -10,6 +10,7 @@ import LoadScreenComponent from '../ui/LoadScreenComponent';
 import IntentComponent from '../IntentComponent';
 import QuestionComponent from '../QuestionComponent';
 import AnswerComponent from '../AnswerComponent';
+import QuestionCard from '../QuestionCard';
 
 const IntentDetailComponent = ({ onBack  }) => {
 
@@ -155,69 +156,20 @@ const IntentDetailComponent = ({ onBack  }) => {
           <QuestionComponent initial={null} onSubmit={handleAddQuestion} onCancel={() => setAddingQuestionMode(false)} />
         )}
 
-        <table className="intent-table">
-          <thead>
-              <th> Id </th>
-              <th> Pregunta</th>
-              <th> Acciones </th>
-              <th> Respuesta</th>
+import QuestionCard from '../QuestionCard';
 
-          </thead>
-          <tbody>
-              {intent.phrases.map( q =>
-                      <tr key = {q.id}>
-                          <td> {q.id} </td>
-                          <td> {q.phrase}
-                          {editingQuestion && editingQuestion.id === q.id && (
-                            <QuestionComponent initial={editingQuestion} onSubmit={(vals) => handleEditQuestion(q.id, vals)}
-                              onCancel={() => setEditingQuestion(null)}
-                              />
-                            )}
-                          </td>
-                          <td>
-                            <div>
-                              <button onClick={() => setEditingQuestion(q)}>Editar pregunta</button>
-                              <button onClick={() => handleDeleteQuestion(q.id)}>Eliminar pregunta</button>
-                              <button onClick={() => setEditingAnswer({ questionId: q.id, answer: null })}>Agregar respuesta</button>
-                            </div>
-                          </td>
+// ... (rest of the component)
 
-                          <td>
-                          <div style={{ marginTop: 8 }}>
-                                <ul>
-                                  {q.responses.map((a) => (
-                                    <li key={a.id}>
-                                      {a.response}
-                                      <div>
-                                        <button onClick={() => setEditingAnswer({ questionId: q.id, answer: a })}><FaEdit /> Editar</button>
-                                        <button onClick={() => handleDeleteAnswer(q.id, a.id)}><FaTrash /> Eliminar</button>
-                                      </div>
-
-                                    </li>
-                                  ))}
-                                </ul>
-                                {editingAnswer.questionId === q.id && editingAnswer.answer === null && (
-                                  <AnswerComponent
-                                    initial={null}
-                                    onSubmit={(vals) => handleAddAnswer(q.id, vals)}
-                                    onCancel={() => setEditingAnswer({ questionId: null, answer: null })}
-                                  />
-                                )}
-
-                                {editingAnswer.questionId === q.id && editingAnswer.answer?.id && (
-                                  <AnswerComponent
-                                    initial={editingAnswer.answer}
-                                    onSubmit={(vals) => handleEditAnswer(q.id, q.id, vals)}
-                                    onCancel={() => setEditingAnswer({ questionId: null, answer: null })}
-                                  />
-                                )}
-                              </div>
-                          </td>
-                      </tr>
-                  )
-              }
-          </tbody>
-        </table>
+        <div className="intent-questions-list">
+          {intent.phrases.map(q => (
+            <QuestionCard 
+              key={q.id} 
+              question={q} 
+              onUpdate={handleEditQuestion} 
+              onDelete={handleDeleteQuestion} 
+            />
+          ))}
+        </div>
 
         </>
 
