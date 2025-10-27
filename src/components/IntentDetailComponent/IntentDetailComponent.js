@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import './IntentDetailComponent.css';
 import { FaEdit, FaTrash, FaPlus, FaSave, FaWindowClose } from "react-icons/fa";
 import { useHistory, useParams } from "react-router-dom";
 import {toast} from "react-toastify";
@@ -21,7 +22,10 @@ const IntentDetailComponent = ({ onBack  }) => {
 
 
   const [intent, setIntent] = useState(null);
-  const [editingIntent, setEditingIntent] = useState(false);
+  // State for inline editing of the header
+  const [isEditingHeader, setIsEditingHeader] = useState(false);
+  const [headerValues, setHeaderValues] = useState({ name: '', description: '' });
+
   const [addingQuestionFor, setAddingQuestionFor] = useState(null); // null or true (new) or questionId editing
   const [editingQuestion, setEditingQuestion] = useState(null);
   const [editingAnswer, setEditingAnswer] = useState({ questionId: null, answer: null });
@@ -29,15 +33,18 @@ const IntentDetailComponent = ({ onBack  }) => {
 
   const loadFetchIntent = async () => {
     setIsLoading(true);
-    try{
-      //const response = await IntentService.listIntents();
-      //const intent = response.find((element) => element.id = intentId);
+    try {
       const intentResult = await IntentService.getIntentById(id);
-      //console.log("cargamos intencion",intentResult);
       setIntent(intentResult.data);
+      // Initialize header values for editing form
+      setHeaderValues({ 
+        name: intentResult.data.name, 
+        description: intentResult.data.description 
+      });
       setIsLoading(false);
-    }catch(e){
+    } catch(e) {
         toast.error(e.message);
+        setIsLoading(false); // Ensure loading is turned off on error
     }
   };
 
@@ -47,54 +54,41 @@ const IntentDetailComponent = ({ onBack  }) => {
 
 
   const handleonBack = () => {
-
     history.push("/intents");
   };
 
-  const handleIntentSave = async (formData) => {
-    try{
-      console.log('guardar intencion', formData);
-      if(intent.id){
-        /*const updatePhrases = [];
-        const updateResponses = [];
+  const handleHeaderSave = async () => {
+    try {
+      const intentUpdated = await IntentService.updateIntent({
+        id: intent.id,
+        name: headerValues.name,
+        description: headerValues.description,
+        assistantId: 1, // Assuming this is static for now
+        modifiedBy: AUDIT_APP.UPDATE_BY,
+      });
 
-        updateResponses.push({
-          id:formData.answerId,
-          response:formData.answer,
-        });
-
-        updatePhrases.push({
-            id:formData.questionId,
-            phrase:formData.question,
-            responses:updateResponses,
-          })*/
-
-        const intentUpdated = await IntentService.updateIntent({
-          id:intent.id,
-          name:formData.intentname,
-          description: formData.description,
-          assistantId: 1,
-          modifiedBy: AUDIT_APP.UPDATE_BY,
-          //phrases:updatePhrases,
-        });
-        console.log("actualiza intent",intentUpdated);
-
-        if(intentUpdated.success){
-
-            //toast.success("Intenci\u00f3n actualizada correctamente.");
-            toast.success(intentUpdated.message);
-        }else{
-          throw new Error("Error al actualizar intenci\u00f3n");
-        }
+      if (intentUpdated.success) {
+        toast.success(intentUpdated.message);
+        // Refresh data and exit editing mode
+        await loadFetchIntent();
+        setIsEditingHeader(false);
+      } else {
+        throw new Error("Error al actualizar la intención");
       }
-    }catch(e){
-      //console.log(e.response.data);
+    } catch (e) {
       toast.error(e.message);
     }
+  };
 
+  const handleHeaderCancel = () => {
+    // Reset values to original and exit editing mode
+    setHeaderValues({ name: intent.name, description: intent.description });
+    setIsEditingHeader(false);
+  };
 
-    setEditingIntent(false);
-    await loadFetchIntent();
+  const handleHeaderValueChange = (e) => {
+    const { name, value } = e.target;
+    setHeaderValues(prev => ({ ...prev, [name]: value }));
   };
 
   const handleAddQuestion = () => {
@@ -129,20 +123,40 @@ const IntentDetailComponent = ({ onBack  }) => {
     <div className = "container">
       {intent && <>
         <button onClick={handleonBack}>Volver a lista</button>
-        <h2>Intención: {intent.name}</h2>
-        <div>
-          <button onClick={() => setEditingIntent(!editingIntent)}>
-            {editingIntent ? "Cerrar editor" : "Editar intenci\u00f3n"}
-          </button>
-        </div>
-
-        {editingIntent ? (
-        <IntentComponent intent={intent} onSubmit={handleIntentSave} onCancel={() => setEditingIntent(false)} />
+        <div className="intent-header">
+          {isEditingHeader ? (
+            <div className="intent-header-edit">
+              <input
+                type="text"
+                name="name"
+                value={headerValues.name}
+                onChange={handleHeaderValueChange}
+                className="form-control"
+              />
+              <textarea
+                name="description"
+                value={headerValues.description}
+                onChange={handleHeaderValueChange}
+                className="form-control"
+                rows="3"
+              />
+              <div className="header-edit-actions">
+                <button onClick={handleHeaderSave} className="btn-save"><FaSave /> Guardar</button>
+                <button onClick={handleHeaderCancel} className="btn-cancel"><FaWindowClose /> Cancelar</button>
+              </div>
+            </div>
           ) : (
-            <div>
-              <p>{intent.description}</p>
+            <div className="intent-header-display">
+              <div className="intent-title-container">
+                <h2>Intención: {intent.name}</h2>
+                <button onClick={() => setIsEditingHeader(true)} className="action-btn">
+                  <FaEdit />
+                </button>
+              </div>
+              <p>{intent.description || "Sin descripción."}</p>
             </div>
           )}
+        </div>
 
         <hr />
 
