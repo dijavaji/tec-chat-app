@@ -1,5 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
+import { FaWindowClose, FaSave } from "react-icons/fa";
+
+
 
 const QuestionSchema = Yup.object().shape({
   text: Yup.string().required("Requerido"),
@@ -24,11 +27,11 @@ const QuestionComponent = ({ initial, onSubmit, onCancel }) => {
               <ErrorMessage name="text" component="div" style={{ color: "red" }} />
             </div>
             <div>
-              <button type="submit" disabled={isSubmitting}>
-                Guardar pregunta
+              <button type="submit" disabled={isSubmitting} className="action-btn">
+                <FaSave title="Guardar pregunta"/>
               </button>
-              <button type="button" onClick={onCancel}>
-                Cancelar
+              <button type="button" onClick={onCancel} className="action-btn">
+                <FaWindowClose title="Cancelar" />
               </button>
             </div>
           </Form>

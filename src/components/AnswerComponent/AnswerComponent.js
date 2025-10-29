@@ -7,7 +7,7 @@ const AnswerSchema = Yup.object().shape({
 
 const AnswerComponent = ({ initial, onSubmit, onCancel }) => {
   return (
-    <div style={{ border: "1px dashed #ccc", padding: 6, marginTop: 6 }}>
+    <div style={{ border: "1px solid #ddd", padding: 8, marginBottom: 8 }}>
       <Formik
         initialValues={{ text: initial?.text || "" }}
         validationSchema={AnswerSchema}
@@ -24,11 +24,11 @@ const AnswerComponent = ({ initial, onSubmit, onCancel }) => {
               <ErrorMessage name="text" component="div" style={{ color: "red" }} />
             </div>
             <div>
-              <button type="submit" disabled={isSubmitting}>
-                Guardar respuesta
+              <button type="submit" disabled={isSubmitting} className="action-btn">
+                <FaSave title="Guardar respuesta"/>
               </button>
-              <button type="button" onClick={onCancel}>
-                Cancelar
+              <button type="button" onClick={onCancel} className="action-btn">
+                <FaWindowClose title="Cancelar" />
               </button>
             </div>
           </Form>

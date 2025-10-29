@@ -51,3 +51,18 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+.btn-return-sm, .btn-rt-sm {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.btn-return-sm {
+  background-color: #28a745;
+  color: white;
+}

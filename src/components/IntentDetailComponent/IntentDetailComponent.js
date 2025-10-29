@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import './IntentDetailComponent.css';
-import { FaEdit, FaTrash, FaPlus, FaSave, FaWindowClose } from "react-icons/fa";
+import { FaEdit, FaTrash, FaPlus, FaSave, FaWindowClose, FaAngleLeft} from "react-icons/fa";
 import { useHistory, useParams } from "react-router-dom";
 import {toast} from "react-toastify";
 import IntentService from '../../services/intent.service.js';
@@ -10,7 +10,7 @@ import { AUDIT_APP,} from "../../utils/tec-chat.constants";
 import LoadScreenComponent from '../ui/LoadScreenComponent';
 import IntentComponent from '../IntentComponent';
 import QuestionComponent from '../QuestionComponent';
-import AnswerComponent from '../AnswerComponent';
+
 import QuestionCard from '../QuestionCard';
 
 const IntentDetailComponent = ({ onBack  }) => {
@@ -37,9 +37,9 @@ const IntentDetailComponent = ({ onBack  }) => {
       const intentResult = await IntentService.getIntentById(id);
       setIntent(intentResult.data);
       // Initialize header values for editing form
-      setHeaderValues({ 
-        name: intentResult.data.name, 
-        description: intentResult.data.description 
+      setHeaderValues({
+        name: intentResult.data.name,
+        description: intentResult.data.description
       });
       setIsLoading(false);
     } catch(e) {
@@ -122,7 +122,8 @@ const IntentDetailComponent = ({ onBack  }) => {
   return (
     <div className = "container">
       {intent && <>
-        <button onClick={handleonBack}>Volver a lista</button>
+        <button onClick={handleonBack} className="btn-return-sm">
+        <FaAngleLeft title="Volver a lista"/>Volver</button>
         <div className="intent-header">
           {isEditingHeader ? (
             <div className="intent-header-edit">
@@ -141,8 +142,8 @@ const IntentDetailComponent = ({ onBack  }) => {
                 rows="3"
               />
               <div className="header-edit-actions">
-                <button onClick={handleHeaderSave} className="btn-save"><FaSave /> Guardar</button>
-                <button onClick={handleHeaderCancel} className="btn-cancel"><FaWindowClose /> Cancelar</button>
+                <button onClick={handleHeaderSave} className="action-btn" > <FaSave title="Guardar"/> </button>
+                <button onClick={handleHeaderCancel} className="action-btn"><FaWindowClose title="Cancelar" /> </button>
               </div>
             </div>
           ) : (
@@ -150,7 +151,7 @@ const IntentDetailComponent = ({ onBack  }) => {
               <div className="intent-title-container">
                 <h2>Intención: {intent.name}</h2>
                 <button onClick={() => setIsEditingHeader(true)} className="action-btn">
-                  <FaEdit />
+                  <FaEdit title="Editar" />
                 </button>
               </div>
               <p>{intent.description || "Sin descripción."}</p>
@@ -162,25 +163,21 @@ const IntentDetailComponent = ({ onBack  }) => {
 
         <h3>Preguntas</h3>
         <div>
-          <button className="" onClick={() => setAddingQuestionMode(true)}>
-            <FaPlus /> Agregar pregunta
+          <button className="add-answer-btn" onClick={() => setAddingQuestionMode(true)}>
+            <FaPlus title="Agregar pregunta"/> Pregunta
           </button>
         </div>
         {addingQuestionMode && (
           <QuestionComponent initial={null} onSubmit={handleAddQuestion} onCancel={() => setAddingQuestionMode(false)} />
         )}
 
-import QuestionCard from '../QuestionCard';
-
-// ... (rest of the component)
-
         <div className="intent-questions-list">
           {intent.phrases.map(q => (
-            <QuestionCard 
-              key={q.id} 
-              question={q} 
-              onUpdate={handleEditQuestion} 
-              onDelete={handleDeleteQuestion} 
+            <QuestionCard
+              key={q.id}
+              question={q}
+              onUpdate={handleEditQuestion}
+              onDelete={handleDeleteQuestion}
             />
           ))}
         </div>

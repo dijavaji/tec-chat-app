@@ -1,41 +1,26 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FaEdit, FaTrash, FaPlus, FaChevronDown, FaChevronRight, FaEllipsisV } from "react-icons/fa";
+import React, { useState } from 'react';
+import { Popover } from 'react-tiny-popover';
+import { FaEdit, FaTrash, FaPlus, FaChevronDown, FaChevronRight, FaEllipsisV, FaSave, FaWindowClose } from "react-icons/fa";
 import './QuestionCard.css';
+import AnswerComponent from '../AnswerComponent';
 
 const QuestionCard = ({ question, onUpdate, onDelete }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isEditingQuestion, setIsEditingQuestion] = useState(false);
   const [editedPhrase, setEditedPhrase] = useState(question.phrase);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef(null);
+  const [addingAnswerMode, setAddingAnswerMode] = useState(false);
+
 
   // State for inline editing answers
   const [editingAnswerId, setEditingAnswerId] = useState(null);
   const [editedAnswerText, setEditedAnswerText] = useState('');
-
-  // Close menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsMenuOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [menuRef]);
 
   // Disable expand when editing
   const toggleExpand = () => {
     if (!isEditingQuestion) {
       setIsExpanded(!isExpanded);
     }
-  };
-
-  const toggleMenu = (e) => {
-    e.stopPropagation();
-    setIsMenuOpen(!isMenuOpen);
   };
 
   const handleEditClick = (e) => {
@@ -87,6 +72,10 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
     setEditedAnswerText('');
   };
 
+  const handleAddAnswer = ()=>{
+
+  };
+
   return (
     <div className="question-card">
       <div className="question-header" onClick={toggleExpand}>
@@ -100,8 +89,8 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
               className="form-control"
             />
             <div className="edit-actions">
-              <button onClick={handleSaveQuestion} className="btn-save-sm">Guardar</button>
-              <button onClick={handleCancelEdit} className="btn-cancel-sm">Cancelar</button>
+              <button onClick={handleSaveQuestion} className="action-btn"> <FaSave title="Guardar"/> </button>
+              <button onClick={handleCancelEdit} className="action-btn"> <FaWindowClose title="Cancelar"/></button>
             </div>
           </div>
         ) : (
@@ -111,11 +100,12 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
               {question.phrase}
             </span>
             <div className="question-actions">
-              <div className="context-menu-container">
-                <button className="action-btn" onClick={toggleMenu}>
-                  <FaEllipsisV />
-                </button>
-                {isMenuOpen && (
+              <Popover
+                isOpen={isMenuOpen}
+                positions={['bottom', 'left', 'top', 'right']} // preferred positions
+                padding={4}
+                onClickOutside={() => setIsMenuOpen(false)}
+                content={
                   <div className="context-menu">
                     <button onClick={handleEditClick} className="menu-item">
                       <FaEdit /> Editar
@@ -124,8 +114,12 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
                       <FaTrash /> Eliminar
                     </button>
                   </div>
-                )}
-              </div>
+                }
+              >
+                <button className="action-btn" onClick={(e) => { e.stopPropagation(); setIsMenuOpen(!isMenuOpen); }}>
+                  <FaEllipsisV />
+                </button>
+              </Popover>
             </div>
           </>
         )}
@@ -146,25 +140,28 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
                         className="form-control"
                       />
                       <div className="edit-actions">
-                        <button onClick={handleSaveAnswer} className="btn-save-sm">Guardar</button>
-                        <button onClick={handleCancelAnswer} className="btn-cancel-sm">Cancelar</button>
+                        <button onClick={handleSaveAnswer} className="action-btn"><FaSave title="Guardar"/></button>
+                        <button onClick={handleCancelAnswer} className="action-btn"><FaWindowClose title="Cancelar"/></button>
                       </div>
                     </div>
                   ) : (
                     <>
                       {answer.response}
                       <div className="answer-actions">
-                        <button onClick={() => handleEditAnswer(answer)} className="action-btn-sm"><FaEdit /></button>
-                        <button className="action-btn-sm"><FaTrash /></button>
+                        <button onClick={() => handleEditAnswer(answer)} className="action-btn-sm"><FaEdit title="Editar"/></button>
+                        <button className="action-btn-sm"><FaTrash title="Eliminar"/></button>
                       </div>
                     </>
                   )}
                 </li>
               ))}
             </ul>
-            <button className="add-answer-btn">
-              <FaPlus /> Añadir Respuesta
+            <button className="add-answer-btn" onClick={() => setAddingAnswerMode(true)}>
+              <FaPlus /> Respuesta
             </button>
+            {addingAnswerMode && (
+              <AnswerComponent initial={null} onSubmit={handleAddAnswer} onCancel={() => setAddingAnswerMode(false)} />
+            )}
           </div>
         </div>
       )}
