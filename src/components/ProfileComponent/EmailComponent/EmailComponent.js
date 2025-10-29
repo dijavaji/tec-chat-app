@@ -1,17 +1,21 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
+import * as Yup from "yup";
+
 import './EmailComponent';
 
-const EmailComponent = () => {
+const EmailComponent = (props) => {
+  const { setShowModal, currentEmail } = props;
 
-  const handleSubmit =(formValue)=>{
-    console.log(formValue);
+  const handleSubmit =(formData)=>{
+    //TODO conectar con backend
+    console.log(formData);
   }
 
   return (
-    <Formik onSubmit={handleSubmit} >
-       {({ errors, touched }) => (
+    <Formik onSubmit={handleSubmit} initialValues={initialValues(currentEmail)} validationSchema={emailValidationSchema}>
+       {() => (
          <Form className="email-form">
           <div className="mb-4">
             <Field type="text" name="email" placeholder="Escribe tu nuevo email"
@@ -27,5 +31,16 @@ const EmailComponent = () => {
      </Formik>
   )
 }
+
+function initialValues(data){
+  return {
+    email:  data || '',
+  }
+}
+
+const emailValidationSchema = Yup.object({
+  email: Yup.string().email("El email no es valido").required("El email es obligatorio"),
+}
+);
 
 export default EmailComponent;
