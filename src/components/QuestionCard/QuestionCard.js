@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Popover } from 'react-tiny-popover';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaEdit, FaTrash, FaPlus, FaChevronDown, FaChevronRight, FaEllipsisV, FaSave, FaWindowClose } from "react-icons/fa";
 import './QuestionCard.css';
 import AnswerComponent from '../AnswerComponent';
@@ -100,26 +99,8 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
               {question.phrase}
             </span>
             <div className="question-actions">
-              <Popover
-                isOpen={isMenuOpen}
-                positions={['bottom', 'left', 'top', 'right']} // preferred positions
-                padding={4}
-                onClickOutside={() => setIsMenuOpen(false)}
-                content={
-                  <div className="context-menu">
-                    <button onClick={handleEditClick} className="menu-item">
-                      <FaEdit /> Editar
-                    </button>
-                    <button onClick={handleDeleteClick} className="menu-item">
-                      <FaTrash /> Eliminar
-                    </button>
-                  </div>
-                }
-              >
-                <button className="action-btn" onClick={(e) => { e.stopPropagation(); setIsMenuOpen(!isMenuOpen); }}>
-                  <FaEllipsisV />
-                </button>
-              </Popover>
+                <button onClick={handleEditClick} className="action-btn-sm"> <FaEdit /> </button>
+                <button onClick={handleDeleteClick} className="action-btn-sm"> <FaTrash /> </button>
             </div>
           </>
         )}

@@ -66,6 +66,8 @@
 .question-actions {
   display: flex;
   gap: 0.5rem;
+  /* opacity: 0; Hidden by default */
+  transition: opacity 0.2s ease;
 }
 
 .action-btn {
