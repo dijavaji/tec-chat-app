@@ -6,6 +6,7 @@ import {toast} from "react-toastify";
 
 import IntentService from '../../services/intent.service.js';
 
+import IntentComponent from '../IntentComponent';
 import LoadScreenComponent from '../ui/LoadScreenComponent';
 import ModalComponent from '../ui/ModalComponent';
 import "./ListIntentComponent.css";
@@ -38,6 +39,7 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
 
     function handleAddNewIntent() {
       //navigate.push('/add-intent');
+      handlerModal('new');
    }
 
    const handleUpdateIntent = (id) => {
@@ -102,6 +104,9 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
           setShowModal(true);
           break;
         default:
+          setTitleModal('Nueva intenci\u00f3n');
+          setChildrenModal(<IntentComponent intent={null}/>);
+          setShowModal(true);
           break;
         }
     }
@@ -111,7 +116,7 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
         <div className = "container">
             <h2> Lista intenci&#243;n </h2>
             {intents &&<div className="table-container">
-              <button className="add-answer-btn" style={{margin: '5px'}} onClick={handleAddNewIntent }>Nuevo</button>
+              <button className="add-answer-btn" style={{margin: '5px'}} onClick={() => handleAddNewIntent() }>Nuevo</button>
               <table className="intent-table">
                 <thead>
                     <th> Id </th>
