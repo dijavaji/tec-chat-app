@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# tec-chat-app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introducción
 
-## Available Scripts
+**tec-chat-app** es la aplicación frontend de una plataforma de chatbot inteligente, diseñada para ofrecer una experiencia de usuario excepcional y natural. Esta interfaz se conecta a un backend de microservicios que utiliza inteligencia artificial para proporcionar respuestas contextualmente relevantes.
 
-In the project directory, you can run:
+El propósito de este frontend es proporcionar un canal de conversación intuitivo y receptivo que mejore la interacción con los clientes y se integre fácilmente en sitios web empresariales.
 
-### `npm start`
+## Características Principales
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Interacción Inteligente:** Capacidad para interactuar con los usuarios que visitan el sitio web de la compañía, respondiendo a preguntas sobre la empresa, sus servicios y oportunidades laborales.
+- **Respuestas Mejoradas con IA:** Utiliza entrenamiento neuronal para mejorar continuamente la calidad y precisión de las respuestas.
+- **Integración Analítica:** Incluye funciones de aprendizaje automático e integración analítica para un seguimiento detallado.
+- **Procesamiento de Lenguaje Natural (NLP):** Todos los mensajes recibidos pasan por un modelo de NLP para comprender la intención del usuario.
+- **Integración con Terceros:** Diseñado para conectarse con aplicaciones de terceros como Telegram.
+- **Interfaz en Tiempo Real:** La interfaz de usuario del chat (frontend) está construida para ofrecer una experiencia de mensajería web en tiempo real.
+- **Fácilmente integrable:** Puede ser integrado de forma sencilla en cualquier sitio web empresarial.
+- **Gestión de Usuarios y Empresas:** Permite el registro, asignación y cancelación de empresas y usuarios en el sistema.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Stack Tecnológico y Atribuciones
 
-### `npm test`
+Este proyecto es la capa de presentación (frontend) de una arquitectura de microservicios. Las tecnologías utilizadas para construir esta interfaz son:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **[React](https://reactjs.org/):** Biblioteca principal para la construcción de la interfaz de usuario.
+- **[Material-UI](https://mui.com/):** Framework de componentes de UI para un diseño visual atractivo.
+- **[Axios](https://axios-http.com/):** Cliente HTTP para la comunicación con los microservicios del backend.
+- **[SockJS](https://github.com/sockjs/sockjs-client)** y **[React-Stomp](https://github.com/stomp-js/react-stomp):** Para la comunicación en tiempo real a través de WebSockets.
+- **[Formik](https://formik.org/)** y **[Yup](https://github.com/jquense/yup):** Para la gestión y validación de formularios.
+- **[React Router](https://reactrouter.com/):** Para la gestión de rutas en la aplicación.
 
-### `npm build`
+## Primeros Pasos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Para ejecutar este proyecto de forma local, sigue los siguientes pasos.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerrequisitos
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Asegúrate de tener instalado [Node.js](https://nodejs.org/) y [npm](https://www.npmjs.com/) en tu sistema.
 
-### `npm eject`
+### Instalación
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Clona el repositorio en tu máquina local.
+2. Navega al directorio del proyecto.
+3. Instala las dependencias del proyecto ejecutando el siguiente comando:
+   ```sh
+   npm install
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Ejecución
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Una vez instaladas las dependencias, puedes iniciar la aplicación en modo de desarrollo:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```sh
+npm start
+```
 
-## Learn More
+Esto ejecutará la aplicación en modo de desarrollo. Abre [http://localhost:3000](http://localhost:3000) para verla en tu navegador. La página se recargará automáticamente cuando realices cambios en el código.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Configuración
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+La configuración del backend se gestiona a través de variables de entorno. Puedes crear un archivo `.env.development` en la raíz del proyecto para personalizar las URLs de los servicios:
 
-### Code Splitting
+```
+REACT_APP_API_SERVER_BACKEND_HOST_AUTH=http://127.0.0.1:4000
+REACT_APP_API_SERVER_BACKEND_HOST_DOCUMENT_LOADER=http://127.0.0.1:8082
+REACT_APP_API_SERVER_BACKEND_HOST_MESSAGE=http://127.0.0.1:8081
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Scripts Disponibles
 
-### Analyzing the Bundle Size
+En el directorio del proyecto, puedes ejecutar los siguientes scripts:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **`npm start`**: Inicia la aplicación en modo de desarrollo.
+- **`npm test`**: Ejecuta las pruebas en modo interactivo.
+- **`npm run build`**: Compila la aplicación para producción en la carpeta `build`.
+- **`npm run eject`**: Expulsa las dependencias de configuración de `create-react-app`. **Nota: esta es una operación de un solo sentido.**
 
-### Making a Progressive Web App
+## Licencia
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Este proyecto está bajo la Licencia Apache 2.0. Consulta el archivo `LICENSE` para más detalles.
