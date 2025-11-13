@@ -104,8 +104,8 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
           setShowModal(true);
           break;
         default:
-          setTitleModal('Nueva intenci\u00f3n');
-          setChildrenModal(<IntentComponent intent={null}/>);
+          setTitleModal('Agregar intenci\u00f3n');
+          setChildrenModal(<IntentComponent intent={null} onCancel={() => setShowModal(false)}/>);
           setShowModal(true);
           break;
         }

@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 //import {useParams, useHistory } from 'react-router-dom';
+import { FaSave, FaWindowClose} from "react-icons/fa";
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
@@ -15,7 +16,7 @@ const IntentComponent = ({ intent, onSubmit, onCancel }) => {
   //const navigate = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   //const [intent, setIntent] = useState({});
-  const {id} = intent;
+  const id = intent?.id;
 
   /*useEffect(() => {
        fetchIntent();
@@ -122,38 +123,36 @@ const IntentComponent = ({ intent, onSubmit, onCancel }) => {
     }
 
   return (
-    <div className = "container">
-    <h2> { pageTitle() } </h2>
-        {intent && <Formik initialValues={initialValues(intent)} onSubmit={async (values, { setSubmitting }) => handleSubmit(values, setSubmitting)} validationSchema={intentValidationSchema}
+    <div>
+        <Formik initialValues={initialValues(intent)} onSubmit={async (values, { setSubmitting }) => handleSubmit(values, setSubmitting)} validationSchema={intentValidationSchema}
           enableReinitialize={true} >
         {() =>(
          <Form className="">
-          <div className="">
+
             <Field id="intentname" type="text" name="intentname" placeholder="Nombre intenci&#243;n"
                 className="form-control"  />
             <ErrorMessage name="intentname" component="div" className=""/>
-          </div>
           <div className="">
-            <Field type="text" name="description" placeholder="Descripci&#243;n"
+            <Field type="textarea" name="description" placeholder="Descripci&#243;n"
                 className="form-control"  />
             <ErrorMessage name="description" component="div" className=""/>
           </div>
 
-          <div className="form-group">
-            <button type="submit" style={{margin: '5px'}} >Ejecutar</button>
-            <button type="reset" onClick={onCancel} style={{margin: '5px', backgroundColor: '#5cb85c'}}>Cancelar</button>
+          <div className="header-edit-actions">
+            <button type="submit" className="action-btn" > <FaSave title="Ejecutar"/> </button>
+            <button type="reset" onClick={onCancel} className="action-btn" > <FaWindowClose title="Cancelar" /> </button>
           </div>
          </Form>
          )
         }
-        </Formik>}
+        </Formik>
     </div>
   )
 }
 
 const intentValidationSchema = Yup.object({
-  intentname: Yup.string().required("El nombre es obligatorio").min(3, "El nombre debe contener al menos 3 caracteres").max(50, 'Too Long!'),
-  description: Yup.string().min(4, 'Too Short!').max(2000, 'Demasiado largo!'),
+  intentname: Yup.string().required("El nombre es obligatorio").min(3, "El nombre debe contener al menos 3 caracteres").max(50, 'Demasiado Largo!'),
+  description: Yup.string().min(4, 'Demasiado corto!').max(2000, 'Demasiado largo!'),
 }
 );
 
@@ -161,7 +160,7 @@ function initialValues(data){
   return(
     {
       intentname: data ? data.name : '',
-      description: data.description? data.description :'',
+      description: data? data.description :'',
     }
   );
 }
