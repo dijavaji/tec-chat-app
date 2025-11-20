@@ -60,3 +60,20 @@
 .profile-img-card{
   border-radius: 50%;
 }
+
+.register-btn {
+  background-color: #007BFF;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+  display: block;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.register-btn:hover {
+  background-color: #3b82f6;
+}

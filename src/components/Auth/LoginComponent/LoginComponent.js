@@ -81,7 +81,7 @@ const LoginComponent = () => {
 			              onBlur={formikLogin.handleBlur}
                     onChange={formikLogin.handleChange}
                     className="form-control"/>
-              <div>
+              <div className="error-message">
                 {formikLogin.touched.email && formikLogin.errors.email ? (<p className="alert alert-danger"><span className=""></span>{formikLogin.errors.email}</p>): null }
               </div>
             </div>
@@ -102,9 +102,8 @@ const LoginComponent = () => {
             </div>
 
             <div className="form-group">
-              <button type="submit" className="send-btn" disabled={loading} >
-                {loading && ( <span className="spinner-border spinner-border-sm"></span>)}
-                <span>Enviar</span>
+              <button type="submit" className="register-btn" disabled={loading} >
+                <span>Iniciar sesi&#243;n</span>
               </button>
             </div>
             <div className="form-group">
