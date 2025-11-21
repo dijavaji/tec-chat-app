@@ -1,0 +1,35 @@
+
+.profile {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    gap: 8px;
+    margin-top: 20px !important;
+}
+
+.profile-left{
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-img-card{
+  border-radius: 50%;
+  width: 170px;
+  height: 170px;
+}
+
+.avatar-img-card:hover{
+  cursor: pointer;
+}
+
+.other-name{
+  font-size: 16px;
+  margin-bottom: 3px;
+  font-weight: bold;
+}
+
+.description{
+  font-size: 16px;
+  margin-top: 10px;
+}
