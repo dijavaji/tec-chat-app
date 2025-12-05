@@ -5,7 +5,9 @@ import * as Yup from "yup";
 
 import './PersonalDataComponent.css'
 
-const PersonalDataComponent = () => {
+const PersonalDataComponent = (props) => {
+
+  const { setShowModal, currentPerson, refetch } = props;
 
   const handleSubmit =(formData)=>{
     //TODO conectar con backend
@@ -13,9 +15,9 @@ const PersonalDataComponent = () => {
   }
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={editValidationSchema}>
+    <Formik initialValues={initialValues(currentPerson)} onSubmit={handleSubmit} validationSchema={editValidationSchema}>
     {() =>(
-     <Form className="data-form">
+     <Form className="personal-form">
       <div className="mb-4">
         <Field type="text" name="firstName" placeholder="Nombre"
             className="form-control"  />
@@ -27,11 +29,6 @@ const PersonalDataComponent = () => {
             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
         <ErrorMessage name="lastName" component="div" className="error-message"/>
       </div>
-      <div className="mb-4">
-        <Field type="text" name="userName" placeholder="Nombre usuario"
-        className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
-        <ErrorMessage name="userName" component="div" className="error-message"/>
-      </div>
 
         <div className="mb-4">
           <Field type="text" name="address" placeholder="Direcci&#243;n"
@@ -39,6 +36,23 @@ const PersonalDataComponent = () => {
           <ErrorMessage name="address" component="div" className="error-message"/>
         </div>
 
+        <div className="mb-4">
+          <Field type="text" name="birthDate" placeholder="Cumplea&#241;os"
+          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
+          <ErrorMessage name="birthDate" component="div" className="error-message"/>
+        </div>
+
+        <div className="mb-4">
+          <Field type="text" name="gender" placeholder="G&#233;nero"
+          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
+          <ErrorMessage name="gender" component="div" className="error-message"/>
+        </div>
+
+        <div className="mb-4">
+          <Field type="text" name="idn" placeholder="Identificaci&#243;n"
+          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
+          <ErrorMessage name="idn" component="div" className="error-message"/>
+        </div>
 
         <div className="">
           <Field type="tel" name="phone" placeholder="Telefono"
@@ -58,7 +72,14 @@ const PersonalDataComponent = () => {
 
 function initialValues(data){
   return {
-    email:  data || '',
+    firstName: data.firstName || '',
+    lastName: data.lastName || '',
+    phone: data.phone || '',
+    address: data.address || '',
+    birthDate: data.birthDate || '',
+    gender: data.gender || '',
+    idn: data.idn || '',
+
   }
 }
 

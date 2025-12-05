@@ -12,6 +12,8 @@ const SettingsComponent = (props) => {
   const {logout} = useAuth();
   const history = useHistory();
 
+  console.log('usuario',getUser);
+
   const onChangePassword = () =>{
     setTitleModal('Cambiar contrase\u00f1a');
     setChildrenModal(<PasswordComponent/>);
@@ -24,7 +26,7 @@ const SettingsComponent = (props) => {
 
   const onChangeDescription = () =>{
     setTitleModal('Cambiar datos personales');
-    setChildrenModal(<PersonalDataComponent setShowModal={setShowModal} currentEmail={getUser.email}/>);
+    setChildrenModal(<PersonalDataComponent setShowModal={setShowModal} currentPerson={getUser.person}/>);
   }
 
   const onLogout = () =>{
