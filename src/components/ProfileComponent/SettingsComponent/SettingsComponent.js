@@ -2,6 +2,7 @@ import React from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { useHistory } from "react-router-dom";
 
+import PasswordComponent from '../PasswordComponent';
 import './SettingsComponent.css';
 
 const SettingsComponent = (props) => {
@@ -11,7 +12,7 @@ const SettingsComponent = (props) => {
 
   const onChangePassword = () =>{
     setTitleModal('Cambiar contrase\u00f1a');
-    setChildrenModal(<div> <h2>formPassword </h2> </div>);
+    setChildrenModal(<PasswordComponent/>);
   }
 
   const onLogout = () =>{
