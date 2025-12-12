@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import './IntentDetailComponent.css';
-import { FaEdit, FaTrash, FaPlus, FaSave, FaWindowClose, FaAngleLeft} from "react-icons/fa";
+import { FaEdit, FaPlus, FaSave, FaWindowClose, FaAngleLeft} from "react-icons/fa";
 import { useHistory, useParams } from "react-router-dom";
 import {toast} from "react-toastify";
 import IntentService from '../../services/intent.service.js';
