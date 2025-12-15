@@ -47,7 +47,7 @@ const ProfileComponent = (props) => {
         break;
       case 'settings':
         setTitleModal('');
-        setChildrenModal(<SettingsComponent setShowModal={setShowModal} setTitleModal={setTitleModal} setChildrenModal={setChildrenModal}/> );
+        setChildrenModal(<SettingsComponent setShowModal={setShowModal} setTitleModal={setTitleModal} setChildrenModal={setChildrenModal} getUser={user}/> );
         setShowModal(true);
         break;
       default:
