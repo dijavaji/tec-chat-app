@@ -1,20 +1,45 @@
 import React, {useState, useEffect}from 'react';
+import Stomp from 'stompjs';
+import Sockjs from 'sockjs-client';
+import { v4 as uuidv4 } from 'uuid';
 import { Widget, addResponseMessage, toggleWidget, toggleMsgLoader, renderCustomComponent} from 'react-chat-widget';
+import { API_SERVER_BACKEND, AUDIT_APP, APP_NAME} from "../../utils/tec-chat.constants";
+
 import 'react-chat-widget/lib/styles.css';
 
+
 import './ChatBoxComponent.css'
+
+const API_SERVER_SOCKET = API_SERVER_BACKEND.HOST_MESSAGE + '/ws';
 
 const ChatBoxComponent = () => {
 
   //const [chatToggle, setChatToggle] = useState(false);
+  const [stompCLient, setStompCLient] = useState(null);
+  const [messageId] = useState(uuidv4(),);
+  const [nickName, setNickName] = useState('usuario');
 
   useEffect(() => {
    //addResponseMessage('Welcome to this **awesome** chat!');
-
    const chatOpen = document.querySelector('.rcw-conversation-container') !== null;
    if(!chatOpen){
       toggleWidget(); // Abre el widget al montar el componente
    }
+
+   const socket = new Sockjs(API_SERVER_SOCKET);//new Sockjs('http://127.0.0.1:8081/ws');
+   const client = Stomp.over(socket);
+   client.connect({},()=>{
+     client.subscribe('/topic/messages', (message)=>{
+       const receivedMessages = JSON.parse(message.body);
+       console.log(receivedMessages);
+       //addResponseMessage((prevMessages)=> [...prevMessages, receivedMessages]);
+       addResponseMessage(receivedMessages.text);
+     });
+   });
+   setStompCLient(client);
+   return () =>{
+     client.disconnect();
+   };
 
  }, []);
 
@@ -32,17 +57,30 @@ const ChatBoxComponent = () => {
     } else {
       // Simular respuesta de la API (reemplazar con llamada real a sendMessageToAPI)
       toggleMsgLoader();
-      const response = await new Promise(resolve => {
+      /*const response = await new Promise(resolve => {
           setTimeout(() => {
               resolve(`Respuesta simulada: "${newMessage}"`);
           }, 1000);
-      });
+      });*/
+      const chatMessage = {
+        id:messageId,
+        displayName:nickName,
+        text: newMessage,
+        assistantName:APP_NAME,
+        createdBy:AUDIT_APP.CREATE_BY
+      };
+      const response = stompCLient.send('/app/chat', {}, JSON.stringify(chatMessage));
+      //console.log(`responde api ${response}`);
+
       toggleMsgLoader();
-      addResponseMessage(response);
+      //addResponseMessage(response);
     }
 
     }catch(e){
       console.error('error',e);
+      addResponseMessage(e.message);
+      //console.log(JSON.stringify(e.message));
+      //const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
     }
   };
 
