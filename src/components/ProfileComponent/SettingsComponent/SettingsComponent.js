@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import PasswordComponent from '../PasswordComponent';
 import EmailComponent from '../EmailComponent';
+import PersonalDataComponent from '../PersonalDataComponent';
 import './SettingsComponent.css';
 
 const SettingsComponent = (props) => {
@@ -21,6 +22,11 @@ const SettingsComponent = (props) => {
     setChildrenModal(<EmailComponent setShowModal={setShowModal} currentEmail={getUser.email}/>);
   }
 
+  const onChangeDescription = () =>{
+    setTitleModal('Cambiar datos personales');
+    setChildrenModal(<PersonalDataComponent setShowModal={setShowModal} currentEmail={getUser.email}/>);
+  }
+
   const onLogout = () =>{
     //TODO cerrar la sesion en el backend
     logout();
@@ -29,9 +35,9 @@ const SettingsComponent = (props) => {
 
   return (
     <div className='settings-form'>
-      <button onClick={onChangePassword}>Cambiar contrase&#241;a</button>
-      <button onClick={onChangeEmail}>Cambiar email</button>
-      <button>Descripci&#243;n</button>
+      <button onClick={onChangePassword} >Cambiar contrase&#241;a</button>
+      <button onClick={onChangeEmail} >Cambiar email</button>
+      <button onClick={onChangeDescription} >Datos personales</button>
       <button onClick={onLogout} >Cerrar sesi&#243;n</button>
       <button onClick={() => setShowModal(false)}>Cancelar</button>
     </div>
