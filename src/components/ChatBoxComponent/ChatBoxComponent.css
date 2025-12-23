@@ -50,6 +50,9 @@
   cursor: pointer;
 }
 
+.chat-widget-container .rcw-response .rcw-message-text{
+  max-width: none;
+}
 
 /* Responsivo */
 @media (max-width: 768px) {
