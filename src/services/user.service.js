@@ -12,6 +12,12 @@ class UserService{
       }).catch((err) => {console.error('Error:', err.message); throw new Error(err);});
   }
 
+  updateUser = async (user, username) =>{
+      return axios.put(USER_BASE_REST_API_URL+ '/' + username, user).then(response => {
+        return response.data;
+      }).catch((err) => {console.error('Error:', err.response.data); throw new Error(err.response.data.message);});
+    }
+
 }
 
 export default new UserService;

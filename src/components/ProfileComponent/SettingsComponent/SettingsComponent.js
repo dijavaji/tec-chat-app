@@ -14,7 +14,7 @@ const SettingsComponent = (props) => {
 
   const onChangePassword = () =>{
     setTitleModal('Cambiar contrase\u00f1a');
-    setChildrenModal(<PasswordComponent/>);
+    setChildrenModal(<PasswordComponent currentUser={getUser.username} logout={onLogout}/>);
   }
 
   const onChangeEmail = () =>{
