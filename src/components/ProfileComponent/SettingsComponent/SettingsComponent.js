@@ -19,7 +19,7 @@ const SettingsComponent = (props) => {
 
   const onChangeEmail = () =>{
     setTitleModal('Cambiar email');
-    setChildrenModal(<EmailComponent setShowModal={setShowModal} currentEmail={getUser.email}/>);
+    setChildrenModal(<EmailComponent setShowModal={setShowModal} currentEmail={getUser.email} currentUser={getUser.username}/>);
   }
 
   const onChangeDescription = () =>{
