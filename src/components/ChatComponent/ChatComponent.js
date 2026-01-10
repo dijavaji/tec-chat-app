@@ -1,5 +1,5 @@
 import React, {useState, useEffect, dropMessages} from 'react';
-import { Widget, addResponseMessage, toggleWidget, toggleMsgLoader, renderCustomComponent} from 'react-chat-widget';
+import { Widget, addResponseMessage, toggleWidget, toggleMsgLoader, renderCustomComponent} from 'react-multiple-chat-widget';
 import { useChatContext } from "../../context/ChatContext";
 import Stomp from 'stompjs';
 import Sockjs from 'sockjs-client';
