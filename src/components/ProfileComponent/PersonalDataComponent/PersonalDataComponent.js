@@ -1,13 +1,18 @@
 import React from 'react';
+import moment from 'moment';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 
 
-import './PersonalDataComponent.css'
+import './PersonalDataComponent.css';
+
+const DefaultTz = "America/New_York";
 
 const PersonalDataComponent = (props) => {
 
   const { setShowModal, currentPerson, refetch } = props;
+
+  //console.log(moment(currentPerson.birthDate).format("YYYY-MM-DD"));
 
   const handleSubmit =(formData)=>{
     //TODO conectar con backend
@@ -37,14 +42,17 @@ const PersonalDataComponent = (props) => {
         </div>
 
         <div className="mb-4">
-          <Field type="text" name="birthDate" placeholder="Cumplea&#241;os"
+          <Field type="date" name="birthDate" timezone={DefaultTz} placeholder="Cumplea&#241;os"
           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
           <ErrorMessage name="birthDate" component="div" className="error-message"/>
         </div>
 
         <div className="mb-4">
-          <Field type="text" name="gender" placeholder="G&#233;nero"
-          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
+          <Field as="select" name="gender" placeholder="G&#233;nero"
+          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none">
+            <option value="F">Femenino</option>
+            <option value="M">Masculino</option>
+          </Field>
           <ErrorMessage name="gender" component="div" className="error-message"/>
         </div>
 
@@ -55,7 +63,7 @@ const PersonalDataComponent = (props) => {
         </div>
 
         <div className="">
-          <Field type="tel" name="phone" placeholder="Telefono"
+          <Field type="tel" name="phone" placeholder="Tel&#233;fono"
           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
           <ErrorMessage name="phone" component="div" className="error-message"/>
         </div>
@@ -76,7 +84,7 @@ function initialValues(data){
     lastName: data.lastName || '',
     phone: data.phone || '',
     address: data.address || '',
-    birthDate: data.birthDate || '',
+    birthDate: moment(data.birthDate).format("YYYY-MM-DD") || '',
     gender: data.gender || '',
     idn: data.idn || '',
 
@@ -86,11 +94,8 @@ function initialValues(data){
 const editValidationSchema = Yup.object({
   firstName: Yup.string().required("El nombre es obligatorio").min(3, "El nombre debe contener al menos 3 caracteres"),
   lastName: Yup.string().required("El apellido es obligatorio").min(3, "El apellido debe contener al menos 3 caracteres"),
-  userName: Yup.string().matches(/[a-zA-Z0-9-]*$/, "El nickname no puede tener espacios").required("El nombre de usuario es obligatorio").min(3, "El nickname debe contener al menos 3 caracteres"),
-  email: Yup.string().email("El email no es valido").required("El email es obligatorio"),
   address: Yup.string().required("La direcci\u00f3n es obligatorio"),
-  password: Yup.string().required("La contrase\u00f1a es obligatoria").min(5, "La contrase\u00f1a debe contener al menos 5 caracteres"),
-  accept: Yup.boolean().oneOf([true], 'Aceptar los t\u00e9rminos y condiciones').required("Aceptar t\u00e9rminos y condiciones"),
+  phone: Yup.string().matches(/^[+]{1}(?:[0-9\-\\(\\)\\/.]\s?){6,15}[0-9]{1}$/, "El tel\u00e9fono debe ser un numero valido").min(3, "El tel\u00e9fono debe contener al menos 3 caracteres").max(13,"El tel\u00e9fono debe contener al maximo 13 caracteres"),
 }
 );
 
