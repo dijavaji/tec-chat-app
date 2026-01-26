@@ -1,13 +1,35 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
+import {toast} from "react-toastify";
+import UserService from '../../../services/user.service.js';
+import { AUDIT_APP,} from "../../../utils/tec-chat.constants";
 
 import './PasswordComponent.css';
 
-const PasswordComponent = () => {
+const PasswordComponent = (props) => {
+  const { currentUser, logout } = props;
 
-  const handleSubmit =(formValue)=>{
-    console.log(formValue);
+
+  const handleSubmit = async (formValues)=>{
+    try{
+      const userUpdated = await UserService.updateUser({
+        currentPassword: formValues.currentPass,
+        newPassword: formValues.newPass,
+        modifiedBy: AUDIT_APP.UPDATE_BY,
+      }, currentUser);
+
+      if(userUpdated.success){
+          //toast.success("Intenci\u00f3n actualizada correctamente.");
+          //toast.success(userUpdated.message);
+          logout();
+      }else{
+        throw new Error("Error al actualizar intenci\u00f3n");
+      }
+
+    }catch(e){
+      toast.error(e.message);
+    }
   }
 
   return (
