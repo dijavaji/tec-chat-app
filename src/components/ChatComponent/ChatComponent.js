@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, dropMessages} from 'react';
 import { Widget, addResponseMessage, toggleWidget, toggleMsgLoader, renderCustomComponent} from 'react-chat-widget';
 import { useChatContext } from "../../context/ChatContext";
 import Stomp from 'stompjs';
@@ -13,7 +13,7 @@ const API_SERVER_SOCKET = API_SERVER_BACKEND.HOST_MESSAGE + '/ws';
 //import './ChatComponent.css';
 
 //https://github.com/gurkanucar/socketio-simple-chat
-const ChatComponent = ({ chatId, userId, fullScreenMode, showCloseButton, autofocus }) => {
+const ChatComponent = ({ chatId, userId, fullScreenMode, showCloseButton, autofocus, profileAvatar, title, subtitle, resizable, titleAvatar}) => {
   const { addMessage } = useChatContext();
   //const [socket, setSocket] = useState(null);
   const [stompCLient, setStompCLient] = useState(null);
@@ -21,6 +21,7 @@ const ChatComponent = ({ chatId, userId, fullScreenMode, showCloseButton, autofo
   const [nickName, setNickName] = useState('usuarioId');
   // Initialize public chat WebSocket
   useEffect(() => {
+    //dropMessages();
     const socket = new Sockjs(API_SERVER_SOCKET);//new Sockjs('http://127.0.0.1:8081/ws');
     //setSocket(socket);
     const client = Stomp.over(socket);
@@ -88,10 +89,11 @@ const ChatComponent = ({ chatId, userId, fullScreenMode, showCloseButton, autofo
   };
 
   return (
-          <Widget fullScreenMode={fullScreenMode}  showCloseButton={showCloseButton} autofocus={autofocus}
-            subtitle={`Estamos aqu&#237; para ayudarte ${chatId}`}
-            title={`Soporte en vivo ${chatId}`}
-            handleNewUserMessage={handleNewResponseMessage}/>
+          <Widget chatId={chatId} fullScreenMode={fullScreenMode}  showCloseButton={showCloseButton} autofocus={autofocus}
+            subtitle={subtitle}
+            title={title}
+            handleNewUserMessage={handleNewResponseMessage} profileAvatar={profileAvatar}
+            titleAvatar={titleAvatar} resizable={resizable}/>
   )
 }
 
