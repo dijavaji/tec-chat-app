@@ -3,12 +3,12 @@ import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Stomp from 'stompjs';
 import Sockjs from 'sockjs-client';
-import { Widget, addResponseMessage, renderCustomComponent} from 'react-chat-widget';
+import { Widget, addResponseMessage, renderCustomComponent} from 'react-multiple-chat-widget';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 //import {toast} from "react-toastify";
 
-import 'react-chat-widget/lib/styles.css';
+import 'react-multiple-chat-widget/lib/styles.css';
 import logo from '../../../logo.svg';
 import botGif from '../../../assets/img/l3sgiphy.gif';
 import "./ChatWidget.css";
@@ -42,7 +42,7 @@ const ChatWidget = () => {
         const receivedMessages = JSON.parse(message.body);
         console.log(receivedMessages);
         //addResponseMessage((prevMessages)=> [...prevMessages, receivedMessages]);
-        addResponseMessage(receivedMessages.response);
+        addResponseMessage(messageId, receivedMessages.response);
       });
     });
     setStompCLient(client);
@@ -128,9 +128,9 @@ const ChatWidget = () => {
 
   return (
     <div>
-      <Widget id={messageId} handleNewUserMessage={handleNewUserMessage}
+      <Widget chatId={messageId} handleNewUserMessage={handleNewUserMessage}
         profileAvatar={logo}
-        title={<span>Asesor Virtual Inteligente</span>}
+        title={<span>Asistente Virtual Inteligente</span>}
         subtitle=""
         titleAvatar={botGif}
         resizable={false}/>
