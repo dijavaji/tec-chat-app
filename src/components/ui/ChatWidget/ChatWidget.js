@@ -58,8 +58,8 @@ const ChatWidget = () => {
     if(newMessage.trim()){
         if(newMessage === '/login'){
           console.log("ingreso login");
-          addResponseMessage("Por favor, ingresa tus credenciales a continuaci&#243;n 👇");
-          renderCustomComponent(getCustomLauncher);
+          addResponseMessage(messageId, "Por favor, ingresa tus credenciales a continuaci&#243;n 👇");
+          renderCustomComponent(messageId, getCustomLauncher);
 
         }else if(newMessage === '/logout'){
           console.log("cierro login");
