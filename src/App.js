@@ -6,6 +6,7 @@ import React, {useState, useEffect, useMemo} from "react";
 //import Auth from "./pages/Auth";
 import {getToken, decodeToken, removeToken} from "./utils/tec-token.util";
 import AuthContext from "./context/AuthContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import Navigation from "./routes/Navigation";
 //import useAuth from './hooks/useAuth';
 
@@ -60,9 +61,11 @@ const App = () => {
   if(auth === undefined) return null;
 
   return (
-    <AuthContext.Provider value={authData}>
-      <Navigation routes={routes}/>
-    </AuthContext.Provider>
+    <ThemeProvider>
+      <AuthContext.Provider value={authData}>
+        <Navigation routes={routes}/>
+      </AuthContext.Provider>
+    </ThemeProvider>
  );
 }
 

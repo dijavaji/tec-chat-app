@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderComponent from '../components/ui/HeaderComponent';
+import HeaderBanner from '../components/ui/HeaderBanner';
 import FooterComponent from '../components/ui/FooterComponent';
 import ChatWidget from '../components/ui/ChatWidget';
 import {ToastContainer} from "react-toastify";
@@ -10,7 +10,7 @@ export default function LayoutBasic(props) {
   //console.log(props);
     return (
       <React.Fragment>
-        <HeaderComponent/>
+        <HeaderBanner/>
           <main>
           <>{children}</>
           <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} closeOnClick={true}
