@@ -48,12 +48,12 @@ const HeaderBanner = () => {
             <NavLink to="/precios" activeClassName="active" onClick={() => setIsOpen(false)}>Precios</NavLink>
           </li>
           <li>
-            <NavLink to="/contacto" activeClassName="active" onClick={() => setIsOpen(false)}>Contacto</NavLink>
+            <NavLink to="/contactos" activeClassName="active" onClick={() => setIsOpen(false)}>Contacto</NavLink>
           </li>
         </ul>
         
         <div className={`nav-actions ${isOpen ? 'open' : ''}`}>
-          <Link to="/login" className="btn-outline" onClick={() => setIsOpen(false)}>Iniciar Sesión</Link>
+          <Link to="/login" className="btn-outline" onClick={() => setIsOpen(false)}>Iniciar Sesi&#243;n</Link>
           <Link to="/contacto?demo=1" className="btn-primary" onClick={() => setIsOpen(false)}>Solicitar Demo</Link>
         </div>
       </nav>
