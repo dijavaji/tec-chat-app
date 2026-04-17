@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaTimes } from "react-icons/fa";
 
+import logoImg from "../../../assets/img/logo-smart-chatbotTiny.png";
+
 import "./HeaderBanner.css";
 
 const HeaderBanner = () => {
@@ -16,7 +18,7 @@ const HeaderBanner = () => {
       <nav aria-label="Navegación principal" className="navbar-container">
         <Link to="/" className="navbar-logo" aria-label="Smart Chatbot Technoloqie — Inicio">
           <img 
-            src="/logo-smart-chatbot.svg" 
+            src={logoImg} 
             alt="Smart Chatbot Technoloqie" 
             width="180" 
             height="40"
