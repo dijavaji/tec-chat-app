@@ -20,13 +20,14 @@ import IntentsPage from '../pages/IntentsPage';
 import Home from "../pages/Home";
 import Auth from "../pages/Auth";
 import UserPage from "../pages/UserPage";
+import UserPage from "../pages/BannerPage";
 
 //import {ReportPage, ReportUserPage } from "../pages/ReportPage";
 
 const routes=[
   {
     path:"/",
-    component:BannerComponent,
+    component:BannerPage,
     exact: true,
     layout: LayoutBasic
   },
