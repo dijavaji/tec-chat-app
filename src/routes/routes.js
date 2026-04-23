@@ -3,7 +3,6 @@ import LayoutHome from "../layouts/LayoutHome";
 //paginas
 import NotFound from "../pages/ui/NotFound";
 
-import BannerComponent from '../components/ui/BannerComponent';
 import AboutComponent from '../components/ui/AboutComponent';
 import ClientComponent from '../components/ui/ClientComponent';
 import ContactComponent from '../components/ui/ContactComponent';
@@ -20,7 +19,8 @@ import IntentsPage from '../pages/IntentsPage';
 import Home from "../pages/Home";
 import Auth from "../pages/Auth";
 import UserPage from "../pages/UserPage";
-import UserPage from "../pages/BannerPage";
+import BannerPage from "../pages/ui/BannerPage";
+import PricePage from "../pages/ui/PricePage";
 
 //import {ReportPage, ReportUserPage } from "../pages/ReportPage";
 
@@ -33,13 +33,19 @@ const routes=[
   },
   {
     path:"/home",
-    component:BannerComponent,
+    component:BannerPage,
     exact: true,
     layout: LayoutBasic
   },
   {
     path:"/servicios",
     component:AboutComponent,
+    exact: true,
+    layout: LayoutBasic
+  },
+  {
+    path:"/precios",
+    component:PricePage,
     exact: true,
     layout: LayoutBasic
   },
