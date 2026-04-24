@@ -50,7 +50,7 @@ const HeaderBanner = () => {
             <NavLink to="/precios" activeClassName="active" onClick={() => setIsOpen(false)}>Precios</NavLink>
           </li>
           <li>
-            <NavLink to="/contactos" activeClassName="active" onClick={() => setIsOpen(false)}>Contacto</NavLink>
+            <NavLink to="/contacto" activeClassName="active" onClick={() => setIsOpen(false)}>Contacto</NavLink>
           </li>
         </ul>
         

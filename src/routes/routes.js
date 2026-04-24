@@ -56,7 +56,7 @@ const routes=[
     layout: LayoutBasic
   },
   {
-    path:"/contactos",
+    path:"/contacto",
     component:ContactComponent,
     exact: true,
     layout: LayoutBasic
