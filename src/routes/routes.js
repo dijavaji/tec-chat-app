@@ -1,5 +1,6 @@
 import LayoutBasic from "../layouts/LayoutBasic";
 import LayoutHome from "../layouts/LayoutHome";
+import LayoutAuth from "../layouts/LayoutAuth";
 //paginas
 import NotFound from "../pages/ui/NotFound";
 
@@ -71,13 +72,13 @@ const routes=[
     path:"/login",
     component:Auth,
     exact: true,
-    layout: LayoutBasic
+    layout: LayoutAuth
   },
   {
     path:"/register",
     component:RegisterComponent,
     exact: true,
-    layout: LayoutBasic
+    layout: LayoutAuth
   },
   {
     path:"/menu",
