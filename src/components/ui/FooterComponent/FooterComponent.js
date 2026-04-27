@@ -6,8 +6,25 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 import './FooterComponent.css';
 
 const FooterComponent = () => {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Smart Chatbot Technoloqie",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "Sistema de chatbot con IA para pymes, integración multicanal",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  };
+
   return (
     <footer className="main-footer">
+      <script type="application/ld+json">
+        {JSON.stringify(schemaData)}
+      </script>
       <div className="footer-container">
         <div className="footer-grid">
           {/* Columna 1: Logo y Bio */}

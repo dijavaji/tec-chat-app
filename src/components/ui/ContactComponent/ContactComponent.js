@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { MdEmail, MdPhone, MdLocationOn, MdSend } from 'react-icons/md';
 
 import "./ContactComponent.css";
@@ -11,13 +12,19 @@ const ContactComponent = () => {
   };
 
   return (
-    <section className="contact-section" id="contacto">
-      <div className="contact-hero">
-        <h2 className="contact-headline">Hablemos de lo que tu negocio necesita.</h2>
-        <p className="contact-subheadline">
-          ¿Tienes dudas? ¿Quieres una demo personalizada? ¿Necesitas una cotización corporativa? Estamos aquí para ayudarte.
-        </p>
-      </div>
+    <>
+      <Helmet>
+        <title>Contacto — Smart Chatbot Technoloqie | Solicita tu Demo</title>
+        <meta name="description" content="Solicita una demo de Smart Chatbot o una cotización corporativa. Contáctanos en Quito, Ecuador. Correo: info@technoloqie.cloud." />
+      </Helmet>
+
+      <section className="contact-section" id="contacto">
+        <div className="contact-hero">
+          <h1 className="contact-headline">Hablemos de lo que tu negocio necesita.</h1>
+          <p className="contact-subheadline">
+            ¿Tienes dudas? ¿Quieres una demo personalizada? ¿Necesitas una cotización corporativa? Estamos aquí para ayudarte.
+          </p>
+        </div>
 
       <div className="contact-container">
         <div className="contact-grid">
@@ -134,6 +141,7 @@ const ContactComponent = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

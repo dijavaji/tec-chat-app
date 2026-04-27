@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { MdCheck, MdArrowForward, MdStar } from 'react-icons/md';
 import './PricingComponent.css';
 
@@ -77,66 +78,73 @@ const PricingComponent = () => {
   ];
 
   return (
-    <section className="pricing-section">
-      <div className="pricing-hero">
-        <h2 className="pricing-headline">Precios transparentes. Sin letras chiquitas.</h2>
-        <p className="pricing-subheadline">
-          Elige el plan que encaje con tu negocio. Todos incluyen IA entrenable, integración multicanal y soporte técnico.
-        </p>
-      </div>
+    <>
+      <Helmet>
+        <title>Planes Smart Chatbot — Precios desde $9.99/mes | Technoloqie</title>
+        <meta name="description" content="Plan básico gratis sin límite de mensajes. Plan profesional desde $9.99/mes con 2 chatbots, WhatsApp, Telegram y analítica predictiva. Sin sorpresas. Technoloqie." />
+      </Helmet>
 
-      <div className="pricing-grid">
-        {plans.map((plan, index) => (
-          <div key={index} className={`pricing-card ${plan.highlighted ? 'highlighted' : ''}`}>
-            {plan.badge && <div className="plan-badge"><MdStar /> {plan.badge}</div>}
-            
-            <div className="plan-header">
-              <h3 className="plan-name">{plan.name}</h3>
-              <p className="plan-tagline">{plan.tagline}</p>
-              <div className="plan-price-container">
-                <span className="plan-price">{plan.price}</span>
-                <span className="plan-period">{plan.period}</span>
+      <section className="pricing-section">
+        <div className="pricing-hero">
+          <h1 className="pricing-headline">Precios transparentes. Sin letras chiquitas.</h1>
+          <p className="pricing-subheadline">
+            Elige el plan que encaje con tu negocio. Todos incluyen IA entrenable, integración multicanal y soporte técnico.
+          </p>
+        </div>
+
+        <div className="pricing-grid">
+          {plans.map((plan, index) => (
+            <div key={index} className={`pricing-card ${plan.highlighted ? 'highlighted' : ''}`}>
+              {plan.badge && <div className="plan-badge"><MdStar /> {plan.badge}</div>}
+              
+              <div className="plan-header">
+                <h2 className="plan-name">{plan.name}</h2>
+                <p className="plan-tagline">{plan.tagline}</p>
+                <div className="plan-price-container">
+                  <span className="plan-price">{plan.price}</span>
+                  <span className="plan-period">{plan.period}</span>
+                </div>
               </div>
-            </div>
 
-            <div className="plan-features">
-              <ul className="feature-list">
-                {plan.features.map((feature, fIndex) => (
-                  <li key={fIndex} className="feature-item">
-                    <MdCheck className="check-icon" /> {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              <div className="plan-features">
+                <ul className="feature-list">
+                  {plan.features.map((feature, fIndex) => (
+                    <li key={fIndex} className="feature-item">
+                      <MdCheck className="check-icon" /> {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            <div className="plan-action">
-              <button className={`btn-pricing ${plan.buttonType}`}>
-                {plan.buttonText} {plan.buttonType === 'primary' && <MdArrowForward />}
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="common-features-section">
-        <h3 className="common-title">Todo plan incluye:</h3>
-        <div className="common-grid">
-          {commonFeatures.map((feature, index) => (
-            <div key={index} className="common-item">
-              <MdCheck className="check-icon-success" /> <span>{feature}</span>
+              <div className="plan-action">
+                <button className={`btn-pricing ${plan.buttonType}`}>
+                  {plan.buttonText} {plan.buttonType === 'primary' && <MdArrowForward />}
+                </button>
+              </div>
             </div>
           ))}
         </div>
-      </div>
 
-      <div className="pricing-cta-footer">
-        <div className="cta-footer-content">
-          <h4>¿No encuentras el plan perfecto para ti?</h4>
-          <p>Cuéntanos lo que necesitas y te armamos una solución a tu medida.</p>
-          <button className="btn-contact-footer">Contactar <MdArrowForward /></button>
+        <div className="common-features-section">
+          <h3 className="common-title">Todo plan incluye:</h3>
+          <div className="common-grid">
+            {commonFeatures.map((feature, index) => (
+              <div key={index} className="common-item">
+                <MdCheck className="check-icon-success" /> <span>{feature}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+
+        <div className="pricing-cta-footer">
+          <div className="cta-footer-content">
+            <h4>¿No encuentras el plan perfecto para ti?</h4>
+            <p>Cuéntanos lo que necesitas y te armamos una solución a tu medida.</p>
+            <button className="btn-contact-footer">Contactar <MdArrowForward /></button>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 

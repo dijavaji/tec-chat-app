@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
@@ -43,16 +44,22 @@ const LoginComponent = () => {
   });
 
   return (
-    <div className="auth-page-wrapper">
-      <div className="login-card-container">
-        <div className="login-card">
-          <div className="login-header">
-            <Link to="/" className="login-logo-link">
-              <img src={logoImg} alt="Technoloqie Logo" className="login-brand-logo" />
-            </Link>
-            <h1 className="login-title">Accede a tu panel de administración</h1>
-            <p className="login-subtitle">Ingresa tus credenciales para continuar</p>
-          </div>
+    <>
+      <Helmet>
+        <title>Iniciar Sesión — Panel Smart Chatbot Technoloqie</title>
+        <meta name="description" content="Accede al panel de administración de tu Smart Chatbot Technoloqie." />
+      </Helmet>
+
+      <div className="auth-page-wrapper">
+        <div className="login-card-container">
+          <div className="login-card">
+            <div className="login-header">
+              <Link to="/" className="login-logo-link">
+                <img src={logoImg} alt="Technoloqie Logo" className="login-brand-logo" />
+              </Link>
+              <h1 className="login-title">Accede a tu panel de administración</h1>
+              <p className="login-subtitle">Ingresa tus credenciales para continuar</p>
+            </div>
 
           <form onSubmit={formikLogin.handleSubmit} className="login-form">
             <div className="form-group-modern">
@@ -120,6 +127,7 @@ const LoginComponent = () => {
         <div className="decoration-orb orb-2"></div>
       </div>
     </div>
+    </>
   );
 }
 

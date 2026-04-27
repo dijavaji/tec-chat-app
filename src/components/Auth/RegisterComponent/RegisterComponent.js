@@ -7,7 +7,7 @@ import { MdArrowForward, MdPerson, MdEmail, MdHome, MdPhone, MdLock, MdErrorOutl
 
 import AuthService from '../../../services/auth.service';
 import { AUDIT_APP } from "../../../utils/tec-chat.constants";
-import logoImg from "../../../assets/img/logo-smart-chatbotTiny.png";
+import logoImg from "../../../assets/img/logo-smart-chat-blank.png";
 import "./RegisterComponent.css";
 
 const RegisterComponent = () => {
