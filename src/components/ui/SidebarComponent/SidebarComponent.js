@@ -1,38 +1,18 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-//import { MdSupportAgent } from "react-icons/md";
-import { MdAssistant, MdOutlineTextsms, MdOutlineUploadFile, MdOutlineTextSnippet} from "react-icons/md";
+import { NavLink, Link } from 'react-router-dom';
+import { Menu, MenuItem } from '@material-ui/core';
+import { MdAssistant, MdOutlineTextsms, MdOutlineUploadFile, MdOutlineTextSnippet } from "react-icons/md";
 import { FaLink } from 'react-icons/fa';
-import {SUPER_USER_ROL} from "../../../utils/tec-chat.constants";
-//import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
-//import { RiRobot2Line } from "react-icons/ri";
-//import {RiLogoutCircleRLine} from 'react-icons/ri';
-import {NavLink, Link} from 'react-router-dom';
-import './SidebarComponent.css';
+
 import useAuth from "../../../hooks/useAuth";
+import { SUPER_USER_ROL } from "../../../utils/tec-chat.constants";
 
-const useStyles = makeStyles({
-
-    root: {
-      display: 'flex',
-      alignItems: 'center',
-      padding: '0.75rem',
-      borderRadius: '0.5rem',
-      background: 'white',
-      transition: 'all var(--transition-speed)',
-      textDecoration: 'none',
-      color: 'var(--text-color)',
-      textTransform: 'none',
-        },
-     });
+import './SidebarComponent.css';
 
 const SidebarComponent = () => {
-  const {auth, logout} = useAuth();
+  const { auth, logout } = useAuth();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const classes = useStyles();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -42,72 +22,83 @@ const SidebarComponent = () => {
   };
 
   return (
-        <nav className="sidebar">
-          <div className="logo-container">
+    <aside className="sidebar">
+      <div>
+        <Link to="/menu" className="logo">
+          <div className="logo-dot"></div>
+          <span>Technoloqie</span>
+        </Link>
 
-            <span className="logo-text">Asesor Virtual Inteligente</span>
-          </div>
+        <nav>
           <ul className="nav-list">
-          <li className="nav-item">
-            <NavLink className={({isActive}) => (isActive ? "nav-link-active" : "nav-link")} exact={true} to="/menu">
-              <span className="nav-icon">
-                  <MdAssistant className="" width="24" height="24"/>
-              </span>
-              <span className="nav-text">Menu</span>
-            </NavLink>
-          </li>
             <li className="nav-item">
-              <NavLink className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} to="/chat">
-              <span className="nav-icon">
-                  <MdOutlineTextsms className="" width="24" height="24"/>
-              </span>
-              <span className="nav-text">Chat nuevo</span>
+              <NavLink className="nav-link" activeClassName="active" exact to="/menu">
+                <span className="nav-icon"><MdAssistant /></span>
+                <span className="nav-text">Menú</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" activeClassName="active" exact to="/chat">
+                <span className="nav-icon"><MdOutlineTextsms /></span>
+                <span className="nav-text">Chat nuevo</span>
               </NavLink>
             </li>
 
-            {auth.roles === SUPER_USER_ROL && <div>
-            <li className="nav-item">
-              <NavLink className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} to="/file-upload">
-              <span className="nav-icon">
-                  <MdOutlineUploadFile className="" width="24" height="24"/>
-              </span>
-              <span className="nav-text">Cargar archivo</span>
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} to="/intents">
-              <span className="nav-icon">
-                  <MdOutlineTextSnippet className="" width="24" height="24"/>
-              </span>
-              <span className="nav-text">Intenci&#243;n</span>
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink className={({isActive}) => (isActive ? "nav-link.active" : "nav-link")}  exact={true} to="/url-upload">
-              <span className="nav-icon">
-                  <FaLink className="" width="24" height="24"/>
-              </span>
-              <span className="nav-text">Agregar ruta</span>
-              </NavLink>
-            </li>
-            </div>}
-
+            {auth.roles === SUPER_USER_ROL && (
+              <>
+                <li className="nav-item">
+                  <NavLink className="nav-link" activeClassName="active" exact to="/file-upload">
+                    <span className="nav-icon"><MdOutlineUploadFile /></span>
+                    <span className="nav-text">Cargar archivo</span>
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" activeClassName="active" exact to="/intents">
+                    <span className="nav-icon"><MdOutlineTextSnippet /></span>
+                    <span className="nav-text">Intención</span>
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" activeClassName="active" exact to="/url-upload">
+                    <span className="nav-icon"><FaLink /></span>
+                    <span className="nav-text">Agregar ruta</span>
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
-          <nav className="logout-nav">
-           <Button aria-controls="simple-menu" aria-haspopup="true" className={classes.root} onClick={handleClick}>
-              <div className="profile-icon">{auth.username.charAt(0).toUpperCase()}</div>
-              <span className="nav-text">Mi perfil</span>
-           </Button>
-           <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-            <MenuItem onClick={handleClose} component={Link} to='/menu'>Home</MenuItem>
-            <MenuItem onClick={handleClose} component={Link} to={`/user/${auth.username}`}>Perfil</MenuItem>
-            <MenuItem onClick={logout}>Cerrar sesi&#243;n</MenuItem>
-          </Menu>
-         </nav>
         </nav>
-  )
-}
+      </div>
+
+      <div className="sidebar-footer">
+        <button className="btn-primary-action">+ Nuevo Bot</button>
+        
+        <div className="profile-nav-container">
+          <button className="profile-button-trigger" onClick={handleClick}>
+            <div className="profile-avatar">
+              {auth.username ? auth.username.charAt(0).toUpperCase() : 'U'}
+            </div>
+            <span className="profile-name">Mi perfil</span>
+          </button>
+          
+          <Menu
+            id="profile-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+            getContentAnchorEl={null}
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            transformOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          >
+            <MenuItem onClick={handleClose} component={Link} to="/menu">Home</MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to={`/user/${auth.username}`}>Perfil</MenuItem>
+            <MenuItem onClick={logout}>Cerrar sesión</MenuItem>
+          </Menu>
+        </div>
+      </div>
+    </aside>
+  );
+};
 
 export default SidebarComponent;
