@@ -140,5 +140,9 @@ export default new AuthService();
 - Tokens should be stored securely (currently using `localStorage` via utils).
 - Always validate inputs using `yup` and `formik` before submission.
 
+## 7. Agentic Instructions
+- **Design Changes:** AI agents MUST always use the `interface-design` skill for any task involving UI/UX modifications, layout refactoring, or styling updates.
+- **Design System:** Refer to and adhere to the patterns defined in `.interface-design/system.md` to maintain visual consistency.
+
 ---
-*Last Updated: April 20, 2026*
+*Last Updated: May 01, 2026*
