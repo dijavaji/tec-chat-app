@@ -1,28 +1,64 @@
-import React from 'react';
-import { Link} from 'react-router-dom';
-import { FaBars } from "react-icons/fa";
+import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { FaBars, FaTimes } from "react-icons/fa";
 
 import "./HeaderBanner.css";
 
 const HeaderBanner = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <header>
-      <nav className="navbar-menu">
-        <input type="checkbox" name="check" id="check"/>
-        <label htmlFor="check" className="checkbtn" >
-          <FaBars className="" />
-        </label>
-        <label className="logo">Technoloqie</label>
-        <ul className="nav-options">
-          <li> <Link to="/"> Home</Link></li>
-          <li> <Link to="/servicios" >Servicios</Link></li>
-          <li> <Link to="/clientes" >Clientes</Link></li>
-          <li> <Link to="/contactos" >Contactos</Link></li>
-          <li> <Link to="/login" >Login</Link></li>
+    <header className="header-banner">
+      <nav aria-label="Navegación principal" className="navbar-container">
+        <Link to="/" className="navbar-logo" aria-label="Smart Chatbot Technoloqie — Inicio">
+          <img 
+            src="/logo-smart-chatbot.svg" 
+            alt="Smart Chatbot Technoloqie" 
+            width="180" 
+            height="40"
+            onError={(e) => {
+              e.target.style.display = 'none';
+              e.target.nextSibling.style.display = 'block';
+            }}
+          />
+          <span className="logo-fallback" style={{ display: 'none' }}>Technoloqie</span>
+        </Link>
+        
+        <button 
+          className="mobile-menu-btn" 
+          onClick={toggleMenu} 
+          aria-expanded={isOpen}
+          aria-label="Toggle navigation"
+        >
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </button>
+
+        <ul className={`nav-links ${isOpen ? 'open' : ''}`}>
+          <li>
+            <NavLink exact to="/" activeClassName="active" onClick={() => setIsOpen(false)}>Inicio</NavLink>
+          </li>
+          <li>
+            <NavLink to="/servicios" activeClassName="active" onClick={() => setIsOpen(false)}>Servicios</NavLink>
+          </li>
+          <li>
+            <NavLink to="/precios" activeClassName="active" onClick={() => setIsOpen(false)}>Precios</NavLink>
+          </li>
+          <li>
+            <NavLink to="/contactos" activeClassName="active" onClick={() => setIsOpen(false)}>Contacto</NavLink>
+          </li>
         </ul>
+        
+        <div className={`nav-actions ${isOpen ? 'open' : ''}`}>
+          <Link to="/login" className="btn-outline" onClick={() => setIsOpen(false)}>Iniciar Sesi&#243;n</Link>
+          <Link to="/contacto?demo=1" className="btn-primary" onClick={() => setIsOpen(false)}>Solicitar Demo</Link>
+        </div>
       </nav>
     </header>
-  )
-}
+  );
+};
 
 export default HeaderBanner;
