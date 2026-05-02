@@ -133,7 +133,8 @@ const ChatWidget = () => {
         title={<span>Asistente Virtual Inteligente</span>}
         subtitle=""
         titleAvatar={botGif}
-        resizable={false}/>
+        resizable={false}
+        emojis={false}/>
     </div>
   )
 }
