@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import BannerComponent from '../../../components/ui/BannerComponent';
 
 const BannerPage = () => {
   return (
-    <div>BannerPage</div>
-  )
-}
+    <div className="banner-page">
+      <BannerComponent />
+    </div>
+  );
+};
 
 export default BannerPage;
+

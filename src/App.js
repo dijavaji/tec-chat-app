@@ -5,6 +5,7 @@ import React, {useState, useEffect, useMemo} from "react";
 //componentes
 //import Auth from "./pages/Auth";
 import {getToken, decodeToken, removeToken} from "./utils/tec-token.util";
+import { HelmetProvider } from 'react-helmet-async';
 import AuthContext from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import Navigation from "./routes/Navigation";
@@ -61,11 +62,13 @@ const App = () => {
   if(auth === undefined) return null;
 
   return (
-    <ThemeProvider>
-      <AuthContext.Provider value={authData}>
-        <Navigation routes={routes}/>
-      </AuthContext.Provider>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider>
+        <AuthContext.Provider value={authData}>
+          <Navigation routes={routes}/>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    </HelmetProvider>
  );
 }
 

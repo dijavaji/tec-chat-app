@@ -1,9 +1,9 @@
 import LayoutBasic from "../layouts/LayoutBasic";
 import LayoutHome from "../layouts/LayoutHome";
+import LayoutAuth from "../layouts/LayoutAuth";
 //paginas
 import NotFound from "../pages/ui/NotFound";
 
-import BannerComponent from '../components/ui/BannerComponent';
 import AboutComponent from '../components/ui/AboutComponent';
 import ClientComponent from '../components/ui/ClientComponent';
 import ContactComponent from '../components/ui/ContactComponent';
@@ -20,19 +20,21 @@ import IntentsPage from '../pages/IntentsPage';
 import Home from "../pages/Home";
 import Auth from "../pages/Auth";
 import UserPage from "../pages/UserPage";
+import BannerPage from "../pages/ui/BannerPage";
+import PricePage from "../pages/ui/PricePage";
 
 //import {ReportPage, ReportUserPage } from "../pages/ReportPage";
 
 const routes=[
   {
     path:"/",
-    component:BannerComponent,
+    component:BannerPage,
     exact: true,
     layout: LayoutBasic
   },
   {
     path:"/home",
-    component:BannerComponent,
+    component:BannerPage,
     exact: true,
     layout: LayoutBasic
   },
@@ -43,13 +45,19 @@ const routes=[
     layout: LayoutBasic
   },
   {
+    path:"/precios",
+    component:PricePage,
+    exact: true,
+    layout: LayoutBasic
+  },
+  {
     path:"/clientes",
     component:ClientComponent,
     exact: true,
     layout: LayoutBasic
   },
   {
-    path:"/contactos",
+    path:"/contacto",
     component:ContactComponent,
     exact: true,
     layout: LayoutBasic
@@ -64,13 +72,13 @@ const routes=[
     path:"/login",
     component:Auth,
     exact: true,
-    layout: LayoutBasic
+    layout: LayoutAuth
   },
   {
     path:"/register",
     component:RegisterComponent,
     exact: true,
-    layout: LayoutBasic
+    layout: LayoutAuth
   },
   {
     path:"/menu",

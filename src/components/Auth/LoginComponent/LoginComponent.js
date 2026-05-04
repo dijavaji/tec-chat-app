@@ -1,129 +1,134 @@
-import React, {useState} from "react";
-import {Link, useHistory } from 'react-router-dom';
-import {useFormik} from "formik";
+import React, { useState } from "react";
+import { Link, useHistory } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { useFormik } from "formik";
 import * as Yup from "yup";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
+import { MdArrowForward, MdEmail, MdLock, MdErrorOutline } from 'react-icons/md';
 
 import "./LoginComponent.css";
 import AuthService from "../../../services/auth.service";
-import {setToken, decodeToken} from "../../../utils/tec-token.util";
+import { setToken, decodeToken } from "../../../utils/tec-token.util";
 import useAuth from "../../../hooks/useAuth";
-
-const required = value => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
+import logoImg from "../../../assets/img/logo-smart-chat-blank.png";
 
 const LoginComponent = () => {
   const navigate = useHistory();
-  const [error, setError] = useState("");
-	//const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  //const [user, setUser] = useState('');
-	const {setUser} = useAuth();
-	//const {setAuthType } = props;
+  const { setUser } = useAuth();
 
-  const formikLogin= useFormik({
-  initialValues: initialValues(),
-  validationSchema:Yup.object(
-    {
-      email: Yup.string().email("El email no es valido").required("El email es obligatorio"),
-      password: Yup.string().matches(/[a-zA-Z0-9-]*$/, "La contrase\u00f1a no puede tener espacios").required("La contrase\u00f1a es obligatoria").min(6,"La contrase\u00f1a debe contener al menos 6 caracteres"),
-    }
-  ),
-  onSubmit:async (formData) =>{
-    //console.log("ingreso a login usuario");
-    setError("");
-    try{
-      const data = await AuthService.login(formData.email, formData.password);
-      //console.log(data);
-      const token = data.accessToken;
-      if(token){
-        setToken(token);
-        setUser(decodeToken(token));
-        navigate.push('/menu');
-        //console.log(decodeToken(token));
-      }else {
-        //console.log(data.error)
-        throw new Error(data.message);
+  const formikLogin = useFormik({
+    initialValues: initialValues(),
+    validationSchema: Yup.object({
+      email: Yup.string().email("El email no es válido").required("El email es obligatorio"),
+      password: Yup.string().required("La contraseña es obligatoria").min(6, "Mínimo 6 caracteres"),
+    }),
+    onSubmit: async (formData) => {
+      setLoading(true);
+      try {
+        const data = await AuthService.login(formData.email, formData.password);
+        const token = data.accessToken;
+        if (token) {
+          setToken(token);
+          setUser(decodeToken(token));
+          toast.success("¡Bienvenido!");
+          navigate.push('/menu');
+        } else {
+          throw new Error(data.message || "Error al iniciar sesión");
+        }
+      } catch (e) {
+        toast.error(e.message);
+        setLoading(false);
       }
-    }catch(e){
-      toast.error(e.message)
-      //console.log(JSON.stringify(e.message)); //console.log(e.toString()); //console.error(e);
-      //const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-      setLoading(false);
-      setError(e.message);
-    }
-  },
-
-});
+    },
+  });
 
   return (
-     <div className="contenedor">
-    <div className="contenido">
-        <div className="login-content">
-        <form onSubmit={formikLogin.handleSubmit} className="form-login">
-        <h2>Iniciar Sesi&#243;n</h2>
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
-          />
-            <div className="form-group">
+    <>
+      <Helmet>
+        <title>Iniciar Sesión — Panel Smart Chatbot Technoloqie</title>
+        <meta name="description" content="Accede al panel de administración de tu Smart Chatbot Technoloqie." />
+      </Helmet>
 
-              <input type="email" name="email" placeholder="Correo"
-						        value={formikLogin.values.email}
-			              onBlur={formikLogin.handleBlur}
-                    onChange={formikLogin.handleChange}
-                    className="form-control"/>
-              <div className="error-message">
-                {formikLogin.touched.email && formikLogin.errors.email ? (<p className="alert alert-danger"><span className=""></span>{formikLogin.errors.email}</p>): null }
-              </div>
+      <div className="auth-page-wrapper">
+        <div className="login-card-container">
+          <div className="login-card">
+            <div className="login-header">
+              <Link to="/" className="login-logo-link">
+                <img src={logoImg} alt="Technoloqie Logo" className="login-brand-logo" />
+              </Link>
+              <h1 className="login-title">Accede a tu panel de administración</h1>
+              <p className="login-subtitle">Ingresa tus credenciales para continuar</p>
             </div>
 
-            <div className="form-group">
-
-              <input name="password"
-                type="password"
-                className="form-control"
-                placeholder="Contrase&#241;a"
-                value={formikLogin.password}
-                onBlur={formikLogin.handleBlur}
-                onChange={formikLogin.handleChange}
+          <form onSubmit={formikLogin.handleSubmit} className="login-form">
+            <div className="form-group-modern">
+              <label htmlFor="email">Correo electrónico</label>
+              <div className="input-with-icon">
+                <MdEmail className="input-icon" />
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="ejemplo@correo.com"
+                  value={formikLogin.values.email}
+                  onBlur={formikLogin.handleBlur}
+                  onChange={formikLogin.handleChange}
+                  className={formikLogin.touched.email && formikLogin.errors.email ? "input-error" : ""}
                 />
-                <div className="error-message">
-                  {formikLogin.touched.password && formikLogin.errors.password ? (<p className="alert alert-danger"><span className=""></span>{formikLogin.errors.password}</p>): null }
-                </div>
-            </div>
-
-            <div className="form-group">
-              <button type="submit" className="register-btn" disabled={loading} >
-                <span>Iniciar sesi&#243;n</span>
-              </button>
-            </div>
-            <div className="form-group">
-              <p className="register-link">¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link></p>
-            </div>
-
-            {/*error && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {error}
-                </div>
               </div>
-            )*/}
+              {formikLogin.touched.email && formikLogin.errors.email && (
+                <div className="error-text">
+                  <MdErrorOutline /> {formikLogin.errors.email}
+                </div>
+              )}
+            </div>
 
+            <div className="form-group-modern">
+              <label htmlFor="password">Contraseña</label>
+              <div className="input-with-icon">
+                <MdLock className="input-icon" />
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="••••••••"
+                  value={formikLogin.values.password}
+                  onBlur={formikLogin.handleBlur}
+                  onChange={formikLogin.handleChange}
+                  className={formikLogin.touched.password && formikLogin.errors.password ? "input-error" : ""}
+                />
+              </div>
+              {formikLogin.touched.password && formikLogin.errors.password && (
+                <div className="error-text">
+                  <MdErrorOutline /> {formikLogin.errors.password}
+                </div>
+              )}
+            </div>
 
-            </form>
+            <div className="login-extras">
+              <Link to="#" className="forgot-password-link">¿Olvidaste tu contraseña?</Link>
+            </div>
+
+            <button type="submit" className="btn-login-submit" disabled={loading}>
+              {loading ? "Cargando..." : "Iniciar Sesión"} <MdArrowForward />
+            </button>
+
+            <div className="login-footer">
+              <p>
+                ¿No tienes cuenta? <Link to="/register" className="register-highlight">Crea una gratis <MdArrowForward /></Link>
+              </p>
+            </div>
+          </form>
         </div>
       </div>
+      <div className="auth-background-decoration">
+        <div className="decoration-orb orb-1"></div>
+        <div className="decoration-orb orb-2"></div>
       </div>
-  )
+    </div>
+    </>
+  );
 }
 
 function initialValues(){
