@@ -1,7 +1,6 @@
 import React from 'react';
 import SidebarComponent from '../components/ui/SidebarComponent';
 import HeaderComponent from '../components/ui/HeaderComponent';
-import ChatWidget from '../components/ui/ChatWidget';
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 export default function LayoutHome(props) {
@@ -26,7 +25,6 @@ export default function LayoutHome(props) {
             pauseOnFocusLoss 
           />
         </div>
-        <ChatWidget/>
       </div>
     );
 }
