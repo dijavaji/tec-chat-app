@@ -104,7 +104,7 @@ const CustomCard = ({ title, description, onClick }) => {
     <div className='card'>
       <h4>{title}</h4>
       <p>{description}</p>
-      <button onClick={onClick}>¡Haz clic!</button>
+      <button onClick={onClick}>Ver detalles</button>
     </div>
   );
 };
