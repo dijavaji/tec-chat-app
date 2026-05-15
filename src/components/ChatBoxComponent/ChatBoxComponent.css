@@ -1,18 +1,19 @@
 .chat-widget-container {
   position: relative;
   width: 100%;
-  max-width: 1200px;
-  height: 650px;
-  margin: 2rem auto;
+  max-width: 1200px; /* Ancho máximo del contenedor */
+  height: 650px; /* Altura del contenedor */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
   overflow: hidden;
   border-radius: 24px;
-  background: var(--color-surface, #ffffff);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--color-border, rgba(0, 0, 0, 0.05));
+  
 }
 
-/* Personalización profunda de react-multiple-chat-widget */
-.chat-widget-container .rcw-conversation-container {
+/* Estilos adicionales para el widget */
+.chat-widget-container .rcw-widget-container {
+  position: absolute;
+  bottom: 0;
   width: 100% !important;
   height: 100% !important;
   box-shadow: none !important;
