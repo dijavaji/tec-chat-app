@@ -1,4 +1,4 @@
-require("dotenv").config({ path: ".env.local" });
+//require("dotenv").config({ path: ".env.local" }); omentado cambio pnpm
 
 export const APP_NAME=process.env.REACT_APP_NAME;
 
