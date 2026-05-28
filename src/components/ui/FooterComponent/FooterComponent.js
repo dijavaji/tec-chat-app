@@ -38,7 +38,7 @@ const FooterComponent = () => {
             </p>
             <div className="footer-social">
               <Link to="#"><FaFacebook /></Link>
-              <Link to="#"><FaInstagram /></Link>
+              <Link to={{ pathname: "https://www.instagram.com/technoloqie" }} target="_blank"><FaInstagram /></Link>
               <Link to={{ pathname: "https://x.com/Technoloqie" }} target="_blank"><FaSquareXTwitter /></Link>
               <Link to="#"><FaGoogle /></Link>
             </div>

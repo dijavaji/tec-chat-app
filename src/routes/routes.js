@@ -1,6 +1,7 @@
 import LayoutBasic from "../layouts/LayoutBasic";
 import LayoutHome from "../layouts/LayoutHome";
 import LayoutAuth from "../layouts/LayoutAuth";
+import LayoutBlank from "../layouts/LayoutBlank";
 //paginas
 import NotFound from "../pages/ui/NotFound";
 
@@ -21,6 +22,7 @@ import Home from "../pages/Home";
 import Auth from "../pages/Auth";
 import UserPage from "../pages/UserPage";
 import BannerPage from "../pages/ui/BannerPage";
+import BannerTemp from "../pages/ui/BannerTemp"
 import PricePage from "../pages/ui/PricePage";
 
 //import {ReportPage, ReportUserPage } from "../pages/ReportPage";
@@ -28,9 +30,9 @@ import PricePage from "../pages/ui/PricePage";
 const routes=[
   {
     path:"/",
-    component:BannerPage,
+    component:BannerTemp,
     exact: true,
-    layout: LayoutBasic
+    layout: LayoutBlank
   },
   {
     path:"/home",
