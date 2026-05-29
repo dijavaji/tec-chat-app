@@ -1,19 +1,15 @@
-import {useState, useEffect} from 'react';
-//import {useParams, useHistory } from 'react-router-dom';
-import { FaSave, FaWindowClose} from "react-icons/fa";
-
+import {useState} from 'react';
+import { FaSave} from "react-icons/fa";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
-//import {toast} from "react-toastify";
 
 import LoadScreenComponent from '../ui/LoadScreenComponent';
+import "./IntentComponent.css";
 
 const IntentComponent = ({ intent, onSubmit, onCancel }) => {
 
-  //const navigate = useHistory();
-  const [isLoading, setIsLoading] = useState(false);
-  //const [intent, setIntent] = useState({});
-  const id = intent?.id;
+  const [isLoading] = useState(false);
+
 
   /*useEffect(() => {
        fetchIntent();
@@ -30,119 +26,43 @@ const IntentComponent = ({ intent, onSubmit, onCancel }) => {
     }
   }*/
 
-  const handleSubmit = async (values, setSubmitting)=>{
-    await onSubmit(values);
-    setSubmitting(false);
-  };
-
-  /*const saveOrUpdateIntent = async (formData) => {
-    try{
-      if(id){
-        const updatePhrases = [];
-        const updateResponses = [];
-
-        updateResponses.push({
-          id:formData.answerId,
-          response:formData.answer,
-        });
-
-        updatePhrases.push({
-            id:formData.questionId,
-            phrase:formData.question,
-            responses:updateResponses,
-            })
-
-        const intentUpdated = await IntentService.updateIntent({
-          id:id,
-          name:formData.intentname,
-          assistantId: 1,
-          modifiedBy: AUDIT_APP.UPDATE_BY,
-          phrases:updatePhrases,
-        });
-        console.log("actualiza intent",intentUpdated);
-
-        if(intentUpdated.success){
-            navigate.push('/intents');
-            //toast.success("Intenci\u00f3n actualizada correctamente.");
-            toast.success(intentUpdated.message);
-        }else{
-          throw new Error("Error al actualizar intenci\u00f3n");
-        }
-      }else{
-        const phrasesNew = [];
-        const responsesNew = [];
-
-        responsesNew.push({
-          response:formData.answer,
-          createdBy: AUDIT_APP.CREATE_BY,
-        });
-
-        phrasesNew.push({
-            phrase:formData.question,
-            createdBy: AUDIT_APP.CREATE_BY,
-            responses:responsesNew,
-            })
-
-        const intentResponse = await IntentService.createIntent({
-          name:formData.intentname,
-          assistantId: 1,
-          createdBy: AUDIT_APP.CREATE_BY,
-          phrases:phrasesNew
-        });
-        if(intentResponse.success){
-            navigate.push('/intents');
-            toast.success(intentResponse.message);
-        }else{
-          throw new Error("Error al crear intenci\u00f3n");
-        }
-
-      }
-    }catch(e){
-      //console.log(e.response.data);
-      toast.error(e.message);
-    }
-  }
-
-  const handleClickCancel = () =>{
-    navigate.push('/intents');
-  }*/
-
   if(isLoading ){
     return <LoadScreenComponent/>;
   }
 
-  const pageTitle = () => {
-        if(id){
-            return <h2 className = "text-center">Actualizar intenci&#243;n</h2>
-        }else{
-            return <h2 className = "text-center">Agregar intenci&#243;n</h2>
-        }
-    }
-
   return (
-    <div>
+
+    <div className="intent-form-container">
         <Formik initialValues={initialValues(intent)}
           onSubmit={async (values, { setSubmitting }) => {await onSubmit(values); setSubmitting(false);}}
           validationSchema={intentValidationSchema}
           enableReinitialize={true} >
         {() =>(
-         <Form className="">
+         <Form className="intent-form">
+            <div className="form-group">
+              <label htmlFor="intentname" className="form-label">Nombre de la Intención</label>
+              <Field id="intentname" type="text" name="intentname" placeholder="Ej: Saludo Inicial"
+                  className="form-control"  />
+              <ErrorMessage name="intentname" component="div" className="error-message"/>
+            </div>
 
-            <Field id="intentname" type="text" name="intentname" placeholder="Nombre intenci&#243;n"
-                className="form-control"  />
-            <ErrorMessage name="intentname" component="div" className=""/>
+            <div className="form-group">
+              <label htmlFor="question" className="form-label">Frase de Entrenamiento</label>
+              <Field id="question" type="text" name="question" placeholder="¿Cómo puedo ayudarte?"
+                  className="form-control"  />
+              <ErrorMessage name="question" component="div" className="error-message"/>
+            </div>
 
-            <Field type="text" name="question" placeholder="Frase de entrenamiento"
-                className="form-control"  />
-            <ErrorMessage name="question" component="div" className=""/>
+            <div className="form-group">
+              <label htmlFor="answer" className="form-label">Respuesta del Asistente</label>
+              <Field id="answer" as="textarea" name="answer" placeholder="Escribe la respuesta aquí..."
+                  className="form-control" style={{ minHeight: '100px', resize: 'vertical' }} />
+              <ErrorMessage name="answer" component="div" className="error-message"/>
+            </div>
 
-            <Field type="text" name="answer" placeholder="Respuesta"
-                className="form-control"  />
-            <ErrorMessage name="answer" component="div" className=""/>
-
-            <div className="header-edit-actions">
-              <button type="submit" className="action-btn" > <FaSave title="Ejecutar"/> </button>
-              <button type="reset" onClick={onCancel} className="action-btn" > <FaWindowClose title="Cancelar" /> </button>
+            <div className="intent-form-actions">
+              <button type="button" onClick={onCancel} className="btn-cancel-form" > Cancelar </button>
+              <button type="submit" className="btn-save" > <FaSave /> Guardar </button>
             </div>
          </Form>
          )

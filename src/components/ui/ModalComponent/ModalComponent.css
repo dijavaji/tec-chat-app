@@ -1,74 +1,87 @@
-/* Modal Styles */
-
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
 }
 
 .modal-container {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background: var(--color-surface, #111827);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   width: 90%;
-  max-width: 500px;
-  padding: 1.5rem;
-  animation: fadeInUp 0.3s ease-in-out;
+  max-width: 550px;
+  padding: 2rem;
+  animation: modalScaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   flex-direction: column;
   max-height: 90vh;
-  overflow-y: auto;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .modal-header h2 {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   margin: 0;
-  color: #333;
+  color: var(--color-text);
+  letter-spacing: -0.025em;
 }
 
 .modal-close {
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
+  font-size: 1.25rem;
   cursor: pointer;
-  color: #888;
-  transition: color 0.2s ease-in-out;
+  color: var(--color-text-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
 
 .modal-close:hover {
-  color: #e74c3c;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text);
 }
 
 .modal-content {
   font-size: 1rem;
-  color: #555;
-  line-height: 1.5;
+  color: var(--color-text);
+  line-height: 1.6;
+  overflow-y: auto;
 }
 
-/* Animation */
-@keyframes fadeInUp {
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalScaleUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: scale(0.95) translateY(10px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1) translateY(0);
   }
 }

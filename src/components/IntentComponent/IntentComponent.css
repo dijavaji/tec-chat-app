@@ -1,0 +1,86 @@
+.intent-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-left: 0.25rem;
+}
+
+.form-control {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 12px !important;
+  padding: 0.875rem 1rem !important;
+  color: var(--color-text) !important;
+  font-size: 1rem !important;
+  transition: all 0.2s ease !important;
+  width: 100%;
+}
+
+.form-control:focus {
+  outline: none !important;
+  border-color: var(--color-primary-electric) !important;
+  box-shadow: 0 0 0 4px rgba(47, 107, 255, 0.1) !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
+.error-message {
+  color: #f87171;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  margin-left: 0.25rem;
+}
+
+.intent-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-save {
+  background: var(--color-primary-electric);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-save:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px var(--shadow-glow);
+}
+
+.btn-cancel-form {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-cancel-form:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text);
+}

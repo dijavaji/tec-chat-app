@@ -6,7 +6,7 @@ function UserPage() {
   const params = useParams();
 
   return (
-    <div className="container"> <ProfileComponent username={params.username}/></div>
+     <ProfileComponent username={params.username}/>
   )
 }
 

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 import { AiOutlineFileAdd } from "react-icons/ai";
-import { FaEdit, FaTrash, FaSave, FaWindowClose} from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import {toast} from "react-toastify";
 
 import IntentService from '../../services/intent.service.js';
@@ -20,7 +20,6 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
     const [titleModal, setTitleModal] = useState("");
     const [childrenModal, setChildrenModal] = useState(null);
 
-    const [intentDelete, setIntentDelete] = useState(null);
     const navigate = useHistory();
 
     useEffect(() => {
@@ -54,7 +53,6 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
         if(intentRes.success){
           getAllIntents();
           setShowModal(false);
-          setIntentDelete(null);
           toast.success(intentRes.message);
         }else{
           throw new Error("Error al eliminar intenci\u00f3n");
@@ -69,7 +67,6 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
      }
 
     const handleOnDelete = (handleIntent)=>{
-      setIntentDelete(handleIntent);
       //setShowModal(true);
       handlerModal('delete', handleIntent);
     }
@@ -128,29 +125,39 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
 
 
     return (
-        <div className = "container">
-            <h2> Lista intenci&#243;n </h2>
-            {intents &&<div className="table-container">
-              <button className="add-answer-btn" style={{margin: '5px'}} onClick={() => handleAddNewIntent() }>Nuevo</button>
+        <div className = "intent-list-container">
+            <div className="list-header">
+              <h2>Lista de Intenciones</h2>
+              <button className="add-intent-btn" onClick={() => handleAddNewIntent()}>
+                <AiOutlineFileAdd /> Nuevo
+              </button>
+            </div>
+            
+            {intents && <div className="table-container">
               <table className="intent-table">
                 <thead>
-                    <th> Id </th>
-                    <th> Nombre</th>
-                    <th> Acciones </th>
+                  <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th className="text-center">Acciones</th>
+                  </tr>
                 </thead>
                 <tbody>
                     {
                         intents.map(
                             intent =>
                             <tr key = {intent.id}>
-                                <td> {intent.id} </td>
-                                <td> {intent.name} </td>
-                                <td>
-                                    <div className="flex justify-center padding-left: 5px; padding-right: 5px;">
-                                      <FaEdit type="button" onClick={() => handleUpdateIntent(intent.id)} className="" title="Editar"/>
-                                      <FaTrash type="button" onClick={() => handleOnDelete(intent)} className="" title="Eliminar"/>
+                                <td data-label="Id"> {intent.id} </td>
+                                <td data-label="Nombre"> {intent.name} </td>
+                                <td data-label="Acciones">
+                                    <div className="action-buttons">
+                                      <button className="icon-btn edit" onClick={() => handleUpdateIntent(intent.id)} title="Editar">
+                                        <FaEdit />
+                                      </button>
+                                      <button className="icon-btn delete" onClick={() => handleOnDelete(intent)} title="Eliminar">
+                                        <FaTrash />
+                                      </button>
                                     </div>
-
                                 </td>
                             </tr>
                         )
@@ -169,10 +176,22 @@ const ListIntentComponent = ({ onSelectIntent, onCreate }) => {
 
 const CreateContentModalDelete = ({intentDelete, onCancel, onSubmit})=>{
   return (
-    <div>
-      {intentDelete && <p>{intentDelete.id} {intentDelete.name}</p>}
-      <button type="submit" className="action-btn" onClick={onSubmit}> <FaSave title="Guardar"/></button>
-      <button type="reset" onClick={onCancel} className="action-btn"> <FaWindowClose title="Cancelar" /> </button>
+    <div className="delete-modal-content">
+      {intentDelete && (
+        <div className="delete-info">
+          <p>¿Estás seguro de que deseas eliminar esta intención?</p>
+          <span className="intent-id">ID: {intentDelete.id}</span>
+          <span className="intent-name">{intentDelete.name}</span>
+        </div>
+      )}
+      <div className="modal-actions">
+        <button type="button" className="btn-confirm" onClick={onSubmit}>
+          <FaTrash /> Eliminar
+        </button>
+        <button type="button" className="btn-cancel" onClick={onCancel}>
+          Cancelar
+        </button>
+      </div>
     </div>
   );
 }
