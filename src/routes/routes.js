@@ -13,7 +13,7 @@ import RegisterComponent from '../components/Auth/RegisterComponent';
 
 import IntentComponent from '../components/IntentComponent';
 import IntentDetailComponent from '../components/IntentDetailComponent';
-import FileUploadComponent from '../components/FileUploadComponent';
+import FilePage from '../pages/FilePage';
 import UrlUploadComponent from '../components/UrlUploadComponent';
 import ChatPage from '../pages/ChatPage';
 import IntentsPage from '../pages/IntentsPage';
@@ -107,7 +107,7 @@ const routes=[
   },
   {
     path:"/file-upload",
-    component:FileUploadComponent,
+    component:FilePage,
     layout: LayoutHome,
     private:true
   },
