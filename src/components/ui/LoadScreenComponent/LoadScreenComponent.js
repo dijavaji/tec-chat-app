@@ -4,7 +4,7 @@ import './LoadScreenComponent.css';
 
 const LoadScreenComponent = ({}) => {
   return(
-    <div className="container">
+    <div className="">
       <p>cargando...</p>
       {/*<img className="load-logo"  src={logo} alt="chatbot"/>*/}
     </div>

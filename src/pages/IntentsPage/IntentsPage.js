@@ -6,10 +6,7 @@ import IntentDetailComponent from '../../components/IntentDetailComponent';
 const IntentsPage = () => {
 
   return (
-    <div className="container" >
-
       <ListIntentComponent />
-    </div>
   )
 }
 

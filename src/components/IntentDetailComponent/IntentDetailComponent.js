@@ -120,7 +120,7 @@ const IntentDetailComponent = ({ onBack  }) => {
   }
 
   return (
-    <div className = "container">
+    <div className = "">
       {intent && <>
         <button onClick={handleonBack} className="btn-return-sm">
         <FaAngleLeft title="Volver a lista"/>Volver</button>
