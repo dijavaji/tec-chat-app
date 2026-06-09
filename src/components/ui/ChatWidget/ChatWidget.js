@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Stomp from 'stompjs';
 import Sockjs from 'sockjs-client';
-import { Widget, addResponseMessage, renderCustomComponent} from 'react-multiple-chat-widget';
+import { Widget, addResponseMessage, renderCustomComponent, toggleMsgLoader} from 'react-multiple-chat-widget';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 //import {toast} from "react-toastify";
@@ -42,6 +42,7 @@ const ChatWidget = () => {
         const receivedMessages = JSON.parse(message.body);
         console.log(receivedMessages);
         //addResponseMessage((prevMessages)=> [...prevMessages, receivedMessages]);
+        toggleMsgLoader(messageId);
         addResponseMessage(messageId, receivedMessages.response);
       });
     });
@@ -53,9 +54,10 @@ const ChatWidget = () => {
 
 
   const handleNewUserMessage = (newMessage) => {
-    //console.log(`New message incoming! ${newMessage}`);
     // Now send the message throught the backend API
+    //console.log(`New message incoming! ${newMessage}`);
     if(newMessage.trim()){
+      
         if(newMessage === '/login'){
           console.log("ingreso login");
           addResponseMessage(messageId, "Por favor, ingresa tus credenciales a continuaci&#243;n 👇");
@@ -73,6 +75,7 @@ const ChatWidget = () => {
             assistantName:APP_NAME,
             createdBy:AUDIT_APP.CREATE_BY
           };
+          toggleMsgLoader(messageId);
           const response = stompCLient.send('/app/chat', {}, JSON.stringify(chatMessage));
           //console.log(`responde api ${response}`);
 
@@ -91,6 +94,7 @@ const ChatWidget = () => {
     //console.log("ingreso a login usuario",values);
 
     setError("");
+    toggleMsgLoader(messageId);
     try{
       const data = await AuthService.login(values.email, values.password);
       //console.log(data);
@@ -102,7 +106,8 @@ const ChatWidget = () => {
         console.log(user);
         setUser(user);
         setNickName(user.username)
-        addResponseMessage("Hola Bienvenido "+user.username);
+        toggleMsgLoader(messageId);
+        addResponseMessage(messageId, "Hola Bienvenido "+user.username);
         navigate.push('/menu');
         //setUser(decodeToken(token));
         //console.log(decodeToken(token));
@@ -112,7 +117,8 @@ const ChatWidget = () => {
       }
     }catch(e){
       //toast.error(e.message);
-      addResponseMessage(e.message);
+      toggleMsgLoader(messageId);
+      addResponseMessage(messageId, e.message);
       console.log(JSON.stringify(e.message)); //console.log(e.toString()); //console.error(e);
       //const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
       setLoading(false);
@@ -122,7 +128,7 @@ const ChatWidget = () => {
 
   const onLogout = () =>{
     logout();
-    addResponseMessage("Hasta pronto");
+    addResponseMessage(messageId, "Hasta pronto");
     navigate.push("/");
   }
 

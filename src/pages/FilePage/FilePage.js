@@ -1,13 +1,10 @@
 import React, {useState, useEffect}from 'react';
 //import BannerComponent from '../../components/ui/BannerComponent';
 
-import "./Home.css";
-//import 'react-chat-widget/lib/styles.css';
-//import logo from '../../logo.svg';
+import "./FilePage.css";
 
-import ChatFeatureComponent from "../../components/ChatModuleComponent/ChatFeatureComponent";
+import FileUploadComponent from "../../components/FileUploadComponent";
 
-//import ChatBoxComponent from '../../components/ChatBoxComponent';
 import AuthService from "../../services/auth.service";
 
 export default function Home() {
@@ -20,6 +17,6 @@ export default function Home() {
   }
 
   return (
-      <ChatFeatureComponent />
+      <FileUploadComponent />
   )
 }

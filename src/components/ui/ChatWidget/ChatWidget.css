@@ -155,3 +155,8 @@
 .loginLaucher-button:hover {
   opacity: 0.9 !important;
 }
+
+.loader-container {
+  background-color: transparent;
+}
+

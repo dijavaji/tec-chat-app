@@ -1,8 +1,7 @@
 .intent-list-container {
-  max-width: 1200px;
-  margin: 2rem auto;
   padding: 0 1.5rem;
   animation: fadeIn 0.5s ease-out;
+  grid-column: 1 / -1; /* Hace que el componente abarque todas las columnas del grid padre */
 }
 
 .list-header {
