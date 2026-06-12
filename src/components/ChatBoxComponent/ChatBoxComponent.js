@@ -33,6 +33,7 @@ const ChatBoxComponent = () => {
        const receivedMessages = JSON.parse(message.body);
        console.log(receivedMessages);
        //addResponseMessage((prevMessages)=> [...prevMessages, receivedMessages]);
+       toggleMsgLoader(messageId);
        addResponseMessage(messageId, receivedMessages.text);
      });
    });
@@ -69,15 +70,16 @@ const ChatBoxComponent = () => {
         assistantName:APP_NAME,
         createdBy:AUDIT_APP.CREATE_BY
       };
+
+      toggleMsgLoader(messageId);
       const response = stompCLient.send('/app/chat', {}, JSON.stringify(chatMessage));
       //console.log(`responde api ${response}`);
-
-      toggleMsgLoader();
       //addResponseMessage(response);
     }
 
     }catch(e){
       console.error('error',e);
+      toggleMsgLoader(messageId);
       addResponseMessage(messageId, e.message);
       //console.log(JSON.stringify(e.message));
       //const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
