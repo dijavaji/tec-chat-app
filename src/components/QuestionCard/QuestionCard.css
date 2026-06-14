@@ -1,23 +1,26 @@
-/* QuestionCard.css */
 .question-card {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  background: var(--color-surface, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  border-radius: 16px;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.question-card:hover {
+  border-color: var(--color-border-emphasis, rgba(255, 255, 255, 0.15));
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .question-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 1.25rem 1.5rem;
   cursor: pointer;
-  min-height: 65px; /* Ensure consistent height */
+  min-height: 70px;
 }
 
-/* Styles for the inline editing form */
 .edit-question-form {
   display: flex;
   align-items: center;
@@ -27,169 +30,158 @@
 
 .edit-question-form .form-control {
   flex-grow: 1;
-  padding: 0.5rem;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
+  background: var(--color-surface-2, rgba(255, 255, 255, 0.05)) !important;
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1)) !important;
+  border-radius: 10px;
+  padding: 0.75rem 1rem !important;
+  color: var(--color-text, #f8fafc) !important;
+  outline: none;
 }
 
-.edit-question-form .edit-actions {
+.edit-actions {
   display: flex;
   gap: 0.5rem;
 }
-
-.btn-save-sm, .btn-cancel-sm {
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.btn-save-sm {
-  background-color: #28a745;
-  color: white;
-}
-
-.btn-cancel-sm {
-  background-color: #6c757d;
-  color: white;
-}
-
 
 .question-title {
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  color: var(--color-text, #f8fafc);
+  font-size: 1rem;
 }
 
 .question-actions {
   display: flex;
   gap: 0.5rem;
-  /* opacity: 0; Hidden by default */
+  opacity: 0.4;
   transition: opacity 0.2s ease;
 }
 
-.action-btn {
-  background: none;
-  border: none;
-  color: #6c757d;
+.question-card:hover .question-actions {
+  opacity: 1;
+}
+
+.action-btn-sm {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.05));
+  color: var(--color-text-muted, #cbd5e1);
   cursor: pointer;
   font-size: 1rem;
-  padding: 0.25rem;
-  border-radius: 4px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.action-btn-sm:hover {
+  background: var(--color-surface-2, rgba(255, 255, 255, 0.1));
+  color: var(--color-text, #f8fafc);
+  border-color: var(--color-primary-electric, #6366f1);
+  transform: translateY(-2px);
+}
+
+.action-btn {
+  background: var(--color-primary-electric, #6366f1);
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .action-btn:hover {
-  background-color: #f1f1f1;
-  color: #333;
+  filter: brightness(1.1);
+  transform: scale(1.05);
 }
-
-/* Context Menu Styles */
-.context-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  width: 150px;
-  padding: 0.5rem 0;
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: none;
-  border: none;
-  width: 100%;
-  text-align: left;
-  padding: 0.75rem 1rem;
-  cursor: pointer;
-  font-size: 0.95rem;
-}
-
-.menu-item:hover {
-  background-color: #f5f5f5;
-}
-
 
 .question-content {
-  padding: 0 1rem 1rem 1rem;
-  border-top: 1px solid #e0e0e0;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.05));
 }
 
 .answers-section h5 {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted, #cbd5e1);
+  font-weight: 700;
 }
 
 .answers-section ul {
   list-style: none;
   padding-left: 0;
+  margin: 0;
 }
 
 .answers-section li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f9f9f9;
-  padding: 0.75rem;
-  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.875rem 1rem;
+  border-radius: 10px;
   margin-bottom: 0.5rem;
+  color: var(--color-text, #f8fafc);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.answers-section li:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .answer-actions {
   display: flex;
   gap: 0.5rem;
-  opacity: 0; /* Hidden by default */
+  opacity: 0;
   transition: opacity 0.2s ease;
 }
 
 .answers-section li:hover .answer-actions {
-  opacity: 1; /* Show on hover */
+  opacity: 1;
 }
 
 .edit-answer-form {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
   width: 100%;
 }
 
-.edit-answer-form .form-control {
-  flex-grow: 1;
-}
-
-
-.action-btn-sm {
-  background: none;
-  border: none;
-  color: #6c757d;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
 .add-answer-btn {
-  background-color: #e7f3ff;
-  color: #007bff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px dashed var(--color-border, rgba(255, 255, 255, 0.2));
+  color: var(--color-text-muted, #cbd5e1);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
   cursor: pointer;
   font-weight: 600;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin-top: 1rem;
+  width: 100%;
+  justify-content: center;
 }
 
 .add-answer-btn:hover {
-  background-color: #d0e7ff;
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--color-primary-electric, #6366f1);
+  color: var(--color-primary-electric);
 }

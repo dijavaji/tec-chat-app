@@ -1,16 +1,15 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
-import { FaWindowClose, FaSave } from "react-icons/fa";
-
-
+import { IoSaveOutline, IoCloseOutline } from "react-icons/io5";
+import './QuestionComponent.css';
 
 const QuestionSchema = Yup.object().shape({
-  text: Yup.string().required("Requerido"),
+  text: Yup.string().required("La pregunta no puede estar vacía"),
 });
 
 const QuestionComponent = ({ initial, onSubmit, onCancel }) => {
   return (
-    <div style={{ border: "1px solid #ddd", padding: 8, marginBottom: 8 }}>
+    <div className="inline-edit-form">
       <Formik
         initialValues={{ text: initial?.text || "" }}
         validationSchema={QuestionSchema}
@@ -21,17 +20,25 @@ const QuestionComponent = ({ initial, onSubmit, onCancel }) => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <div>
-              <label>Pregunta</label>
-              <Field name="text" />
-              <ErrorMessage name="text" component="div" style={{ color: "red" }} />
+            <div className="form-group">
+              <label>Nueva Pregunta</label>
+              <Field 
+                name="text" 
+                className="form-control" 
+                placeholder="Escribe la frase de entrenamiento..."
+                autoFocus
+              />
+              <ErrorMessage name="text" component="div" className="error-message" />
             </div>
-            <div>
-              <button type="submit" disabled={isSubmitting} className="action-btn">
-                <FaSave title="Guardar pregunta"/>
+            
+            <div className="form-actions">
+              <button type="button" onClick={onCancel} className="btn-cancel">
+                <IoCloseOutline size={18} />
+                Cancelar
               </button>
-              <button type="button" onClick={onCancel} className="action-btn">
-                <FaWindowClose title="Cancelar" />
+              <button type="submit" disabled={isSubmitting} className="btn-submit">
+                <IoSaveOutline size={18} />
+                {isSubmitting ? 'Guardando...' : 'Guardar Pregunta'}
               </button>
             </div>
           </Form>
