@@ -4,7 +4,6 @@ import {toast} from "react-toastify";
 
 import userAuth from '../../hooks/useAuth'
 import UserService from '../../services/user.service.js';
-import { AUDIT_APP,} from "../../utils/tec-chat.constants";
 
 import HeaderProfile from './HeaderProfile';
 import SettingsComponent from './SettingsComponent';
@@ -28,7 +27,6 @@ const ProfileComponent = (props) => {
     setIsLoading(true);
     try{
       const response = await UserService.getUser('',username);
-      //setIntents(response);
       setUser(response.data);
       setIsLoading(false);
     }catch(e){
@@ -46,31 +44,53 @@ const ProfileComponent = (props) => {
         setShowModal(true);
         break;
       case 'settings':
-        setTitleModal('');
+        setTitleModal('Configuración');
         setChildrenModal(<SettingsComponent setShowModal={setShowModal} setTitleModal={setTitleModal} setChildrenModal={setChildrenModal} getUser={user}/> );
         setShowModal(true);
         break;
       default:
-
         break;
       }
   }
 
   return (
     <div className="profile">
-      {user && (<><div className='profile-left'>
-        <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="avatar" className="avatar-img-card"/>
+      {user && (
+        <>
+          <div className='profile-left'>
+            <img 
+              src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" 
+              alt="avatar" 
+              className="avatar-img-card"
+              onClick={() => handlerModal('avatar')}
+            />
+          </div>
+          <div className="profile-content">
+            <HeaderProfile getUser={user} auth={auth} handlerModal={handlerModal}/>
+            
+            <div className='other'>
+              <p className='other-name'> {user.person.firstName} {user.person.lastName} </p>
+            </div>
 
-      </div>
-      <div>
-        <HeaderProfile getUser={user} auth={auth} handlerModal={handlerModal}/>
-        <div>Followers</div>
-        <div className='other'>
-          <p className='other-name'> {user.person.firstName} {user.person.lastName} </p>
-        </div>
-          {user.siteWeb && <a href={user.siteWeb} className='siteWeb' target='_blank'></a>}
+            <div className="profile-stats">
+              <div className="stat-item">
+                <span className="stat-value">0</span>
+                <span>Followers</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-value">0</span>
+                <span>Following</span>
+              </div>
+            </div>
 
-      </div></>)}
+            {user.siteWeb && (
+              <a href={user.siteWeb} className='siteWeb' target='_blank' rel="noopener noreferrer">
+                {user.siteWeb}
+              </a>
+            )}
+          </div>
+        </>
+      )}
       <ModalComponent isOpen={showModal} onClose={() => setShowModal(false)} title={titleModal} >
         {childrenModal}
       </ModalComponent>
