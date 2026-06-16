@@ -1,0 +1,83 @@
+.inline-edit-form {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.inline-edit-form label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-muted, #cbd5e1);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.inline-edit-form .form-control {
+  background: var(--color-surface, rgba(255, 255, 255, 0.05)) !important;
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1)) !important;
+  border-radius: 12px;
+  padding: 0.875rem 1rem !important;
+  color: var(--color-text, #f8fafc) !important;
+  font-size: 1rem;
+  width: 100%;
+  outline: none;
+  transition: all 0.2s ease;
+  margin-bottom: 0.5rem;
+}
+
+.inline-edit-form .form-control:focus {
+  border-color: var(--color-primary-electric, #6366f1) !important;
+  background: var(--color-surface-2, rgba(255, 255, 255, 0.08)) !important;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.form-actions button {
+  padding: 0.625rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.btn-submit {
+  background: var(--color-primary-electric, #6366f1);
+  color: white;
+  border: none;
+}
+
+.btn-submit:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+  color: var(--color-text-muted, #cbd5e1);
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text, #f8fafc);
+}
+
+.error-message {
+  color: var(--color-error, #f87171);
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
