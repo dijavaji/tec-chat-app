@@ -2,101 +2,148 @@ import React from 'react';
 import moment from 'moment';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
-
+import { 
+  IoPersonOutline, 
+  IoLocationOutline, 
+  IoCalendarOutline, 
+  IoMaleFemaleOutline, 
+  IoCardOutline, 
+  IoCallOutline 
+} from "react-icons/io5";
 
 import './PersonalDataComponent.css';
 
 const DefaultTz = "America/New_York";
 
 const PersonalDataComponent = (props) => {
+  const { setShowModal, currentPerson } = props;
 
-  const { setShowModal, currentPerson, refetch } = props;
-
-  //console.log(moment(currentPerson.birthDate).format("YYYY-MM-DD"));
-
-  const handleSubmit =(formData)=>{
-    //TODO conectar con backend
-    console.log(formData);
+  const handleSubmit = (formData) => {
+    // TODO: conectar con backend
+    console.log('Update Personal Data:', formData);
+    setShowModal(false);
   }
 
   return (
-    <Formik initialValues={initialValues(currentPerson)} onSubmit={handleSubmit} validationSchema={editValidationSchema}>
-    {() =>(
-     <Form className="personal-form">
-      <div className="mb-4">
-        <Field type="text" name="firstName" placeholder="Nombre"
-            className="form-control"  />
-        <ErrorMessage name="firstName" component="div" className="error-message"/>
-      </div>
+    <Formik 
+      initialValues={initialValues(currentPerson)} 
+      onSubmit={handleSubmit} 
+      validationSchema={editValidationSchema}
+    >
+      {({ isSubmitting }) => (
+        <Form className="personal-form">
+          <div className="form-row">
+            <div className="form-group">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: 'var(--color-text-muted)' }}>
+                <IoPersonOutline />
+                <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Nombre</span>
+              </div>
+              <Field type="text" name="firstName" placeholder="Nombre" className="form-control" />
+              <ErrorMessage name="firstName" component="div" className="error-message" />
+            </div>
 
-      <div className="mb-4">
-        <Field type="text" name="lastName" placeholder="Apellido"
-            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
-        <ErrorMessage name="lastName" component="div" className="error-message"/>
-      </div>
+            <div className="form-group">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: 'var(--color-text-muted)' }}>
+                <IoPersonOutline />
+                <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Apellido</span>
+              </div>
+              <Field type="text" name="lastName" placeholder="Apellido" className="form-control" />
+              <ErrorMessage name="lastName" component="div" className="error-message" />
+            </div>
+          </div>
 
-        <div className="mb-4">
-          <Field type="text" name="address" placeholder="Direcci&#243;n"
-          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
-          <ErrorMessage name="address" component="div" className="error-message"/>
-        </div>
+          <div className="form-group">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: 'var(--color-text-muted)' }}>
+              <IoLocationOutline />
+              <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Dirección</span>
+            </div>
+            <Field type="text" name="address" placeholder="Tu dirección" className="form-control" />
+            <ErrorMessage name="address" component="div" className="error-message" />
+          </div>
 
-        <div className="mb-4">
-          <Field type="date" name="birthDate" timezone={DefaultTz} placeholder="Cumplea&#241;os"
-          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
-          <ErrorMessage name="birthDate" component="div" className="error-message"/>
-        </div>
+          <div className="form-row">
+            <div className="form-group">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: 'var(--color-text-muted)' }}>
+                <IoCalendarOutline />
+                <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Fecha de Nacimiento</span>
+              </div>
+              <Field type="date" name="birthDate" className="form-control" />
+              <ErrorMessage name="birthDate" component="div" className="error-message" />
+            </div>
 
-        <div className="mb-4">
-          <Field as="select" name="gender" placeholder="G&#233;nero"
-          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none">
-            <option value="F">Femenino</option>
-            <option value="M">Masculino</option>
-          </Field>
-          <ErrorMessage name="gender" component="div" className="error-message"/>
-        </div>
+            <div className="form-group">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: 'var(--color-text-muted)' }}>
+                <IoMaleFemaleOutline />
+                <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Género</span>
+              </div>
+              <Field as="select" name="gender" className="form-control">
+                <option value="" disabled>Seleccionar</option>
+                <option value="F">Femenino</option>
+                <option value="M">Masculino</option>
+              </Field>
+              <ErrorMessage name="gender" component="div" className="error-message" />
+            </div>
+          </div>
 
-        <div className="mb-4">
-          <Field type="text" name="idn" placeholder="Identificaci&#243;n"
-          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
-          <ErrorMessage name="idn" component="div" className="error-message"/>
-        </div>
+          <div className="form-row">
+            <div className="form-group">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: 'var(--color-text-muted)' }}>
+                <IoCardOutline />
+                <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Identificación</span>
+              </div>
+              <Field type="text" name="idn" placeholder="ID / DNI" className="form-control" />
+              <ErrorMessage name="idn" component="div" className="error-message" />
+            </div>
 
-        <div className="">
-          <Field type="tel" name="phone" placeholder="Tel&#233;fono"
-          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-yellow-500 focus:outline-none"  />
-          <ErrorMessage name="phone" component="div" className="error-message"/>
-        </div>
+            <div className="form-group">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: 'var(--color-text-muted)' }}>
+                <IoCallOutline />
+                <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Teléfono</span>
+              </div>
+              <Field type="tel" name="phone" placeholder="+00 000 000 000" className="form-control" />
+              <ErrorMessage name="phone" component="div" className="error-message" />
+            </div>
+          </div>
 
-      <div className="">
-        <button type="submit" className="register-btn">Actualizar</button>
-      </div>
-     </Form>
-     )
-    }
+          <button type="submit" className="register-btn" disabled={isSubmitting}>
+            {isSubmitting ? 'Actualizando...' : 'Actualizar Perfil'}
+          </button>
+        </Form>
+      )}
     </Formik>
   )
 }
 
-function initialValues(data){
+function initialValues(data) {
+  if (!data) return {
+    firstName: '',
+    lastName: '',
+    phone: '',
+    address: '',
+    birthDate: '',
+    gender: '',
+    idn: '',
+  };
+
   return {
     firstName: data.firstName || '',
     lastName: data.lastName || '',
     phone: data.phone || '',
     address: data.address || '',
-    birthDate: moment(data.birthDate).format("YYYY-MM-DD") || '',
+    birthDate: data.birthDate ? moment(data.birthDate).format("YYYY-MM-DD") : '',
     gender: data.gender || '',
     idn: data.idn || '',
-
   }
 }
 
 const editValidationSchema = Yup.object({
-  firstName: Yup.string().required("El nombre es obligatorio").min(3, "El nombre debe contener al menos 3 caracteres"),
-  lastName: Yup.string().required("El apellido es obligatorio").min(3, "El apellido debe contener al menos 3 caracteres"),
-  address: Yup.string().required("La direcci\u00f3n es obligatorio"),
-  phone: Yup.string().matches(/^[+]{1}(?:[0-9\-\\(\\)\\/.]\s?){6,15}[0-9]{1}$/, "El tel\u00e9fono debe ser un numero valido").min(3, "El tel\u00e9fono debe contener al menos 3 caracteres").max(13,"El tel\u00e9fono debe contener al maximo 13 caracteres"),
-}
-);
+  firstName: Yup.string().required("El nombre es obligatorio").min(3, "Mínimo 3 caracteres"),
+  lastName: Yup.string().required("El apellido es obligatorio").min(3, "Mínimo 3 caracteres"),
+  address: Yup.string().required("La dirección es obligatoria"),
+  phone: Yup.string().matches(/^[+]{1}(?:[0-9\-\\(\\)\\/.]\s?){6,15}[0-9]{1}$/, "Número no válido").required("El teléfono es obligatorio"),
+  birthDate: Yup.date().required("La fecha es obligatoria"),
+  gender: Yup.string().required("El género es obligatorio"),
+  idn: Yup.string().required("La identificación es obligatoria"),
+});
 
-export default PersonalDataComponent
+export default PersonalDataComponent;
