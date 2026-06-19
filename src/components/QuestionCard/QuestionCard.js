@@ -1,5 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FaEdit, FaTrash, FaPlus, FaChevronDown, FaChevronRight, FaEllipsisV, FaSave, FaWindowClose } from "react-icons/fa";
+import React, { useState } from 'react';
+import { 
+  IoChevronDown, 
+  IoChevronForward, 
+  IoCreateOutline, 
+  IoTrashOutline, 
+  IoSaveOutline, 
+  IoCloseOutline, 
+  IoAddOutline 
+} from "react-icons/io5";
 import './QuestionCard.css';
 import AnswerComponent from '../AnswerComponent';
 
@@ -7,7 +15,6 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isEditingQuestion, setIsEditingQuestion] = useState(false);
   const [editedPhrase, setEditedPhrase] = useState(question.phrase);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [addingAnswerMode, setAddingAnswerMode] = useState(false);
 
 
@@ -24,20 +31,13 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
 
   const handleEditClick = (e) => {
     e.stopPropagation();
-    handleEditQuestion(e);
-    setIsMenuOpen(false);
+    setEditedPhrase(question.phrase);
+    setIsEditingQuestion(true);
   };
 
   const handleDeleteClick = (e) => {
     e.stopPropagation();
     onDelete(question.id);
-    setIsMenuOpen(false);
-  };
-
-  const handleEditQuestion = (e) => {
-    e.stopPropagation();
-    setEditedPhrase(question.phrase); // Reset on opening
-    setIsEditingQuestion(true);
   };
 
   const handleCancelEdit = (e) => {
@@ -47,7 +47,6 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
 
   const handleSaveQuestion = (e) => {
     e.stopPropagation();
-    // Here you would call the actual update logic passed via props
     console.log(`Saving new phrase: ${editedPhrase}`);
     // onUpdate({ ...question, phrase: editedPhrase });
     setIsEditingQuestion(false);
@@ -72,11 +71,11 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
   };
 
   const handleAddAnswer = ()=>{
-
+    // Placeholder for handleAddAnswer
   };
 
   return (
-    <div className="question-card">
+    <div className={`question-card ${isExpanded ? 'is-expanded' : ''}`}>
       <div className="question-header" onClick={toggleExpand}>
         {isEditingQuestion ? (
           <div className="edit-question-form">
@@ -84,31 +83,41 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
               type="text"
               value={editedPhrase}
               onChange={(e) => setEditedPhrase(e.target.value)}
-              onClick={(e) => e.stopPropagation()} // Prevent header click
+              onClick={(e) => e.stopPropagation()}
               className="form-control"
+              autoFocus
             />
             <div className="edit-actions">
-              <button onClick={handleSaveQuestion} className="action-btn"> <FaSave title="Guardar"/> </button>
-              <button onClick={handleCancelEdit} className="action-btn"> <FaWindowClose title="Cancelar"/></button>
+              <button onClick={handleSaveQuestion} className="action-btn"> 
+                <IoSaveOutline /> 
+              </button>
+              <button onClick={handleCancelEdit} className="action-btn" style={{background: 'rgba(255,255,255,0.05)'}}> 
+                <IoCloseOutline />
+              </button>
             </div>
           </div>
         ) : (
           <>
-            <span className="question-title">
-              {isExpanded ? <FaChevronDown /> : <FaChevronRight />}
-              {question.phrase}
-            </span>
+            <div className="question-title">
+              {isExpanded ? <IoChevronDown color="var(--color-primary-electric)" /> : <IoChevronForward color="var(--color-text-muted)" />}
+              <span>{question.phrase}</span>
+            </div>
             <div className="question-actions">
-                <button onClick={handleEditClick} className="action-btn-sm"> <FaEdit /> </button>
-                <button onClick={handleDeleteClick} className="action-btn-sm"> <FaTrash /> </button>
+                <button onClick={handleEditClick} className="action-btn-sm"> 
+                  <IoCreateOutline /> 
+                </button>
+                <button onClick={handleDeleteClick} className="action-btn-sm" style={{color: 'var(--color-error)'}}> 
+                  <IoTrashOutline /> 
+                </button>
             </div>
           </>
         )}
       </div>
+      
       {isExpanded && (
         <div className="question-content">
           <div className="answers-section">
-            <h5>Respuestas</h5>
+            <h5>Respuestas Disponibles</h5>
             <ul>
               {question.responses.map(answer => (
                 <li key={answer.id}>
@@ -119,29 +128,43 @@ const QuestionCard = ({ question, onUpdate, onDelete }) => {
                         value={editedAnswerText}
                         onChange={(e) => setEditedAnswerText(e.target.value)}
                         className="form-control"
+                        autoFocus
                       />
                       <div className="edit-actions">
-                        <button onClick={handleSaveAnswer} className="action-btn"><FaSave title="Guardar"/></button>
-                        <button onClick={handleCancelAnswer} className="action-btn"><FaWindowClose title="Cancelar"/></button>
+                        <button onClick={handleSaveAnswer} className="action-btn">
+                          <IoSaveOutline />
+                        </button>
+                        <button onClick={handleCancelAnswer} className="action-btn" style={{background: 'rgba(255,255,255,0.05)'}}>
+                          <IoCloseOutline />
+                        </button>
                       </div>
                     </div>
                   ) : (
                     <>
-                      {answer.response}
+                      <span>{answer.response}</span>
                       <div className="answer-actions">
-                        <button onClick={() => handleEditAnswer(answer)} className="action-btn-sm"><FaEdit title="Editar"/></button>
-                        <button className="action-btn-sm"><FaTrash title="Eliminar"/></button>
+                        <button onClick={() => handleEditAnswer(answer)} className="action-btn-sm">
+                          <IoCreateOutline />
+                        </button>
+                        <button className="action-btn-sm" style={{color: 'var(--color-error)'}}>
+                          <IoTrashOutline />
+                        </button>
                       </div>
                     </>
                   )}
                 </li>
               ))}
             </ul>
-            <button className="add-answer-btn" onClick={() => setAddingAnswerMode(true)}>
-              <FaPlus /> Respuesta
-            </button>
-            {addingAnswerMode && (
-              <AnswerComponent initial={null} onSubmit={handleAddAnswer} onCancel={() => setAddingAnswerMode(false)} />
+            
+            {!addingAnswerMode ? (
+              <button className="add-answer-btn" onClick={() => setAddingAnswerMode(true)}>
+                <IoAddOutline size={18} />
+                Agregar Respuesta
+              </button>
+            ) : (
+              <div style={{marginTop: '1.5rem'}}>
+                <AnswerComponent initial={null} onSubmit={handleAddAnswer} onCancel={() => setAddingAnswerMode(false)} />
+              </div>
             )}
           </div>
         </div>

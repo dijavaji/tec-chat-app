@@ -1,6 +1,13 @@
 import {useState, useEffect} from 'react';
 import './IntentDetailComponent.css';
-import { FaEdit, FaPlus, FaSave, FaWindowClose, FaAngleLeft} from "react-icons/fa";
+import { 
+  IoArrowBackOutline, 
+  IoCreateOutline, 
+  IoSaveOutline, 
+  IoCloseOutline, 
+  IoAddOutline,
+  IoChatboxEllipsesOutline 
+} from "react-icons/io5";
 import { useHistory, useParams } from "react-router-dom";
 import {toast} from "react-toastify";
 import IntentService from '../../services/intent.service.js';
@@ -8,9 +15,7 @@ import IntentService from '../../services/intent.service.js';
 import { AUDIT_APP,} from "../../utils/tec-chat.constants";
 
 import LoadScreenComponent from '../ui/LoadScreenComponent';
-import IntentComponent from '../IntentComponent';
 import QuestionComponent from '../QuestionComponent';
-
 import QuestionCard from '../QuestionCard';
 
 const IntentDetailComponent = ({ onBack  }) => {
@@ -26,9 +31,6 @@ const IntentDetailComponent = ({ onBack  }) => {
   const [isEditingHeader, setIsEditingHeader] = useState(false);
   const [headerValues, setHeaderValues] = useState({ name: '', description: '' });
 
-  const [addingQuestionFor, setAddingQuestionFor] = useState(null); // null or true (new) or questionId editing
-  const [editingQuestion, setEditingQuestion] = useState(null);
-  const [editingAnswer, setEditingAnswer] = useState({ questionId: null, answer: null });
   const [addingQuestionMode, setAddingQuestionMode] = useState(false);
 
   const loadFetchIntent = async () => {
@@ -92,27 +94,15 @@ const IntentDetailComponent = ({ onBack  }) => {
   };
 
   const handleAddQuestion = () => {
-
+    // Placeholder for handleAddQuestion logic
   }
 
   const handleDeleteQuestion =()=>{
-
+    // Placeholder for handleDeleteQuestion logic
   }
 
   const handleEditQuestion = ()=>{
-
-  }
-  const handleDeleteAnswer=()=>{
-    console.log('eliminar respuesta')
-
-
-
-  }
-  const handleEditAnswer=()=>{
-
-  }
-  const handleAddAnswer=()=>{
-
+    // Placeholder for handleEditQuestion logic
   }
 
   if(isLoading ){
@@ -120,38 +110,50 @@ const IntentDetailComponent = ({ onBack  }) => {
   }
 
   return (
-    <div className = "">
+    <div className="intent-detail-container">
       {intent && <>
         <button onClick={handleonBack} className="btn-return-sm">
-        <FaAngleLeft title="Volver a lista"/>Volver</button>
+          <IoArrowBackOutline />
+          Volver a lista
+        </button>
+
         <div className="intent-header">
           {isEditingHeader ? (
             <div className="intent-header-edit">
               <input
                 type="text"
                 name="name"
+                placeholder="Nombre de la intención"
                 value={headerValues.name}
                 onChange={handleHeaderValueChange}
                 className="form-control"
               />
               <textarea
                 name="description"
+                placeholder="Descripción de la intención..."
                 value={headerValues.description}
                 onChange={handleHeaderValueChange}
                 className="form-control"
                 rows="3"
               />
               <div className="header-edit-actions">
-                <button onClick={handleHeaderSave} className="action-btn" > <FaSave title="Guardar"/> </button>
-                <button onClick={handleHeaderCancel} className="action-btn"><FaWindowClose title="Cancelar" /> </button>
+                <button onClick={handleHeaderSave} className="action-btn save">
+                  <IoSaveOutline />
+                </button>
+                <button onClick={handleHeaderCancel} className="action-btn">
+                  <IoCloseOutline />
+                </button>
               </div>
             </div>
           ) : (
             <div className="intent-header-display">
               <div className="intent-title-container">
-                <h2>Intención: {intent.name}</h2>
+                <h2>
+                  <IoChatboxEllipsesOutline style={{marginRight: '12px', verticalAlign: 'middle', color: 'var(--color-primary-electric)'}} />
+                  {intent.name}
+                </h2>
                 <button onClick={() => setIsEditingHeader(true)} className="action-btn">
-                  <FaEdit title="Editar" />
+                  <IoCreateOutline />
                 </button>
               </div>
               <p>{intent.description || "Sin descripción."}</p>
@@ -159,16 +161,18 @@ const IntentDetailComponent = ({ onBack  }) => {
           )}
         </div>
 
-        <hr />
-
-        <h3>Preguntas</h3>
-        <div>
+        <div className="section-header">
+          <h3>Preguntas Entrenadas</h3>
           <button className="add-answer-btn" onClick={() => setAddingQuestionMode(true)}>
-            <FaPlus title="Agregar pregunta"/> Pregunta
+            <IoAddOutline size={20} />
+            Nueva Pregunta
           </button>
         </div>
+
         {addingQuestionMode && (
-          <QuestionComponent initial={null} onSubmit={handleAddQuestion} onCancel={() => setAddingQuestionMode(false)} />
+          <div style={{marginBottom: '2rem'}}>
+            <QuestionComponent initial={null} onSubmit={handleAddQuestion} onCancel={() => setAddingQuestionMode(false)} />
+          </div>
         )}
 
         <div className="intent-questions-list">
@@ -180,12 +184,13 @@ const IntentDetailComponent = ({ onBack  }) => {
               onDelete={handleDeleteQuestion}
             />
           ))}
+          {intent.phrases.length === 0 && !addingQuestionMode && (
+            <div style={{textAlign: 'center', padding: '3rem', color: 'var(--color-text-muted)', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px dashed var(--color-border)'}}>
+              No hay preguntas registradas para esta intención.
+            </div>
+          )}
         </div>
-
-        </>
-
-      }
-
+      </>}
     </div>
   )
 }

@@ -1,3 +1,97 @@
-personal-form{
-  margin: 20px;
+.personal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 0.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-control {
+  background: var(--color-surface, rgba(255, 255, 255, 0.05)) !important;
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1)) !important;
+  border-radius: 12px;
+  padding: 0.875rem 1rem !important;
+  color: var(--color-text, #f8fafc) !important;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  width: 100%;
+  outline: none;
+}
+
+.form-control:focus {
+  background: var(--color-surface-2, rgba(255, 255, 255, 0.08)) !important;
+  border-color: var(--color-primary-electric, #6366f1) !important;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.form-control::placeholder {
+  color: var(--color-text-muted, #cbd5e1);
+  opacity: 0.5;
+}
+
+/* Specific styling for select and date inputs to match */
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23cbd5e1'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.5em;
+  padding-right: 2.5rem !important;
+}
+
+input[type="date"].form-control::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.error-message {
+  color: var(--color-error, #f87171);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  margin-left: 0.5rem;
+  font-weight: 500;
+}
+
+.register-btn {
+  background: var(--color-primary-electric, #6366f1) !important;
+  color: white !important;
+  border: none !important;
+  padding: 1rem !important;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  width: 100%;
+  letter-spacing: 0.025em;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  filter: brightness(1.1);
+}
+
+.register-btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
 }
