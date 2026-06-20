@@ -1,6 +1,14 @@
 import React, {useEffect, useState} from 'react';
-
+import moment from 'moment';
 import {toast} from "react-toastify";
+import { 
+  IoLocationOutline, 
+  IoCalendarOutline, 
+  IoMaleFemaleOutline, 
+  IoCardOutline, 
+  IoCallOutline,
+  IoMailOutline
+} from "react-icons/io5";
 
 import userAuth from '../../hooks/useAuth'
 import UserService from '../../services/user.service.js';
@@ -81,6 +89,66 @@ const ProfileComponent = (props) => {
                 <span className="stat-value">0</span>
                 <span>Following</span>
               </div>
+            </div>
+
+            <div className="profile-details">
+              <div className="detail-item">
+                <IoMailOutline className="detail-icon" />
+                <div className="detail-info">
+                  <span className="detail-label">Email</span>
+                  <span className="detail-text">{user.email}</span>
+                </div>
+              </div>
+
+              {user.person.phone && (
+                <div className="detail-item">
+                  <IoCallOutline className="detail-icon" />
+                  <div className="detail-info">
+                    <span className="detail-label">Teléfono</span>
+                    <span className="detail-text">{user.person.phone}</span>
+                  </div>
+                </div>
+              )}
+
+              {user.person.idn && (
+                <div className="detail-item">
+                  <IoCardOutline className="detail-icon" />
+                  <div className="detail-info">
+                    <span className="detail-label">Identificación</span>
+                    <span className="detail-text">{user.person.idn}</span>
+                  </div>
+                </div>
+              )}
+
+              {user.person.address && (
+                <div className="detail-item">
+                  <IoLocationOutline className="detail-icon" />
+                  <div className="detail-info">
+                    <span className="detail-label">Dirección</span>
+                    <span className="detail-text">{user.person.address}</span>
+                  </div>
+                </div>
+              )}
+
+              {user.person.birthDate && (
+                <div className="detail-item">
+                  <IoCalendarOutline className="detail-icon" />
+                  <div className="detail-info">
+                    <span className="detail-label">Fecha de Nacimiento</span>
+                    <span className="detail-text">{moment(user.person.birthDate).format('DD/MM/YYYY')}</span>
+                  </div>
+                </div>
+              )}
+
+              {user.person.gender && (
+                <div className="detail-item">
+                  <IoMaleFemaleOutline className="detail-icon" />
+                  <div className="detail-info">
+                    <span className="detail-label">Género</span>
+                    <span className="detail-text">{user.person.gender === 'M' ? 'Masculino' : 'Femenino'}</span>
+                  </div>
+                </div>
+              )}
             </div>
 
             {user.siteWeb && (
