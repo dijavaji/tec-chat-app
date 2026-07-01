@@ -86,9 +86,8 @@
 }
 
 .sidebar-accordion .MuiAccordionSummary-root {
-  padding: 10px 14px !important;
+  height: 40px;
   border-radius: 8px !important;
-  min-height: 48px !important; /* Adjust based on nav-link height */
   color: var(--color-text-muted) !important;
 }
 
@@ -122,6 +121,11 @@
 
 .sidebar-accordion .MuiAccordionDetails-root {
   padding: 0px 0px 0px 14px !important; /* Adjust padding for nested list */
+}
+
+.sidebar-accordion .MuiButtonBase-root.MuiAccordionSummary-root{
+  min-height: 40px !important;
+  height: 40px;
 }
 
 .sidebar-accordion .MuiListItem-root {
