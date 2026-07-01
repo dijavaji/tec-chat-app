@@ -34,6 +34,12 @@
   flex-direction: column;
   gap: 10px;
   list-style: none;
+  padding: 0; /* Asegurar que no haya padding por defecto en la lista */
+  margin: 0;
+}
+
+.nav-item {
+  margin-bottom: 10px; /* Espacio entre items de la lista */
 }
 
 .nav-link {
@@ -66,6 +72,81 @@
   justify-content: center;
   font-size: 20px;
 }
+
+/* Accordion styles */
+.sidebar-accordion {
+  background: transparent !important;
+  box-shadow: none !important;
+  margin-bottom: 10px !important;
+  border-radius: 8px !important;
+}
+
+.sidebar-accordion::before {
+  display: none; /* Remove the default Material-UI border */
+}
+
+.sidebar-accordion .MuiAccordionSummary-root {
+  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  min-height: 48px !important; /* Adjust based on nav-link height */
+  color: var(--color-text-muted) !important;
+}
+
+.sidebar-accordion .MuiAccordionSummary-root:hover {
+  background: var(--color-surface-2) !important;
+  color: var(--color-text) !important;
+}
+
+.sidebar-accordion .MuiAccordionSummary-content {
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sidebar-accordion .MuiAccordionSummary-content .nav-icon {
+  color: var(--color-text-muted); /* Icon color */
+}
+
+.sidebar-accordion .MuiAccordionSummary-root.Mui-expanded {
+  background: var(--color-surface-2) !important;
+  color: var(--color-text) !important;
+}
+
+.sidebar-accordion .MuiAccordionSummary-root.Mui-expanded .nav-icon {
+  color: var(--color-text) !important;
+}
+
+
+.sidebar-accordion .MuiAccordionDetails-root {
+  padding: 0px 0px 0px 14px !important; /* Adjust padding for nested list */
+}
+
+.sidebar-accordion .MuiListItem-root {
+  padding: 8px 14px 8px 38px !important; /* Indent nested items */
+  border-radius: 8px !important;
+  color: var(--color-text-muted) !important;
+  transition: 0.2s;
+}
+
+.sidebar-accordion .MuiListItem-root:hover {
+  background: var(--color-surface-2) !important;
+  color: var(--color-text) !important;
+}
+
+.sidebar-accordion .MuiListItem-root.active {
+  background: var(--color-primary-electric) !important;
+  color: white !important;
+  box-shadow: 0 0 14px var(--shadow-glow) !important;
+}
+
+.sidebar-accordion .MuiListItemText-primary {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
 
 .sidebar-footer {
   margin-top: auto;
