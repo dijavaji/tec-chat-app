@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, MenuItem } from '@material-ui/core';
-import { MdAssistant, MdOutlineTextsms, MdOutlineUploadFile, MdOutlineTextSnippet } from "react-icons/md";
+import { Menu, MenuItem, Accordion, AccordionSummary, AccordionDetails, Typography, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { MdAssistant, MdOutlineTextsms, MdOutlineUploadFile, MdOutlineTextSnippet, MdPeople, MdOutlineHistory, MdExpandMore } from "react-icons/md";
 import { FaLink } from 'react-icons/fa';
 
 import useAuth from "../../../hooks/useAuth";
@@ -12,6 +12,23 @@ import './SidebarComponent.css';
 const SidebarComponent = () => {
   const { auth, logout } = useAuth();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [expanded, setExpanded] = React.useState(false);
+
+  const mockAgents = [
+    { id: 1, name: 'Agente de Ventas', path: '/agents/sales' },
+    { id: 2, name: 'Agente de Soporte', path: '/agents/support' },
+    { id: 3, name: 'Agente de Marketing', path: '/agents/marketing' },
+  ];
+
+  const mockRecents = [
+    { id: 1, name: 'Conversación con Cliente A', path: '/chat/123' },
+    { id: 2, name: 'Conversación con Cliente B', path: '/chat/456' },
+    { id: 3, name: 'Conversación con Cliente C', path: '/chat/789' },
+  ];
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -43,6 +60,48 @@ const SidebarComponent = () => {
                 <span className="nav-text">Chat nuevo</span>
               </NavLink>
             </li>
+            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} className="sidebar-accordion">
+              <AccordionSummary
+                expandIcon={<MdExpandMore />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <ListItemIcon>
+                  <MdPeople className="nav-icon" />
+                </ListItemIcon>
+                <Typography className="nav-text">Agentes</Typography>
+              </AccordionSummary>
+              <AccordionDetails className="sidebar-accordion-details">
+                <List component="div" disablePadding>
+                  {mockAgents.map((agent) => (
+                    <ListItem button key={agent.id} component={NavLink} to={agent.path} activeClassName="active">
+                      <ListItemText primary={agent.name} />
+                    </ListItem>
+                  ))}
+                </List>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} className="sidebar-accordion">
+              <AccordionSummary
+                expandIcon={<MdExpandMore />}
+                aria-controls="panel2bh-content"
+                id="panel2bh-header"
+              >
+                <ListItemIcon>
+                  <MdOutlineHistory className="nav-icon" />
+                </ListItemIcon>
+                <Typography className="nav-text">Recientes</Typography>
+              </AccordionSummary>
+              <AccordionDetails className="sidebar-accordion-details">
+                <List component="div" disablePadding>
+                  {mockRecents.map((recent) => (
+                    <ListItem button key={recent.id} component={NavLink} to={recent.path} activeClassName="active">
+                      <ListItemText primary={recent.name} />
+                    </ListItem>
+                  ))}
+                </List>
+              </AccordionDetails>
+            </Accordion>
 
             {auth.roles === SUPER_USER_ROL && (
               <>
