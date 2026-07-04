@@ -34,7 +34,7 @@ Para ejecutar este proyecto de forma local, sigue los siguientes pasos.
 
 ### Prerrequisitos
 
-Asegúrate de tener instalado [Node.js](https://nodejs.org/) y [npm](https://www.npmjs.com/) en tu sistema.
+Asegúrate de tener instalado [Node.js](https://nodejs.org/) y [pnpm](https://pnpm.io/installation) en tu sistema.
 
 ### Instalación
 
@@ -42,7 +42,7 @@ Asegúrate de tener instalado [Node.js](https://nodejs.org/) y [npm](https://www
 2. Navega al directorio del proyecto.
 3. Instala las dependencias del proyecto ejecutando el siguiente comando:
    ```sh
-   npm install
+   pnpm install
    ```
 
 ### Ejecución
@@ -50,7 +50,7 @@ Asegúrate de tener instalado [Node.js](https://nodejs.org/) y [npm](https://www
 Una vez instaladas las dependencias, puedes iniciar la aplicación en modo de desarrollo:
 
 ```sh
-npm start
+pnpm start
 ```
 
 Esto ejecutará la aplicación en modo de desarrollo. Abre [http://localhost:3000](http://localhost:3000) para verla en tu navegador. La página se recargará automáticamente cuando realices cambios en el código.
@@ -69,8 +69,8 @@ REACT_APP_API_SERVER_BACKEND_HOST_MESSAGE=http://127.0.0.1:8081
 
 En el directorio del proyecto, puedes ejecutar los siguientes scripts:
 
-- **`npm start`**: Inicia la aplicación en modo de desarrollo.
-- **`npm test`**: Ejecuta las pruebas en modo interactivo.
+- **`pnpm start`**: Inicia la aplicación en modo de desarrollo.
+- **`pnpm test`**: Ejecuta las pruebas en modo interactivo.
 - **`npm run build`**: Compila la aplicación para producción en la carpeta `build`.
 - **`npm run eject`**: Expulsa las dependencias de configuración de `create-react-app`. **Nota: esta es una operación de un solo sentido.**
 
