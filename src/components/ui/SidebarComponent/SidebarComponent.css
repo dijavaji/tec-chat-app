@@ -129,10 +129,11 @@
 }
 
 .sidebar-accordion .MuiListItem-root {
-  padding: 8px 14px 8px 38px !important; /* Indent nested items */
+  padding: 8px 14px 8px 8px !important; /* Indent nested items */
   border-radius: 8px !important;
   color: var(--color-text-muted) !important;
   transition: 0.2s;
+  height: 34px;
 }
 
 .sidebar-accordion .MuiListItem-root:hover {
