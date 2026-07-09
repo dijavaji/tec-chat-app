@@ -46,7 +46,7 @@ const LoginComponent = () => {
   return (
     <>
       <Helmet>
-        <title>Iniciar Sesión — Panel Smart Chatbot Technoloqie</title>
+        <title>Smart Chatbot Technoloqie</title>
         <meta name="description" content="Accede al panel de administración de tu Smart Chatbot Technoloqie." />
       </Helmet>
 

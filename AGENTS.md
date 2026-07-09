@@ -15,19 +15,19 @@ This document provides essential information for AI agents and developers workin
 ## 2. Development Commands
 
 ### Build & Run
-- **Start Development Server:** `npm start`
+- **Start Development Server:** `pnpm start`
   - Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-- **Production Build:** `npm run build`
+- **Production Build:** `pnpm run build`
   - Bundles the app into static files for production in the `build` folder.
 
 ### Linting & Formatting
-- **Lint:** The project uses the default `eslint-config-react-app`. Linting runs automatically during `npm start` and `npm run build`.
+- **Lint:** The project uses the default `eslint-config-react-app`. Linting runs automatically during `pnpm start` and `pnpm run build`.
 - **Formatting:** Ensure 2-space indentation and single quotes for strings.
 
 ### Testing
-- **Run All Tests:** `npm test`
-- **Run a Specific Test File:** `npm test -- path/to/file.test.js`
-- **Watch Mode:** `npm test -- --watch`
+- **Run All Tests:** `pnpm test`
+- **Run a Specific Test File:** `pnpm test -- path/to/file.test.js`
+- **Watch Mode:** `pnpm test -- --watch`
 - *Note: Currently, no test files are present in the repository. New features should ideally include tests.*
 
 ### Configuration
