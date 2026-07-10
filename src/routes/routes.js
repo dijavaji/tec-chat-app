@@ -22,6 +22,7 @@ import Auth from "../pages/Auth";
 import UserPage from "../pages/UserPage";
 import BannerPage from "../pages/ui/BannerPage";
 import PricePage from "../pages/ui/PricePage";
+import AgentsPage from "../pages/AgentsPage"
 
 //import {ReportPage, ReportUserPage } from "../pages/ReportPage";
 
@@ -83,6 +84,13 @@ const routes=[
   {
     path:"/menu",
     component:Home,
+    exact: true,
+    layout: LayoutHome,
+    private:true
+  },
+  {
+    path:"/agents",
+    component:AgentsPage,
     exact: true,
     layout: LayoutHome,
     private:true
