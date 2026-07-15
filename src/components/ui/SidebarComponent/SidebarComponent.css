@@ -221,20 +221,30 @@
 
 /* Material UI Menu Overrides (Profile Menu) */
 .profile-menu-dropdown .MuiPaper-root {
-  background: rgba(11, 15, 26, 0.8) !important; /* Slightly darker base for contrast */
+  background: var(--color-menu-bg, rgba(11, 15, 26, 0.8)) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid var(--color-border) !important;
   border-radius: 16px !important;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3) !important;
   color: var(--color-text) !important;
   margin-top: -12px !important;
   min-width: 180px !important;
 }
 
+/* Base variable for menu background to support theme switching */
+:root {
+  --color-menu-bg: rgba(11, 15, 26, 0.8);
+}
+
+[data-theme="light"] {
+  --color-menu-bg: rgba(255, 255, 255, 0.9);
+}
+
 .profile-menu-dropdown .MuiList-root {
   padding: 8px !important;
 }
+
 
 .profile-menu-dropdown .MuiMenuItem-root {
   font-family: 'Inter', sans-serif !important;
@@ -252,7 +262,7 @@
 }
 
 .profile-menu-dropdown .MuiMenuItem-root:hover {
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: var(--color-surface-2) !important;
   color: var(--color-text) !important;
   transform: translateX(4px);
 }
