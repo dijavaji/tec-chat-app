@@ -4,8 +4,10 @@ import { Menu, MenuItem, Accordion, AccordionSummary, AccordionDetails, Typograp
 import { MdOutlineDashboard, MdOutlineTextsms, MdOutlineUploadFile, MdOutlineTextSnippet, MdExpandMore } from "react-icons/md";
 import { RiAiGenerate2, RiChatAi4Line} from "react-icons/ri";
 import { FaLink } from 'react-icons/fa';
+import { IoHomeOutline, IoPersonOutline, IoLogOutOutline } from "react-icons/io5";
 
 import { truncateDots } from '../../../utils/tec-chat.util';
+
 import useAuth from "../../../hooks/useAuth";
 import { SUPER_USER_ROL } from "../../../utils/tec-chat.constants";
 
@@ -124,13 +126,14 @@ const SidebarComponent = () => {
         <div className="profile-nav-container">
           <button className="profile-button-trigger" onClick={handleClick}>
             <div className="profile-avatar">
-              {auth.username ? auth.username.charAt(0).toUpperCase() : 'U'}
+              {auth?.username ? auth.username.substring(0, 2).toUpperCase() : 'TS'}
             </div>
-            <span className="profile-name">Mi perfil</span>
+            <span className="profile-name">Ajustes</span>
           </button>
           
           <Menu
             id="profile-menu"
+            className="profile-menu-dropdown"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
@@ -139,9 +142,18 @@ const SidebarComponent = () => {
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             transformOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           >
-            <MenuItem onClick={handleClose} component={Link} to="/menu">Home</MenuItem>
-            <MenuItem onClick={handleClose} component={Link} to={`/user/${auth.username}`}>Perfil</MenuItem>
-            <MenuItem onClick={logout}>Cerrar sesión</MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/menu">
+              <IoHomeOutline style={{ marginRight: '12px', fontSize: '1.1rem' }} />
+              Home
+            </MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to={`/user/${auth.username}`}>
+              <IoPersonOutline style={{ marginRight: '12px', fontSize: '1.1rem' }} />
+              Perfil
+            </MenuItem>
+            <MenuItem onClick={logout} className="logout-item">
+              <IoLogOutOutline style={{ marginRight: '12px', fontSize: '1.1rem' }} />
+              Cerrar sesión
+            </MenuItem>
           </Menu>
         </div>
       </div>
