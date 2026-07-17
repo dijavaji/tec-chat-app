@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useHistory } from 'react-router-dom';
 import { Menu, MenuItem, Accordion, AccordionSummary, AccordionDetails, Typography, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { MdOutlineDashboard, MdOutlineTextsms, MdOutlineUploadFile, MdOutlineTextSnippet, MdExpandMore } from "react-icons/md";
 import { RiAiGenerate2, RiChatAi4Line} from "react-icons/ri";
@@ -15,6 +15,7 @@ import './SidebarComponent.css';
 
 const SidebarComponent = () => {
   const { auth, logout } = useAuth();
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [expanded, setExpanded] = React.useState(false);
 
@@ -56,12 +57,6 @@ const SidebarComponent = () => {
               <NavLink className="nav-link" activeClassName="active" exact to="/menu">
                 <span className="nav-icon"><MdOutlineDashboard /></span>
                 <span className="nav-text">Tablero</span>
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" activeClassName="active" exact to="/chat">
-                <span className="nav-icon"><MdOutlineTextsms /></span>
-                <span className="nav-text">Chat nuevo</span>
               </NavLink>
             </li>
 
@@ -121,7 +116,7 @@ const SidebarComponent = () => {
       </div>
 
       <div className="sidebar-footer">
-        <button className="btn-primary-action">+ Nuevo Bot</button>
+        <button className="btn-primary-action" onClick={() => history.push('/chat')}>Chat Nuevo</button>
         
         <div className="profile-nav-container">
           <button className="profile-button-trigger" onClick={handleClick}>
