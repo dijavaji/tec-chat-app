@@ -13,8 +13,8 @@ const HeaderComponent = () => {
   return (
     <header className="header">
       <div className="search-container">
-        <MdSearch size={20} color="var(--color-text-muted)" />
-        <input placeholder="Buscar..." />
+        {/*<MdSearch size={20} color="var(--color-text-muted)" />
+        <input placeholder="Buscar..." />*/}
       </div>
 
       <div className="header-actions">
