@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link} from 'react-router-dom';
 import { MdSearch, MdNotificationsNone, MdOutlineElectricBolt } from "react-icons/md";
 import { useTheme } from '../../../context/ThemeContext';
 import useAuth from '../../../hooks/useAuth';
@@ -29,9 +30,7 @@ const HeaderComponent = () => {
           <MdNotificationsNone size={20} />
         </button>
 
-        <div className="header-avatar">
-          {auth?.username ? auth.username.substring(0, 2).toUpperCase() : 'TS'}
-        </div>
+        <Link  to={`/user/${auth.username}`} className="header-avatar"> {auth?.username ? auth.username.substring(0, 2).toUpperCase() : 'TS'} </Link>
       </div>
     </header>
   );
