@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { MdCheck, MdArrowForward, MdStar } from 'react-icons/md';
 import './PricingComponent.css';
 
@@ -27,7 +28,7 @@ const PricingComponent = () => {
     {
       name: 'Plan Profesional',
       tagline: 'Para pymes y negocios en crecimiento',
-      price: '$9.99',
+      price: '$24.99',
       period: '/ mes',
       features: [
         '2 Chatbots / Agentes',
@@ -117,9 +118,9 @@ const PricingComponent = () => {
               </div>
 
               <div className="plan-action">
-                <button className={`btn-pricing ${plan.buttonType}`}>
+                <Link to="/register" className={`btn-pricing ${plan.buttonType}`}>
                   {plan.buttonText} {plan.buttonType === 'primary' && <MdArrowForward />}
-                </button>
+                </Link>
               </div>
             </div>
           ))}
@@ -140,7 +141,7 @@ const PricingComponent = () => {
           <div className="cta-footer-content">
             <h4>¿No encuentras el plan perfecto para ti?</h4>
             <p>Cuéntanos lo que necesitas y te armamos una solución a tu medida.</p>
-            <button className="btn-contact-footer">Contactar <MdArrowForward /></button>
+            <Link to="/contacto" className="btn-contact-footer">Contactar <MdArrowForward /></Link>
           </div>
         </div>
       </section>

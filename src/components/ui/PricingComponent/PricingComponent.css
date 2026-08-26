@@ -157,6 +157,7 @@
   justify-content: center;
   gap: 10px;
   transition: all 0.2s;
+  text-decoration: none;
 }
 
 .btn-pricing.primary {
@@ -265,6 +266,7 @@
   align-items: center;
   gap: 10px;
   transition: transform 0.2s;
+  text-decoration: none;
 }
 
 .btn-contact-footer:hover {
