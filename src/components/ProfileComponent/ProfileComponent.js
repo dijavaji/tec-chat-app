@@ -82,12 +82,12 @@ const ProfileComponent = (props) => {
 
             <div className="profile-stats">
               <div className="stat-item">
-                <span className="stat-value">0</span>
-                <span>Followers</span>
+                <span className="stat-value">10</span>
+                <span>Cr&#233;ditos gratis</span>
               </div>
               <div className="stat-item">
                 <span className="stat-value">0</span>
-                <span>Following</span>
+                <span>Cr&#233;ditos disponibles</span>
               </div>
             </div>
 

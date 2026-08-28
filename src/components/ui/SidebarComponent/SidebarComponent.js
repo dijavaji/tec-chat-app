@@ -1,10 +1,14 @@
 import React from 'react';
+import copy from "copy-to-clipboard";
+
+
 import { NavLink, Link, useHistory } from 'react-router-dom';
 import { Menu, MenuItem, Accordion, AccordionSummary, AccordionDetails, Typography, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { MdOutlineDashboard, MdOutlineTextsms, MdOutlineUploadFile, MdOutlineTextSnippet, MdExpandMore } from "react-icons/md";
-import { RiAiGenerate2, RiChatAi4Line} from "react-icons/ri";
+import { RiAiGenerate2, RiChatAi4Line, RiFileCopyLine} from "react-icons/ri";
 import { FaLink } from 'react-icons/fa';
 import { IoHomeOutline, IoPersonOutline, IoLogOutOutline } from "react-icons/io5";
+import { toast } from 'react-toastify';
 
 import { truncateDots } from '../../../utils/tec-chat.util';
 
@@ -18,6 +22,9 @@ const SidebarComponent = () => {
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [expanded, setExpanded] = React.useState(false);
+
+  const [copyText, setCopyText] = React.useState("<div id='chat-widget-container'></div>");
+
 
   const mockAgents = [
     { id: 1, name: 'Agente de Ventas', path: '/agents/sales' },
@@ -42,6 +49,16 @@ const SidebarComponent = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleCopyText = (e) => {
+    setCopyText(e.target.value);
+  }
+  const copyToClipboard = () => {
+    if (!copyText) return;
+    copy(copyText);
+    toast.success("Componente copiado al portapapeles, instalar en su web");
+  }
+
 
   return (
     <aside className="sidebar">
@@ -109,8 +126,20 @@ const SidebarComponent = () => {
                     <span className="nav-text">Agregar ruta</span>
                   </NavLink>
                 </li>
+
               </>
             )}
+
+            <li className="nav-item">
+              <div className="affiliate-link-container">
+                <input id="copyLink" type="text" name="copyLink" value={copyText} onChange={handleCopyText}
+                  className="affiliate-link-input" readOnly placeholder="Enlace de afiliado" />
+                <button className="affiliate-link-button" onClick={copyToClipboard} type="button" aria-label="Copiar link" >
+                  <RiFileCopyLine />
+                </button>
+              </div>
+            </li>
+
           </ul>
         </nav>
       </div>

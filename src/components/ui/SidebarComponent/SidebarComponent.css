@@ -281,4 +281,57 @@
   color: white !important;
 }
 
+/* Affiliate Link Styles */
+.affiliate-link-container {
+  display: flex;
+  align-items: center;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 4px 8px;
+  margin: 10px 14px;
+  gap: 8px;
+  transition: border-color 0.2s;
+}
+
+.affiliate-link-container:focus-within {
+  border-color: var(--color-primary-electric);
+}
+
+.affiliate-link-input {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-family: inherit;
+  width: 100%;
+  padding: 6px 0;
+  outline: none;
+  cursor: default;
+}
+
+.affiliate-link-button {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.affiliate-link-button:hover {
+  color: var(--color-primary-electric);
+  background: rgba(var(--color-primary-electric-rgb, 0, 102, 255), 0.1);
+  transform: scale(1.1);
+}
+
+.affiliate-link-button:active {
+  transform: scale(0.95);
+}
+
 
